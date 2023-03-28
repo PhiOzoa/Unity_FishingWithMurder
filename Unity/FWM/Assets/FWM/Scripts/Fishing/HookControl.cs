@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Fishing
 {
@@ -12,17 +13,24 @@ namespace Fishing
 		//tug input to jostle hook quickly
 		//rotate hook to face the direction its moving with a delay
 		
-		private HookControlInput input;
+		//private HookControlInput input;
+		
+		private Vector2 inputDir = Vector2.zero;
 		
 		public Rigidbody rb;
+		Vector3 v = Vector3.down;
 		public GameObject hookDir;
 		
 		[Range(0.5f, 5.0f)]
-		public float targetVelMag = 3.0f;
+		public float lateralMag = 3.0f;
+		[Range(0.5f, 3.0f)]
+		public float sinkMag = 3.0f;
 		[Range(0.1f, 1.0f)]
-		public float accelFactor = 1.0f;
+		public float accelFactorLat = 1.0f;
 		[Range(0.1f, 5.0f)]
-		public float decelFactor = 1.0f;
+		public float decelFactorLat = 1.0f;
+		
+		public float sinkFactor = 1.0f;
 		
 		[Range(0.0f, 90.0f)]
 		public float maxRotationAngle =45.0f;
@@ -34,33 +42,75 @@ namespace Fishing
 		
 		private void Awake()
 		{
-			input = gameObject.AddComponent(typeof(HookControlInput)) as HookControlInput;
+
 		}
 		
 		private void FixedUpdate()
 		{
-			//Debug.Log(input.moveInputVec);
+			v = rb.velocity;
 			
-			targetVel = (new Vector3(input.moveInputVec.x, 0f, input.moveInputVec.y)) * targetVelMag;
+			targetVel = ( new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag) );
+			
 			MoveLaterally();
+			Sink();
 			RotateToDirection();
+			
+			
+			
+			rb.velocity = v;
+		}
+		
+		public void ReadMoveInput(InputAction.CallbackContext context)
+		{
+			if(context.performed)
+			{
+				inputDir = context.ReadValue<Vector2>();
+			}
+			else
+			{
+				if(context.canceled)
+				{
+					inputDir = Vector2.zero;
+				}
+			}
+		}
+		
+		public void TugInput(InputAction.CallbackContext context)
+		{
+			if(context.performed)
+			{
+				Tug();
+			}
+		}
+		
+		public void RaiseInput()
+		{
+			
 		}
 		
 		private void MoveLaterally()
 		{
-			
-			if(targetVel != rb.velocity)
+			if( (v.x != targetVel.x) || (v.z != targetVel.z) ) //if already at target, don't change velocity
 			{
-				if(targetVel != Vector3.zero) //if speeding up, use accelleration factor, else use deceleration factor
+				if( (targetVel.x != 0f) || (targetVel.z != 0f) ) //if target is not zero use accel, if target is at zero use decel
 				{
-					rb.velocity = Vector3.Lerp(rb.velocity, targetVel, Time.deltaTime * accelFactor);
+					v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * accelFactorLat);
+					v.z = Mathf.Lerp(v.z, targetVel.z, Time.deltaTime * accelFactorLat);
 				}
 				else
 				{
-					rb.velocity = Vector3.Lerp(rb.velocity, targetVel, Time.deltaTime * decelFactor);
+					v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * decelFactorLat);
+					v.z = Mathf.Lerp(v.z, targetVel.z, Time.deltaTime * decelFactorLat);
 				}
 			}
-			
+		}
+		
+		private void Sink()
+		{
+			if( v.y != targetVel.y )
+			{
+				v.y = Mathf.Lerp(v.y, targetVel.y, Time.deltaTime*sinkFactor);
+			}
 		}
 		
 		private void RotateToDirection()
@@ -70,7 +120,7 @@ namespace Fishing
 			
 			
 
-			lookDir = new Vector3(rb.velocity.x, -1.0f,rb.velocity.z);
+			lookDir = new Vector3(v.x, v.y, v.z);
 
 
 			
@@ -78,5 +128,16 @@ namespace Fishing
 			hookDir.transform.rotation = rotation;
 			
 		}
+		
+		private void Tug()
+		{
+			Debug.Log("Tug!");
+		}
+		
+		private void Raise()
+		{
+			
+		}
+		
     }
 }

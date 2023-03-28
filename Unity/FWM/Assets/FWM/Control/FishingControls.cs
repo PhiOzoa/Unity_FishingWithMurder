@@ -35,6 +35,15 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Tug"",
+                    ""type"": ""Button"",
+                    ""id"": ""c76cb370-945a-42bb-bc2c-037125424d30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -147,6 +156,28 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e8b0c12-88df-4821-832f-d105416a14e6"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6d4193a-482c-4b9c-8362-084ad0d76996"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -156,6 +187,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
         // Hook
         m_Hook = asset.FindActionMap("Hook", throwIfNotFound: true);
         m_Hook_Movement = m_Hook.FindAction("Movement", throwIfNotFound: true);
+        m_Hook_Tug = m_Hook.FindAction("Tug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,11 +248,13 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Hook;
     private IHookActions m_HookActionsCallbackInterface;
     private readonly InputAction m_Hook_Movement;
+    private readonly InputAction m_Hook_Tug;
     public struct HookActions
     {
         private @FishingControls m_Wrapper;
         public HookActions(@FishingControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Hook_Movement;
+        public InputAction @Tug => m_Wrapper.m_Hook_Tug;
         public InputActionMap Get() { return m_Wrapper.m_Hook; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +267,9 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_HookActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_HookActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_HookActionsCallbackInterface.OnMovement;
+                @Tug.started -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
+                @Tug.performed -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
+                @Tug.canceled -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
             }
             m_Wrapper.m_HookActionsCallbackInterface = instance;
             if (instance != null)
@@ -240,6 +277,9 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Tug.started += instance.OnTug;
+                @Tug.performed += instance.OnTug;
+                @Tug.canceled += instance.OnTug;
             }
         }
     }
@@ -247,5 +287,6 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
     public interface IHookActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnTug(InputAction.CallbackContext context);
     }
 }
