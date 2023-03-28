@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 504089127}
   - component: {fileID: 504089126}
   - component: {fileID: 504089128}
+  - component: {fileID: 504089130}
   - component: {fileID: 504089129}
   m_Layer: 0
   m_Name: hookController
@@ -386,6 +387,18 @@ MonoBehaviour:
   m_DefaultActionMap: Hook
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &504089130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504089124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567d5870093835341a195b2e1020ad08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &554165087
 GameObject:
   m_ObjectHideFlags: 0
