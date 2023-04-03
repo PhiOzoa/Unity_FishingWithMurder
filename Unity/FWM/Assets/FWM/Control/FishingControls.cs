@@ -44,6 +44,15 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Raise"",
+                    ""type"": ""Button"",
+                    ""id"": ""b15572fa-a6fe-458f-9eef-760e3bab68c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,6 +187,28 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                     ""action"": ""Tug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""951ca3be-0a8a-4e4d-9994-ed1906d6aa10"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Raise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ea40756-3403-4b43-a927-0fea2ae46a82"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Raise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -188,6 +219,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
         m_Hook = asset.FindActionMap("Hook", throwIfNotFound: true);
         m_Hook_Movement = m_Hook.FindAction("Movement", throwIfNotFound: true);
         m_Hook_Tug = m_Hook.FindAction("Tug", throwIfNotFound: true);
+        m_Hook_Raise = m_Hook.FindAction("Raise", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,12 +281,14 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
     private IHookActions m_HookActionsCallbackInterface;
     private readonly InputAction m_Hook_Movement;
     private readonly InputAction m_Hook_Tug;
+    private readonly InputAction m_Hook_Raise;
     public struct HookActions
     {
         private @FishingControls m_Wrapper;
         public HookActions(@FishingControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Hook_Movement;
         public InputAction @Tug => m_Wrapper.m_Hook_Tug;
+        public InputAction @Raise => m_Wrapper.m_Hook_Raise;
         public InputActionMap Get() { return m_Wrapper.m_Hook; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -270,6 +304,9 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                 @Tug.started -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
                 @Tug.performed -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
                 @Tug.canceled -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
+                @Raise.started -= m_Wrapper.m_HookActionsCallbackInterface.OnRaise;
+                @Raise.performed -= m_Wrapper.m_HookActionsCallbackInterface.OnRaise;
+                @Raise.canceled -= m_Wrapper.m_HookActionsCallbackInterface.OnRaise;
             }
             m_Wrapper.m_HookActionsCallbackInterface = instance;
             if (instance != null)
@@ -280,6 +317,9 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                 @Tug.started += instance.OnTug;
                 @Tug.performed += instance.OnTug;
                 @Tug.canceled += instance.OnTug;
+                @Raise.started += instance.OnRaise;
+                @Raise.performed += instance.OnRaise;
+                @Raise.canceled += instance.OnRaise;
             }
         }
     }
@@ -288,5 +328,6 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnTug(InputAction.CallbackContext context);
+        void OnRaise(InputAction.CallbackContext context);
     }
 }

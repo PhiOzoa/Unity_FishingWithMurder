@@ -321,10 +321,15 @@ MonoBehaviour:
   hookDir: {fileID: 415292459}
   lateralMag: 1.5
   sinkMag: 0.5
+  raiseMag: 1.24
   accelFactorLat: 0.2
   decelFactorLat: 2.5
   sinkFactor: 0.4
-  maxRotationAngle: 45
+  raiseFactor: 0.32
+  sinkRotFactor: 2
+  raiseRotFactor: 0.5
+  minDepth: 0
+  maxDepth: -30
 --- !u!114 &504089129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,6 +387,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c76cb370-945a-42bb-bc2c-037125424d30
     m_ActionName: Hook/Tug[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 504089128}
+        m_TargetAssemblyTypeName: Fishing.HookControl, Assembly-CSharp
+        m_MethodName: RaiseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b15572fa-a6fe-458f-9eef-760e3bab68c7
+    m_ActionName: Hook/Raise[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hook

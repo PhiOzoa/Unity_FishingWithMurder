@@ -27,7 +27,7 @@ namespace Fishing
 			rot = gameObject.transform.rotation;
 		}
 		
-		private void Update()
+		private void FixedUpdate()
 		{
 			pos = gameObject.transform.position;
 			rot = gameObject.transform.rotation;

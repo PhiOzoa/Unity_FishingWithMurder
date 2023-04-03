@@ -7,36 +7,38 @@ namespace Fishing
 {
     public class HookControl : MonoBehaviour
     {
-		//constantly move hook down
-		//accept input directions
-		//move hook in that direction with momentum damping, apply force perhaps?
-		//tug input to jostle hook quickly
-		//rotate hook to face the direction its moving with a delay
-		
-		//private HookControlInput input;
+		public Rigidbody rb;
+		public GameObject hookDir;
 		
 		private Vector2 inputDir = Vector2.zero;
+		private bool raiseInput = false;
 		
-		public Rigidbody rb;
-		Vector3 v = Vector3.down;
-		public GameObject hookDir;
+		private Vector3 v = Vector3.down;
 		
 		[Range(0.5f, 5.0f)]
 		public float lateralMag = 3.0f;
 		[Range(0.5f, 3.0f)]
 		public float sinkMag = 3.0f;
+		[Range(0.5f, 3.0f)]
+		public float raiseMag = 3.0f;
 		[Range(0.1f, 1.0f)]
 		public float accelFactorLat = 1.0f;
 		[Range(0.1f, 5.0f)]
 		public float decelFactorLat = 1.0f;
-		
+		[Range(0.05f,2.0f)]
 		public float sinkFactor = 1.0f;
+		[Range(0.05f,2.0f)]
+		public float raiseFactor = 1.0f;
 		
-		[Range(0.0f, 90.0f)]
-		public float maxRotationAngle =45.0f;
+		public float sinkRotFactor = 2.0f;
+		public float raiseRotFactor = 0.5f;
+		
+		public float minDepth = 0f;
+		public float maxDepth = -30f;
+		
+		
 		
 		private Vector3 lookDir = Vector3.down;
-		
 		private Vector3 targetVel = Vector3.zero;
 		
 		
@@ -49,10 +51,19 @@ namespace Fishing
 		{
 			v = rb.velocity;
 			
-			targetVel = ( new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag) );
 			
+			
+			if(!raiseInput)
+			{
+				targetVel = ( new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag) );
+			}
+			else
+			{
+				targetVel = ( new Vector3(0f, raiseMag, 0f) );
+			}
 			MoveLaterally();
-			Sink();
+			Vert();
+			
 			RotateToDirection();
 			
 			
@@ -83,9 +94,19 @@ namespace Fishing
 			}
 		}
 		
-		public void RaiseInput()
+		public void RaiseInput(InputAction.CallbackContext context)
 		{
-			
+			if(context.performed)
+			{
+				raiseInput = true;
+			}
+			else
+			{
+				if(context.canceled)
+				{
+					raiseInput = false;
+				}
+			}
 		}
 		
 		private void MoveLaterally()
@@ -105,11 +126,19 @@ namespace Fishing
 			}
 		}
 		
-		private void Sink()
+		private void Vert()
 		{
 			if( v.y != targetVel.y )
 			{
-				v.y = Mathf.Lerp(v.y, targetVel.y, Time.deltaTime*sinkFactor);
+				if(!raiseInput)
+				{
+					v.y = Mathf.Lerp(v.y, targetVel.y, Time.deltaTime*sinkFactor);
+				}
+				else
+				{
+					v.y = Mathf.Lerp(v.y, targetVel.y, Time.deltaTime*raiseFactor);
+				}
+				
 			}
 		}
 		
@@ -119,9 +148,14 @@ namespace Fishing
 			
 			
 			
-
-			lookDir = new Vector3(v.x, v.y, v.z);
-
+			if(!raiseInput)
+			{
+				lookDir = Vector3.Lerp(lookDir, new Vector3(v.x, v.y, v.z), Time.deltaTime * sinkRotFactor);
+			}
+			else
+			{
+				lookDir = Vector3.Lerp(lookDir, (rb.transform.position - new Vector3(0f, minDepth, 0f) ), Time.deltaTime * raiseRotFactor);
+			}
 
 			
 			Quaternion rotation = Quaternion.LookRotation(lookDir, Vector3.up);
