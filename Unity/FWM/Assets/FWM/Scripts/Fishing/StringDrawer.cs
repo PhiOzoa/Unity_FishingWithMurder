@@ -17,9 +17,9 @@ namespace Fishing
 		{
 			hookDir = new Vector3(gameObject.transform.position.x, 0f, gameObject.transform.position.z).normalized;
 			
-			lineTopPos = Vector3.Lerp(lineTopPos, cam.transform.position + hookDir, Time.deltaTime);
+			lineTopPos = Vector3.Slerp(lineTopPos - cam.transform.position , hookDir, Time.deltaTime) + cam.transform.position;
 			
-			fishingLine.SetPosition(0, gameObject.transform.position + (Vector3.up / 10f));
+			fishingLine.SetPosition(0, gameObject.transform.position);
 			fishingLine.SetPosition(1, lineTopPos);
 		}
     }
