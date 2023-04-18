@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 504089126}
   - component: {fileID: 504089128}
   - component: {fileID: 504089129}
+  - component: {fileID: 504089130}
   m_Layer: 0
   m_Name: hookController
   m_TagString: Untagged
@@ -405,7 +406,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &504089127
 Transform:
@@ -442,12 +443,14 @@ MonoBehaviour:
   raiseMag: 1.24
   accelFactorLat: 0.2
   decelFactorLat: 2.5
-  sinkFactor: 0.4
+  sinkFactor: 0.8
   raiseFactor: 0.32
   sinkRotFactor: 2
   raiseRotFactor: 0.5
   minDepth: 0
   maxDepth: -30
+  tugForce: 0.7
+  tugTime: 60
 --- !u!114 &504089129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,7 +496,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 504089128}
         m_TargetAssemblyTypeName: Fishing.HookControl, Assembly-CSharp
-        m_MethodName: Tug
+        m_MethodName: TugInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -526,6 +529,19 @@ MonoBehaviour:
   m_DefaultActionMap: Hook
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!135 &504089130
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504089124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.06
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &554165087
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +556,7 @@ GameObject:
   - component: {fileID: 554165088}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -637,7 +653,7 @@ GameObject:
   - component: {fileID: 625958707}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -734,7 +750,7 @@ GameObject:
   - component: {fileID: 817027006}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

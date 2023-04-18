@@ -36,7 +36,10 @@ namespace Fishing
 		public float minDepth = 0f;
 		public float maxDepth = -30f;
 		
-		
+		private bool tugging = false;
+		public float tugForce = 0.7f;
+		public int tugTime = 120;
+		private int tugCountdown = 0;
 		
 		private Vector3 lookDir = Vector3.down;
 		private Vector3 targetVel = Vector3.zero;
@@ -51,18 +54,49 @@ namespace Fishing
 		{
 			v = rb.velocity;
 			
-			
+			RaycastHit hit;
 			
 			if(!raiseInput)
 			{
-				targetVel = ( new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag) );
+				if(Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
+				{
+					if(hit.transform.tag == "Env")
+					{
+						targetVel = ( new Vector3(inputDir.x * lateralMag, 0f, inputDir.y*lateralMag) );
+					}
+					else
+					{
+						targetVel = ( new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag) );
+					}
+				}
+				else
+				{
+					targetVel = ( new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag) );
+				}
+				
 			}
 			else
 			{
 				targetVel = ( new Vector3(0f, raiseMag, 0f) );
 			}
+			
+			
 			MoveLaterally();
-			Vert();
+			
+			if( (tugging) && (tugCountdown == 0) && (v.y < 0f) )
+			{
+				tugging = false;
+				v.y = tugForce;
+				tugCountdown = tugTime;
+			}
+			else
+			{
+				if(tugCountdown != 0)
+				{
+					tugCountdown--;
+				}
+				Vert();
+			}
 			
 			RotateToDirection();
 			
@@ -90,7 +124,10 @@ namespace Fishing
 		{
 			if(context.performed)
 			{
-				Tug();
+				if(tugCountdown == 0)
+				{
+					tugging = true;
+				}
 			}
 		}
 		
