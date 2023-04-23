@@ -96,10 +96,9 @@ namespace FWM
 			Vector3 targetDir = hook.transform.position - transform.position;
 			float hookAngleFromFwd = Vector3.Angle(targetDir, transform.forward);
 			
-			if( (Vector3.Distance(hook.transform.position, transform.position) <= visionDistance) && (hookAngleFromFwd <= visionDegrees) )
+			if( (Vector3.Distance(hook.transform.position, transform.position) <= visionDistance) && (hookAngleFromFwd <= (visionDegrees / 2) ) )
 			{
 				seesHook = true;
-				Debug.Log("spotted");
 			}
 			else
 			{

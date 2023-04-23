@@ -12,7 +12,8 @@ namespace Fishing
 		private Vector3 pos = Vector3.zero;
 		private Vector3 targetPos = Vector3.zero;
 
-		public float translateFactor = 0.5f;
+		public float latTranslateFactor = 1.0f;
+		public float vertTranslateFactor = 0.5f;
 		
 		private void Awake()
 		{
@@ -30,11 +31,12 @@ namespace Fishing
 		
 		private void FollowHook()
 		{
-			pos.x = hook.transform.position.x;
-			pos.z = hook.transform.position.z;
-			
+			targetPos.x = hook.transform.position.x;
+			targetPos.z = hook.transform.position.z;
 			targetPos.y = (hook.transform.position.y + camHeight);
-			pos.y = Mathf.Lerp(pos.y, targetPos.y, Time.deltaTime * translateFactor);
+			
+			pos = Vector3.Lerp(pos, targetPos, Time.deltaTime * latTranslateFactor);
+			pos.y = Mathf.Lerp(pos.y, targetPos.y, Time.deltaTime * vertTranslateFactor);
 		}
     }
 }
