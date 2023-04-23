@@ -23,6 +23,11 @@ namespace FWM
 		
 		private float i = 0f;
 		
+		private void Awake()
+		{
+			RenderSettings.fog = true;
+		}
+		
 		private void FixedUpdate()
 		{
 			if(cam != null)

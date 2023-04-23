@@ -42,6 +42,7 @@ namespace FWM
 		private void FixedUpdate()
 		{
 			Debug.DrawLine(transform.position, transform.position + (transform.forward * 3f) );
+			Debug.DrawLine(startPos, targetPos);
 			
 			LookForHook();
 			
@@ -72,7 +73,9 @@ namespace FWM
 		private void SetTarget()
 		{
 			targetPos = (startPos + ( Random.onUnitSphere * Random.Range(0f, wanderRadius) ) ); // choose random location relative to start position and maximum radius
-			targetPos.y = ( (startPos.y + targetPos.y) * heightTruncationFactor ); // truncate hight of randomly generated position by the truncation factor
+			
+			targetPos.y = ( ( (targetPos.y - startPos.y) * heightTruncationFactor) + startPos.y);
+			
 			targetSet = true;
 		}
 		
@@ -93,11 +96,14 @@ namespace FWM
 			Vector3 targetDir = hook.transform.position - transform.position;
 			float hookAngleFromFwd = Vector3.Angle(targetDir, transform.forward);
 			
-			//Debug.Log(hookAngleFromFwd);
-			
-			if( (Vector3.Distance(hook.transform.position, transform.position) <= visionDistance) )
+			if( (Vector3.Distance(hook.transform.position, transform.position) <= visionDistance) && (hookAngleFromFwd <= visionDegrees) )
 			{
-				
+				seesHook = true;
+				Debug.Log("spotted");
+			}
+			else
+			{
+				seesHook = false;
 			}
 		}
     }
