@@ -24,12 +24,9 @@ namespace FWM
 		public float accelFactor = 0.5f; // factor by which fish approaches top speed
 		public float rotFactor = 1.3f; // factor by which fish approaches desired rotation
 		
-		private bool wandering = true; // is the fish in its state of having not notice the hook
 		private bool targetSet = false; // has the fish got a target it wants to wander to
 		
 		[Header("Hook Detection")]
-		public float visionDistance = 5f;
-		public float visionDegrees = 45f;
 		private bool seesHook = false;
 		private bool attentionGrabbed = false;
 		
@@ -46,16 +43,24 @@ namespace FWM
 			Debug.DrawLine(transform.position, transform.position + (transform.forward * 3f) );
 			Debug.DrawLine(startPos, targetPos);
 			
-			if(seesHook && hookScript.tugging)
+			if(seesHook && hookScript.tugging && !attentionGrabbed)
 			{
 				attentionGrabbed = true;
 				Debug.Log("got em");
 			}
 			
-			if(wandering)
+			if(!attentionGrabbed)
 			{
 				Wander();
 			}
+			else
+			{
+				targetSet = false;
+				
+				
+				InteractWithHook();
+			}
+			
 		}
 		
 		private void OnTriggerEnter(Collider other)
@@ -111,6 +116,15 @@ namespace FWM
 			{
 				targetSet = false;
 			}
+		}
+		
+		private void InteractWithHook()
+		{
+			targetPos = new Vector3(hook.transform.position.x + 1f, hook.transform.position.y, hook.transform.position.z);
+			
+			rb.velocity = Vector3.Lerp(rb.velocity, ( (targetPos - transform.position).normalized * swimSpeed ), Time.deltaTime * accelFactor);
+			
+			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(hook.transform.position - transform.position, Vector3.up), Time.deltaTime * rotFactor);
 		}
     }
 }
