@@ -27,8 +27,13 @@ namespace FWM
 		private bool targetSet = false; // has the fish got a target it wants to wander to
 		
 		[Header("Hook Detection")]
+		public float curiosityRadius = 1.5f;
+		public float tooCloseRadius = 0.5f;
+		public float getBoredDistance = 5f;
 		private bool seesHook = false;
 		private bool attentionGrabbed = false;
+		
+		private Vector3 lookDir = Vector3.forward;
 		
 		private void Awake()
 		{
@@ -110,7 +115,8 @@ namespace FWM
 		{
 			rb.velocity = Vector3.Lerp(rb.velocity, ( (targetPos - transform.position).normalized * swimSpeed ), Time.deltaTime * accelFactor);
 			
-			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity, Vector3.up), Time.deltaTime * rotFactor);
+			lookDir = rb.velocity.normalized;
+			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir, Vector3.up), Time.deltaTime * rotFactor);
 			
 			if( (Vector3.Distance(transform.position, targetPos) ) <= arrivedErrorRadius )
 			{
@@ -120,11 +126,33 @@ namespace FWM
 		
 		private void InteractWithHook()
 		{
-			targetPos = new Vector3(hook.transform.position.x + 1f, hook.transform.position.y, hook.transform.position.z);
+			if(Vector3.Distance(hook.transform.position, transform.position) > curiosityRadius) // if far away, move to be closer to hook
+			{
+				targetPos = hook.transform.position;
+			}
+			else // if close enough, dont move
+			{
+				if(Vector3.Distance(hook.transform.position, transform.position) < tooCloseRadius)
+				{
+					targetPos = ( transform.position + ( (transform.position - hook.transform.position).normalized * curiosityRadius) );
+				}
+				else
+				{
+					targetPos = transform.position;
+				}
+			}
+			
 			
 			rb.velocity = Vector3.Lerp(rb.velocity, ( (targetPos - transform.position).normalized * swimSpeed ), Time.deltaTime * accelFactor);
 			
-			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(hook.transform.position - transform.position, Vector3.up), Time.deltaTime * rotFactor);
+			
+			lookDir = (hook.transform.position - transform.position).normalized;
+			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir, Vector3.up), Time.deltaTime * rotFactor);
+			
+			if(Vector3.Distance(hook.transform.position, startPos) > getBoredDistance) //if hook goes too far from its patrol zone it gets bored
+			{
+				attentionGrabbed = false;
+			}
 		}
     }
 }
