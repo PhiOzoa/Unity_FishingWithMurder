@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Fishing
+namespace FWM
 {
     public class HookControl : MonoBehaviour
     {
@@ -36,7 +36,7 @@ namespace Fishing
 		public float minDepth = 0f;
 		public float maxDepth = -30f;
 		
-		private bool tugging = false;
+		public bool tugging = false;
 		public float tugForce = 0.7f;
 		public int tugTime = 120;
 		private int tugCountdown = 0;

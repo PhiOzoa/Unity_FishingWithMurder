@@ -7,6 +7,7 @@ namespace FWM
     public class FishBehaviour : MonoBehaviour
     {
 		public GameObject hook; // fish needs to be able to notice hook
+		private HookControl hookScript;
 		public Rigidbody rb;
 		public Collider col;
 		
@@ -37,6 +38,7 @@ namespace FWM
 			startPos = transform.position;
 			
 			hook = GameObject.Find("HookController");
+			hookScript = hook.GetComponent<HookControl>();
 		}
 		
 		private void FixedUpdate()
@@ -44,12 +46,37 @@ namespace FWM
 			Debug.DrawLine(transform.position, transform.position + (transform.forward * 3f) );
 			Debug.DrawLine(startPos, targetPos);
 			
-			LookForHook();
+			if(seesHook && hookScript.tugging)
+			{
+				attentionGrabbed = true;
+				Debug.Log("got em");
+			}
 			
 			if(wandering)
 			{
 				Wander();
 			}
+		}
+		
+		private void OnTriggerEnter(Collider other)
+		{
+			if(other.gameObject == hook)
+			{
+				seesHook = true;
+			}
+		}
+		
+		private void OnTriggerExit(Collider other)
+		{
+			if(other.gameObject == hook)
+			{
+				seesHook = false;
+			}
+		}
+		
+		private void OnCollisionEnter(Collision col)
+		{
+			targetSet = false; // choose a new place to swim if you bump into something
 		}
 		
 		private void Wander()
@@ -63,11 +90,6 @@ namespace FWM
 			{
 				MoveToTarget();
 			}
-		}
-		
-		private void OnCollisionEnter(Collision col)
-		{
-			targetSet = false; // choose a new place to swim if you bump into something
 		}
 		
 		private void SetTarget()
@@ -88,21 +110,6 @@ namespace FWM
 			if( (Vector3.Distance(transform.position, targetPos) ) <= arrivedErrorRadius )
 			{
 				targetSet = false;
-			}
-		}
-		
-		private void LookForHook()
-		{
-			Vector3 targetDir = hook.transform.position - transform.position;
-			float hookAngleFromFwd = Vector3.Angle(targetDir, transform.forward);
-			
-			if( (Vector3.Distance(hook.transform.position, transform.position) <= visionDistance) && (hookAngleFromFwd <= (visionDegrees / 2) ) )
-			{
-				seesHook = true;
-			}
-			else
-			{
-				seesHook = false;
 			}
 		}
     }

@@ -32,7 +32,7 @@ namespace Fishing
 		private void FollowHook()
 		{
 			targetPos.x = hook.transform.position.x;
-			targetPos.z = hook.transform.position.z;
+			targetPos.z = hook.transform.position.z - 1f;
 			targetPos.y = (hook.transform.position.y + camHeight);
 			
 			pos = Vector3.Lerp(pos, targetPos, Time.deltaTime * latTranslateFactor);
