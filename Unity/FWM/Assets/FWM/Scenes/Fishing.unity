@@ -823,7 +823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &733378778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,7 +843,7 @@ MonoBehaviour:
   shallowDensity: 0.01
   deepDensity: 0.3
   shallowBrightness: 1.8
-  deepBrightness: 0.3
+  deepBrightness: 0.7
   colGrad:
     serializedVersion: 2
     key0: {r: 0.43676576, g: 0.6132076, b: 0.55604035, a: 0.49803922}
@@ -2369,6 +2369,26 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 238982263, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
+      propertyPath: m_Height
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 238982263, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
+      propertyPath: m_Radius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 238982263, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
+      propertyPath: m_Center.z
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068233932, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378533783, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 438367818434922498, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
       propertyPath: m_Name
       value: Fish
