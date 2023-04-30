@@ -123,12 +123,9 @@ namespace FWM
 		
 		public void TugInput(InputAction.CallbackContext context)
 		{
-			if(context.performed)
+			if(context.performed && tugCountdown == 0)
 			{
-				if(tugCountdown == 0)
-				{
-					tugging = true;
-				}
+				tugging = true;
 			}
 		}
 		
