@@ -9,6 +9,7 @@ namespace FWM
     {
 		public Rigidbody rb;
 		public GameObject hookDir;
+		public GameObject activeFish = null;
 		
 		private Vector2 inputDir = Vector2.zero;
 		private bool raiseInput = false;

@@ -33,6 +33,14 @@ namespace FWM
 		private bool seesHook = false;
 		private bool attentionGrabbed = false;
 		
+		[Header("Catch Mechanics")]
+		public int initAttention = 25;
+		public int attentionIncrement = 10;
+		public int attentionDecrement = 5;
+		public int maxAttention = 100;
+		public int attentionAmt = 0;
+		private bool attentionInitialized = false;
+		
 		private Vector3 lookDir = Vector3.forward;
 		
 		private void Awake()
@@ -45,13 +53,10 @@ namespace FWM
 		
 		private void FixedUpdate()
 		{
-			Debug.DrawLine(transform.position, transform.position + (transform.forward * 3f) );
-			Debug.DrawLine(startPos, targetPos);
-			
-			if(seesHook && hookScript.tugging && !attentionGrabbed)
+			if(seesHook && hookScript.tugging && !attentionGrabbed && hookScript.activeFish == null)
 			{
+				hookScript.activeFish = gameObject;
 				attentionGrabbed = true;
-				Debug.Log("got em");
 			}
 			
 			if(!attentionGrabbed)
@@ -62,10 +67,9 @@ namespace FWM
 			{
 				targetSet = false;
 				
-				
-				InteractWithHook();
+				FollowHook();
+				CatchCalculation();
 			}
-			
 		}
 		
 		private void OnTriggerEnter(Collider other)
@@ -91,32 +95,14 @@ namespace FWM
 		
 		private void Wander()
 		{
-			
 			if(!targetSet)
 			{
 				SetTarget();
 			}
-			else
-			{
-				MoveToTarget();
-			}
-		}
-		
-		private void SetTarget()
-		{
-			targetPos = (startPos + ( Random.onUnitSphere * Random.Range(0f, wanderRadius) ) ); // choose random location relative to start position and maximum radius
-			
-			targetPos.y = ( ( (targetPos.y - startPos.y) * heightTruncationFactor) + startPos.y);
-			
-			targetSet = true;
-		}
-		
-		private void MoveToTarget()
-		{
-			rb.velocity = Vector3.Lerp(rb.velocity, ( (targetPos - transform.position).normalized * swimSpeed ), Time.deltaTime * accelFactor);
 			
 			lookDir = rb.velocity.normalized;
-			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir, Vector3.up), Time.deltaTime * rotFactor);
+			
+			MoveToTarget();
 			
 			if( (Vector3.Distance(transform.position, targetPos) ) <= arrivedErrorRadius )
 			{
@@ -124,35 +110,83 @@ namespace FWM
 			}
 		}
 		
-		private void InteractWithHook()
+		private void SetTarget()
 		{
-			if(Vector3.Distance(hook.transform.position, transform.position) > curiosityRadius) // if far away, move to be closer to hook
+			if(!attentionGrabbed) // if wandering
 			{
-				targetPos = hook.transform.position;
+				targetPos = (startPos + ( Random.onUnitSphere * Random.Range(0f, wanderRadius) ) ); // choose random location relative to start position and maximum radius
+				
+				targetPos.y = ( ( (targetPos.y - startPos.y) * heightTruncationFactor) + startPos.y);
+				
+				targetSet = true;
 			}
-			else // if close enough, dont move
+			else // if attention is grabbed
 			{
-				if(Vector3.Distance(hook.transform.position, transform.position) < tooCloseRadius)
+				if(Vector3.Distance(hook.transform.position, transform.position) > curiosityRadius) // if far away, move to be closer to hook
 				{
-					targetPos = ( transform.position + ( (transform.position - hook.transform.position).normalized * curiosityRadius) );
+					targetPos = hook.transform.position;
 				}
-				else
+				else // if close enough, dont move
 				{
-					targetPos = transform.position;
+					if(Vector3.Distance(hook.transform.position, transform.position) < tooCloseRadius)
+					{
+						targetPos = (transform.position + ( (transform.position - hook.transform.position).normalized * curiosityRadius) );
+					}
+					else
+					{
+						targetPos = transform.position;
+					}
 				}
 			}
-			
-			
-			rb.velocity = Vector3.Lerp(rb.velocity, ( (targetPos - transform.position).normalized * swimSpeed ), Time.deltaTime * accelFactor);
-			
+		}
+		
+		private void FollowHook()
+		{
+			SetTarget();
 			
 			lookDir = (hook.transform.position - transform.position).normalized;
+			
+			MoveToTarget();
+		}
+		
+		private void MoveToTarget()
+		{
+			rb.velocity = Vector3.Lerp(rb.velocity, ( (targetPos - transform.position).normalized * swimSpeed), Time.deltaTime * accelFactor);
 			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir, Vector3.up), Time.deltaTime * rotFactor);
+		}
+		
+		private void CatchCalculation()
+		{
+			if(!attentionInitialized)
+			{
+				attentionAmt = initAttention;
+				attentionInitialized = true;
+			}
+			
+			TestForDesires();
+			
+			if(attentionAmt >= maxAttention)
+			{
+				Catch();
+			}
 			
 			if(Vector3.Distance(hook.transform.position, startPos) > getBoredDistance) //if hook goes too far from its patrol zone it gets bored
 			{
+				hookScript.activeFish = null;
 				attentionGrabbed = false;
+				attentionInitialized = false;
+				attentionAmt = 0;
 			}
+		}
+		
+		private void TestForDesires()
+		{
+			
+		}
+		
+		private void Catch()
+		{
+			
 		}
     }
 }
