@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d649542a2dd478a4d9d97c0706af0d3e, type: 3}
+  m_Name: BasicFish
+  m_EditorClassIdentifier: 
+  fishName: fush
+  wanderRadius: 5
+  arrivedErrorRadius: 3
+  heightTruncationFactor: 0.7
+  swimSpeed: 0.5
+  accelFactor: 0.5
+  rotFactor: 1.3
+  curiosityRadius: 2.5
+  tooCloseRadius: 0.5
+  getBoredDistance: 5
+  initAttention: 25
+  attentionIncrement: 10
+  attentionDecrement: 5
+  maxAttention: 100
+  scale: 1.5
+  sightDist: 20
+  sightRadius: 5

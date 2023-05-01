@@ -94,8 +94,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.48
+  m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &438367818434922498
@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 438367818434922500}
   - component: {fileID: 438367818434922496}
+  - component: {fileID: 8832576577026882959}
   - component: {fileID: 438367818434922499}
   - component: {fileID: 238982263}
   m_Layer: 0
@@ -131,7 +132,7 @@ Transform:
   m_Children:
   - {fileID: 1897456282}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &438367818434922496
 MonoBehaviour:
@@ -161,6 +162,23 @@ MonoBehaviour:
   attentionIncrement: 10
   attentionDecrement: 5
   maxAttention: 100
+  attentionAmt: 0
+--- !u!114 &8832576577026882959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438367818434922498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96135905c169be74aa8a38f55f6e89f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fb: {fileID: 438367818434922496}
+  body: {fileID: 1897456278}
+  sightCol: {fileID: 238982263}
+  fishStats: {fileID: 11400000, guid: 3208b48c4caaa8845847522f6b73ca44, type: 2}
 --- !u!54 &438367818434922499
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,4 +208,4 @@ CapsuleCollider:
   m_Radius: 5
   m_Height: 20
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 10.2}
+  m_Center: {x: 0, y: 0, z: 10}
