@@ -194,7 +194,7 @@ Transform:
   m_Children:
   - {fileID: 3612536229398571530}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3612536229428263936
 Rigidbody:
@@ -226,12 +226,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3612536229428263936}
   hookDir: {fileID: 3612536229398571533}
+  activeFish: {fileID: 0}
   lateralMag: 1.5
   sinkMag: 0.5
   raiseMag: 1.24
   accelFactorLat: 0.2
   decelFactorLat: 2
-  sinkFactor: 0.8
+  sinkFactor: 0.65
   raiseFactor: 0.32
   sinkRotFactor: 2
   raiseRotFactor: 0.5
