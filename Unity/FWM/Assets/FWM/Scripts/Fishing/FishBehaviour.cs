@@ -7,7 +7,7 @@ namespace FWM
     public class FishBehaviour : MonoBehaviour
     {
 		public GameObject hook; // fish needs to be able to notice hook
-		private HookControl hookScript;
+		public HookControl hookScript;
 		public Rigidbody rb;
 		public Collider col;
 		
@@ -27,9 +27,10 @@ namespace FWM
 		private bool targetSet = false; // has the fish got a target it wants to wander to
 		
 		[Header("Hook Detection")]
-		public float curiosityRadius = 1.5f;
-		public float tooCloseRadius = 0.5f;
-		public float getBoredDistance = 5f;
+		public float curiosityRadius = 1.5f; // how far the fish will get to the hook when interested
+		public float tooCloseRadius = 0.5f; // how close the fish will get to the hook when interested
+		public float getBoredDistance = 5f; // the distance the hook must be from the attentionPos for the fish to get bored
+		private Vector3 attentionPos; // where the fish is when its attention is grabbed
 		private bool seesHook = false;
 		private bool attentionGrabbed = false;
 		
@@ -39,23 +40,59 @@ namespace FWM
 		public int attentionDecrement = 5;
 		public int maxAttention = 100;
 		public int attentionAmt = 0;
+		
+		public int countdownBetweenDecrement = 60;
+		private int countdownVal = 0;
+		private bool desirePerformed = false;
 		private bool attentionInitialized = false;
 		
 		private Vector3 lookDir = Vector3.forward;
 		
+		private bool initialTug = false;
+		
+		private bool _isTugging;
+		public bool isTugging
+		{
+			get
+			{
+				return _isTugging;
+			}
+			set
+			{
+				if (_isTugging == false && value == true)
+				{
+					initialTug = true;
+				}
+				else
+				{
+					initialTug = false;
+				}
+				
+				
+				_isTugging = value;
+			}
+		}
+		
+		
 		private void Awake()
 		{
 			startPos = transform.position;
+			attentionPos = startPos;
 			
 			hook = GameObject.Find("HookController");
 			hookScript = hook.GetComponent<HookControl>();
 		}
 		
+
+		
 		private void FixedUpdate()
 		{
-			if(seesHook && hookScript.tugging && !attentionGrabbed && hookScript.activeFish == null)
+			DetectInitialTug();
+			
+			if(seesHook && initialTug && !attentionGrabbed && hookScript.activeFish == null)
 			{
 				hookScript.activeFish = gameObject;
+				attentionPos = transform.position;
 				attentionGrabbed = true;
 			}
 			
@@ -78,6 +115,7 @@ namespace FWM
 			{
 				seesHook = true;
 			}
+			
 		}
 		
 		private void OnTriggerExit(Collider other)
@@ -91,6 +129,18 @@ namespace FWM
 		private void OnCollisionEnter(Collision col)
 		{
 			targetSet = false; // choose a new place to swim if you bump into something
+		}
+		
+		private void DetectInitialTug()
+		{
+			if(hookScript.tugging)
+			{
+				isTugging = true;
+			}
+			else
+			{
+				isTugging = false;
+			}
 		}
 		
 		private void Wander()
@@ -160,6 +210,7 @@ namespace FWM
 			if(!attentionInitialized)
 			{
 				attentionAmt = initAttention;
+				countdownVal = countdownBetweenDecrement;
 				attentionInitialized = true;
 			}
 			
@@ -170,10 +221,11 @@ namespace FWM
 				Catch();
 			}
 			
-			if(Vector3.Distance(hook.transform.position, startPos) > getBoredDistance) //if hook goes too far from its patrol zone it gets bored
+			if(Vector3.Distance(hook.transform.position, attentionPos) > getBoredDistance) //if hook goes too far from attentionPos it gets bored
 			{
 				hookScript.activeFish = null;
 				attentionGrabbed = false;
+				attentionPos = startPos;
 				attentionInitialized = false;
 				attentionAmt = 0;
 			}
@@ -181,12 +233,32 @@ namespace FWM
 		
 		private void TestForDesires()
 		{
+			if(initialTug && !desirePerformed)
+			{
+				//desirePerformed = true;
+				attentionAmt+= attentionIncrement;
+			}
 			
+			countdownVal--;
+			
+			if(countdownVal <= 0)
+			{
+				if(desirePerformed)
+				{
+					desirePerformed = false;
+				}
+				
+				attentionAmt-= attentionDecrement;
+				
+				countdownVal = countdownBetweenDecrement;
+			}
+			
+			//Debug.Log(attentionAmt);
 		}
 		
 		private void Catch()
 		{
-			
+			Debug.Log("caught");
 		}
     }
 }

@@ -8,14 +8,14 @@ namespace FWM
     {
 		public FishBehaviour fb;
 		public GameObject body;
-		public CapsuleCollider sightCol;
+		//public CapsuleCollider sightCol;
 		
 		public FishScriptableObject fishStats;
 		
 		public void OnEnable()
 		{
 			SetupScriptFromConfig();
-			SetupLookRadiusFromConfig();
+			//SetupLookRadiusFromConfig();
 			SetupModelFromConfig();
 		}
 		
@@ -38,13 +38,13 @@ namespace FWM
 			fb.attentionDecrement = fishStats.attentionDecrement;
 			fb.maxAttention = fishStats.maxAttention;
 		}
-		
+		/*
 		public void SetupLookRadiusFromConfig()
 		{
 			sightCol.radius = fishStats.sightRadius;
 			sightCol.height = fishStats.sightDist;
 			sightCol.center = new Vector3(0f, 0f, (fishStats.sightDist / 2) );
-		}
+		}*/
 		
 		public void SetupModelFromConfig()
 		{

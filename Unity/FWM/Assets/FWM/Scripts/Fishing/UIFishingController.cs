@@ -16,6 +16,9 @@ namespace FWM
 		public float depthFactor = 2f;
 		private float depthRounded;
 		
+		private FishBehaviour fishScript = null;
+		private bool fishScriptRetrieved = false;
+		
 		private void Awake()
 		{
 			hookScript = hook.GetComponent<HookControl>();
@@ -32,11 +35,23 @@ namespace FWM
 				{
 					fishUI.enabled = true;
 				}
+				if(!fishScriptRetrieved)
+				{
+					fishScript = hookScript.activeFish.GetComponent<FishBehaviour>();
+					fishScriptRetrieved = true;
+				}
+				
+				float desiredFill = Mathf.InverseLerp(0, fishScript.maxAttention, fishScript.attentionAmt);
+				
+				fishAttention.fillAmount = Mathf.Lerp(fishAttention.fillAmount, desiredFill, Time.deltaTime * 2f);
 				fishUI.transform.position = hookScript.activeFish.transform.position;
 			}
 			else
 			{
 				fishUI.enabled = false;
+				fishAttention.fillAmount = 0f;
+				fishScript = null;
+				fishScriptRetrieved = false;
 			}
 		}			
 		

@@ -86,16 +86,22 @@ namespace FWM
 			
 			if( (tugging) && (tugCountdown == 0) && (v.y < 0f) )
 			{
-				tugging = false;
+				//tugging = false;
 				v.y = tugForce;
 				tugCountdown = tugTime;
 			}
 			else
-			{
+			{	
 				if(tugCountdown != 0)
 				{
 					tugCountdown--;
+					
+					if(tugCountdown == 0)
+					{
+						tugging = false;
+					}
 				}
+				
 				Vert();
 			}
 			

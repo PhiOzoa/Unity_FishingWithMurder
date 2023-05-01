@@ -17,7 +17,7 @@ public class FishScriptableObject : ScriptableObject
 	public Vector2 spawnHeight = new Vector2(0f, -50f);
 	
 	public float wanderRadius = 5f;
-	public float arrivedErrorRadius = 03f;
+	public float arrivedErrorRadius = 0.3f;
 	public float heightTruncationFactor = 0.7f;
 	
 	public float swimSpeed = 0.5f;
@@ -29,7 +29,7 @@ public class FishScriptableObject : ScriptableObject
 	public float getBoredDistance = 5f;
 	
 	public int initAttention = 25;
-	public int attentionIncrement = 10;
+	public int attentionIncrement = 15;
 	public int attentionDecrement = 5;
 	public int maxAttention = 100;
 	

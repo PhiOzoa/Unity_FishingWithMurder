@@ -13,19 +13,21 @@ MonoBehaviour:
   m_Name: BasicFish
   m_EditorClassIdentifier: 
   fishName: fush
+  spawnBiome: 0
+  spawnHeight: {x: 0, y: -50}
   wanderRadius: 5
-  arrivedErrorRadius: 3
+  arrivedErrorRadius: 0.3
   heightTruncationFactor: 0.7
   swimSpeed: 0.5
   accelFactor: 0.5
   rotFactor: 1.3
-  curiosityRadius: 2.5
+  curiosityRadius: 2
   tooCloseRadius: 0.5
-  getBoredDistance: 5
+  getBoredDistance: 2.5
   initAttention: 25
-  attentionIncrement: 10
+  attentionIncrement: 12
   attentionDecrement: 5
   maxAttention: 100
-  scale: 1.5
+  scale: {x: 1.5, y: 1.5, z: 1.5}
   sightDist: 20
   sightRadius: 5

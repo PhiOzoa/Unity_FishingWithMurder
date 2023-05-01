@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1897456278}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4879272, y: 1.4879272, z: 1.4879272}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 438367818434922500}
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hook: {fileID: 0}
+  hookScript: {fileID: 0}
   rb: {fileID: 438367818434922499}
   col: {fileID: 1897456279}
   wanderRadius: 5
@@ -159,10 +160,11 @@ MonoBehaviour:
   tooCloseRadius: 1.5
   getBoredDistance: 5
   initAttention: 25
-  attentionIncrement: 10
+  attentionIncrement: 15
   attentionDecrement: 5
   maxAttention: 100
   attentionAmt: 0
+  countdownBetweenDecrement: 120
 --- !u!114 &8832576577026882959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fb: {fileID: 438367818434922496}
   body: {fileID: 1897456278}
-  sightCol: {fileID: 238982263}
   fishStats: {fileID: 11400000, guid: 3208b48c4caaa8845847522f6b73ca44, type: 2}
 --- !u!54 &438367818434922499
 Rigidbody:
