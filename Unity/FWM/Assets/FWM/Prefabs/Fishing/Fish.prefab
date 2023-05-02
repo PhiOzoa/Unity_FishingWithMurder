@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897456278}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.81}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -147,7 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hook: {fileID: 0}
-  hookScript: {fileID: 0}
   rb: {fileID: 438367818434922499}
   col: {fileID: 1897456279}
   wanderRadius: 5
@@ -179,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fb: {fileID: 438367818434922496}
   body: {fileID: 1897456278}
+  sightCol: {fileID: 238982263}
   fishStats: {fileID: 11400000, guid: 3208b48c4caaa8845847522f6b73ca44, type: 2}
 --- !u!54 &438367818434922499
 Rigidbody:

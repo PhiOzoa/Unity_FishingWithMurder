@@ -13,13 +13,29 @@ namespace FWM
 		
 		private Vector3 lineTopPos = Vector3.forward;
 		
+		private void Awake()
+		{
+			
+			SetPositions();
+			lineTopPos = hookDir;
+			DrawLine();
+		}
+		
 		private void FixedUpdate()
 		{
-			hookDir = new Vector3(gameObject.transform.position.x, 0f, gameObject.transform.position.z).normalized;
-			
+			SetPositions();
+			DrawLine();
+		}
+		
+		private void SetPositions()
+		{
+			hookDir = new Vector3(transform.position.x, 0f, transform.position.z).normalized;
 			lineTopPos = Vector3.Slerp(lineTopPos - cam.transform.position , hookDir, Time.deltaTime) + cam.transform.position;
-			
-			fishingLine.SetPosition(0, gameObject.transform.position);
+		}
+		
+		private void DrawLine()
+		{
+			fishingLine.SetPosition(0, transform.position);
 			fishingLine.SetPosition(1, lineTopPos);
 		}
     }
