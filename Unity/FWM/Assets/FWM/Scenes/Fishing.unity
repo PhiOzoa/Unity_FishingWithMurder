@@ -773,11 +773,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5d9bdcd89a6acd7478643edd90019ecf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0360b21ae62e00046bf7a48c6db11587, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 4
   m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -2610,18 +2610,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1897456282, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1897456282, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1897456282, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 438367818434922498, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
       propertyPath: m_Name
       value: Fish
@@ -2629,18 +2617,6 @@ PrefabInstance:
     - target: {fileID: 438367818434922500, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 438367818434922500, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 438367818434922500, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 438367818434922500, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 438367818434922500, guid: 2ee5c1ae3c387e54f89247efb0d9257d, type: 3}
       propertyPath: m_LocalPosition.x
