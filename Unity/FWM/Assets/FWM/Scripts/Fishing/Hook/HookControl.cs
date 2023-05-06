@@ -195,7 +195,7 @@ namespace FWM
 			}
 			else
 			{
-				lookDir = Vector3.Lerp(lookDir, (rb.transform.position - new Vector3(0f, minDepth, 0f) ), Time.deltaTime * raiseRotFactor);
+				lookDir = Vector3.Lerp(lookDir, rb.transform.position + Vector3.down, Time.deltaTime * raiseRotFactor);
 			}
 
 			

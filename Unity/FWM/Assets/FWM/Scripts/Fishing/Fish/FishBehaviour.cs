@@ -153,7 +153,6 @@ namespace FWM
 			if(interestCountdownVal > 0)
 			{
 				interestCountdownVal --;
-				Debug.Log(interestCountdownVal);
 			}
 			
 			if(!targetSet)

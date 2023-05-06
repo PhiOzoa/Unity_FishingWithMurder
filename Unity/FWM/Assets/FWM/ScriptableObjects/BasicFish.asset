@@ -23,7 +23,7 @@ MonoBehaviour:
   rotFactor: 1.3
   curiosityRadius: 2
   tooCloseRadius: 1
-  getBoredDistance: 3.5
+  getBoredDistance: 4
   initAttention: 25
   attentionIncrement: 14
   attentionDecrement: 7
