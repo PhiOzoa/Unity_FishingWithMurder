@@ -35,6 +35,15 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""GoFish"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f2f4db9-62a5-40c3-b086-b7edfcedb128"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -147,6 +156,28 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2863b68c-40f2-4a74-b063-e5d947487a8e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoFish"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a20c935-2cf0-46f9-999c-0f5dfcb3fc2f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoFish"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -156,6 +187,7 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
         // Overworld
         m_Overworld = asset.FindActionMap("Overworld", throwIfNotFound: true);
         m_Overworld_Movement = m_Overworld.FindAction("Movement", throwIfNotFound: true);
+        m_Overworld_GoFish = m_Overworld.FindAction("GoFish", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,11 +248,13 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Overworld;
     private IOverworldActions m_OverworldActionsCallbackInterface;
     private readonly InputAction m_Overworld_Movement;
+    private readonly InputAction m_Overworld_GoFish;
     public struct OverworldActions
     {
         private @OverworldControls m_Wrapper;
         public OverworldActions(@OverworldControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Overworld_Movement;
+        public InputAction @GoFish => m_Wrapper.m_Overworld_GoFish;
         public InputActionMap Get() { return m_Wrapper.m_Overworld; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +267,9 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMovement;
+                @GoFish.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnGoFish;
+                @GoFish.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnGoFish;
+                @GoFish.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnGoFish;
             }
             m_Wrapper.m_OverworldActionsCallbackInterface = instance;
             if (instance != null)
@@ -240,6 +277,9 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @GoFish.started += instance.OnGoFish;
+                @GoFish.performed += instance.OnGoFish;
+                @GoFish.canceled += instance.OnGoFish;
             }
         }
     }
@@ -247,5 +287,6 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
     public interface IOverworldActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnGoFish(InputAction.CallbackContext context);
     }
 }
