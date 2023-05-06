@@ -66,7 +66,7 @@ Transform:
   m_Children:
   - {fileID: 3612536229398571530}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3612536229428263936
 Rigidbody:
@@ -434,8 +434,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.034313202
-        value: 0.14634514
+        time: 0.041355133
+        value: 0.06437492
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -444,7 +444,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.39864868
+        value: 0.275701
         inSlope: 0
         outSlope: 0
         tangentMode: 0

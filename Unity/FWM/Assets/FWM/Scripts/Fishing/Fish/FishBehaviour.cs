@@ -315,9 +315,10 @@ namespace FWM
 		{
 			SetTarget(2);
 			bool biting = false;
-			if(Vector3.Distance(hook.transform.position, transform.position) < (0.3f + (body.transform.localScale.y / 2f) ) )
+			if(Vector3.Distance(hook.transform.position, transform.position) < (0.1f + (body.transform.localScale.y / 2f) ) )
 			{
 				biting = true;
+				Debug.Log("biting");
 			}
 			
 			lookDir = (hook.transform.position - transform.position).normalized;
