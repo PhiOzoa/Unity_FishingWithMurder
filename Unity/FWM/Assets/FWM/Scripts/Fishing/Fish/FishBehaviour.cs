@@ -44,7 +44,7 @@ namespace FWM
 		public int maxAttention = 100; // how much attention you need to reach to get the fish to bite
 		public int attentionAmt = 0;
 		private bool attentionFilled = false; // has the fish reached max attention
-		private bool fishCaught = false; // has the fish been caught
+		public bool fishCaught = false; // has the fish been caught
 		
 		public int countdownBetweenDecrement = 60; // time between each instance of fish losing attention
 		private int decCountdownVal = 0;
@@ -318,7 +318,6 @@ namespace FWM
 			if(Vector3.Distance(hook.transform.position, transform.position) < (0.1f + (body.transform.localScale.y / 2f) ) )
 			{
 				biting = true;
-				Debug.Log("biting");
 			}
 			
 			lookDir = (hook.transform.position - transform.position).normalized;
@@ -339,6 +338,7 @@ namespace FWM
 		private void Catch()
 		{
 			Debug.Log("caught");
+			fishCaught = true;
 		}
     }
 }
