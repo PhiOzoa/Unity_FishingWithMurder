@@ -10,7 +10,7 @@ namespace FWM
 		private GameObject ovrWrldPlayer = null;
 		
 		private FishingManager fm = null;
-		private OverworldManager om = null;
+		public OverworldManager om = null;
 		
 		private bool sceneLoading = false;
 		
@@ -30,9 +30,9 @@ namespace FWM
 		{
 			curScene = scene;
 			
-			if(scene.name == "Overworld")
+			if(scene.name == "Overworld" && om == null)
 			{
-				
+				om = gameObject.AddComponent<OverworldManager>() as OverworldManager;
 			}
 			
 			sceneLoading = false;
@@ -40,9 +40,9 @@ namespace FWM
 		
 		public void loadFishingScene()
 		{
-			if(!sceneLoading)
+			if(!sceneLoading && curScene.name == "Overworld")
 			{
-				SceneManager.LoadScene("Lake");
+				SceneManager.LoadScene("River");
 				sceneLoading = true;
 			}
 		}
