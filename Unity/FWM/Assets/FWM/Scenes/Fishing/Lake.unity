@@ -1901,16 +1901,16 @@ MonoBehaviour:
   light: {fileID: 1192973146}
   minCameraDepth: 0
   maxCameraDepth: 45
-  shallowDensity: 0.01
-  deepDensity: 0.3
+  shallowDensity: 0.027
+  deepDensity: 0.1
   shallowBrightness: 1.8
   deepBrightness: 0.6
   colGrad:
     serializedVersion: 2
-    key0: {r: 0.43676576, g: 0.6132076, b: 0.55604035, a: 0.49803922}
-    key1: {r: 0.22067462, g: 0.5377358, b: 0.46210656, a: 1}
-    key2: {r: 0.105286576, g: 0.24528301, b: 0.20140354, a: 0}
-    key3: {r: 0.02429691, g: 0.05660379, b: 0.02429691, a: 0}
+    key0: {r: 0.16990031, g: 0.4339623, b: 0.3518097, a: 0.49803922}
+    key1: {r: 0.0990566, g: 0.3962264, b: 0.3265199, a: 1}
+    key2: {r: 0.024029901, g: 0.18867922, b: 0.13379613, a: 0}
+    key3: {r: 0.004405484, g: 0.084905684, b: 0.004405484, a: 0}
     key4: {r: 0.12276395, g: 0.1792453, b: 0.120906025, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}

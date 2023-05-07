@@ -1576,22 +1576,22 @@ MonoBehaviour:
   light: {fileID: 1192973146}
   minCameraDepth: 0
   maxCameraDepth: 48
-  shallowDensity: 0.01
-  deepDensity: 0.25
+  shallowDensity: 0.027
+  deepDensity: 0.1
   shallowBrightness: 1.8
   deepBrightness: 0.8
   colGrad:
     serializedVersion: 2
-    key0: {r: 0.7688679, g: 1, b: 0.9695079, a: 0.72156864}
-    key1: {r: 0.4219918, g: 0.80529934, b: 0.8207547, a: 0.7058824}
-    key2: {r: 0.10588236, g: 0.19740036, b: 0.24705882, a: 1}
-    key3: {r: 0.06327874, g: 0.10481388, b: 0.16981131, a: 0}
+    key0: {r: 0.10399608, g: 0.38679248, b: 0.35144293, a: 1}
+    key1: {r: 0.06768423, g: 0.3551484, b: 0.3679245, a: 1}
+    key2: {r: 0.0497508, g: 0.17467414, b: 0.24528301, a: 1}
+    key3: {r: 0.02193842, g: 0.078339465, b: 0.16037738, a: 0}
     key4: {r: 0.06327874, g: 0.10481388, b: 0.16981131, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 17540
+    ctime1: 17348
     ctime2: 40285
     ctime3: 65535
     ctime4: 65535
@@ -1599,7 +1599,7 @@ MonoBehaviour:
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 18119
+    atime1: 65535
     atime2: 39128
     atime3: 0
     atime4: 0
@@ -1608,7 +1608,7 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 4
-    m_NumAlphaKeys: 3
+    m_NumAlphaKeys: 2
 --- !u!4 &733378779
 Transform:
   m_ObjectHideFlags: 0
@@ -5743,6 +5743,14 @@ PrefabInstance:
     - target: {fileID: 6742359911962969476, guid: d1682738fd69a54448f21def960e87b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742359911962969477, guid: d1682738fd69a54448f21def960e87b8, type: 3}
+      propertyPath: m_Center.x
+      value: -36.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742359911962969478, guid: d1682738fd69a54448f21def960e87b8, type: 3}
+      propertyPath: m_Center.x
+      value: 37.6
       objectReference: {fileID: 0}
     - target: {fileID: 6742359911962969481, guid: d1682738fd69a54448f21def960e87b8, type: 3}
       propertyPath: m_Name

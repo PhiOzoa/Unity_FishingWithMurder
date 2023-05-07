@@ -160,7 +160,7 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2863b68c-40f2-4a74-b063-e5d947487a8e"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -171,7 +171,7 @@ public partial class @OverworldControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9a20c935-2cf0-46f9-999c-0f5dfcb3fc2f"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
