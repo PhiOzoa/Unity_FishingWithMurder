@@ -184,7 +184,7 @@ namespace FWM
 				
 					if(Vector3.Distance(hook.transform.position, transform.position) > curiosityRadius) // if far away, move to be closer to hook
 					{
-						targetPos = hook.transform.position;
+						targetPos = hook.transform.position + (Vector3.down * 0.5f);
 					}
 					else // if close enough, dont move
 					{

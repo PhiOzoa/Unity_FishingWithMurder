@@ -23,6 +23,8 @@ namespace FWM
 		{
 			fb.body = body;
 			
+			gameObject.name = fishStats.fishName;
+			
 			fb.wanderRadius = fishStats.wanderRadius;
 			fb.arrivedErrorRadius = fishStats.arrivedErrorRadius;
 			fb.heightTruncationFactor = fishStats.heightTruncationFactor;

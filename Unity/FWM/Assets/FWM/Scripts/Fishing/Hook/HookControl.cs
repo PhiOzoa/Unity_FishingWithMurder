@@ -10,6 +10,8 @@ namespace FWM
 		public Rigidbody rb;
 		public GameObject hookDir;
 		public GameObject activeFish = null;
+		public FishBehaviour fishScript = null;
+		public bool leaveInput = false;
 		
 		private Vector2 inputDir = Vector2.zero;
 		private bool raiseInput = false;
@@ -54,6 +56,19 @@ namespace FWM
 		private void FixedUpdate()
 		{
 			v = rb.velocity;
+			
+			
+			if(activeFish != null)
+			{
+				if(fishScript == null)
+				{
+					fishScript = activeFish.GetComponent<FishBehaviour>() as FishBehaviour;
+				}
+			}
+			else
+			{
+				fishScript = null;
+			}
 			
 			RaycastHit hit;
 			
@@ -147,6 +162,14 @@ namespace FWM
 				{
 					raiseInput = false;
 				}
+			}
+		}
+		
+		public void LeaveInput(InputAction.CallbackContext context)
+		{
+			if(context.performed)
+			{
+				leaveInput = true;
 			}
 		}
 		

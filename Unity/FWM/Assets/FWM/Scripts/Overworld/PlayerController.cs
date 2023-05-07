@@ -13,6 +13,8 @@ namespace FWM
 		private Vector3 v = Vector3.zero;
 		public float speed = 2f;
 		
+		public GameObject fishingTrigger;
+		
         void Start()
         {
         
@@ -43,6 +45,25 @@ namespace FWM
 					inputDir = Vector3.zero;
 				}
 			}
+		}
+		
+		void OnTriggerEnter(Collider other)
+		{
+			if(other.gameObject.tag == "FishSpot")
+			{
+				fishingTrigger = other.gameObject;
+			}
+			Debug.Log("entered");
+		}
+		
+		void OnTriggerExit(Collider other)
+		{
+			if(other.gameObject.tag == "FishSpot")
+			{
+				fishingTrigger = null;
+			}
+			
+			Debug.Log("exited");
 		}
 		
 		private void Move()
