@@ -6,16 +6,19 @@ namespace FWM
 {
     public class OverworldManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-    }
+		public GameObject ovwPlayer;
+		public PlayerController playerScript;
+		
+		void OnEnable()
+		{
+			ovwPlayer = GameObject.Find("Player");
+			playerScript = ovwPlayer.GetComponent<PlayerController>() as PlayerController;
+		}
+		
+		void OnDisable()
+		{
+			ovwPlayer = null;
+			playerScript = null;
+		}
+	}
 }

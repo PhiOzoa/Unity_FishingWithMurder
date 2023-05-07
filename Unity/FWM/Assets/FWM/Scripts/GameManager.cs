@@ -7,9 +7,7 @@ namespace FWM
 {
     public class GameManager : MonoBehaviour
     {
-		private GameObject ovrWrldPlayer = null;
-		
-		private FishingManager fm = null;
+		public FishingManager fm = null;
 		public OverworldManager om = null;
 		
 		private bool sceneLoading = false;
@@ -30,10 +28,18 @@ namespace FWM
 		{
 			curScene = scene;
 			
-			if(scene.name == "Overworld" && om == null)
+			if(scene.name == "Overworld" && om.enabled == false)
 			{
-				om = gameObject.AddComponent<OverworldManager>() as OverworldManager;
+				om.enabled = true;
+				fm.enabled = false;
 			}
+			
+			if(scene.name == "Lake" || scene.name == "River" || scene.name == "Beach" && fm.enabled == false)
+			{
+				fm.enabled = true;
+				om.enabled = false;
+			}
+
 			
 			sceneLoading = false;
 		}
