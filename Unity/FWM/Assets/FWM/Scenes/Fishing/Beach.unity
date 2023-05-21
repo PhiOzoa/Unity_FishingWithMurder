@@ -1520,8 +1520,8 @@ MonoBehaviour:
   light: {fileID: 1192973146}
   minCameraDepth: 0
   maxCameraDepth: 48
-  shallowDensity: 0.027
-  deepDensity: 0.1
+  shallowDensity: 0.05
+  deepDensity: 0.3
   shallowBrightness: 1.8
   deepBrightness: 0.8
   colGrad:
@@ -5582,6 +5582,10 @@ PrefabInstance:
       propertyPath: hook
       value: 
       objectReference: {fileID: 504089124}
+    - target: {fileID: 6869301260725725844, guid: 4868d4e96c5b38043994a491fe11fde6, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6869301260725725845, guid: 4868d4e96c5b38043994a491fe11fde6, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -1786,7 +1786,7 @@ MonoBehaviour:
   light: {fileID: 1192973146}
   minCameraDepth: 0
   maxCameraDepth: 45
-  shallowDensity: 0.027
+  shallowDensity: 0.03
   deepDensity: 0.1
   shallowBrightness: 1.8
   deepBrightness: 0.6
