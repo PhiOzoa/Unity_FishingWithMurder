@@ -48,6 +48,8 @@ namespace FWM
 		private Vector3 targetVel = Vector3.zero;
 		
 		
+		private bool tugHeld = false;
+		
 		private void Awake()
 		{
 
@@ -56,7 +58,6 @@ namespace FWM
 		private void FixedUpdate()
 		{
 			v = rb.velocity;
-			
 			
 			if(activeFish != null)
 			{
@@ -71,6 +72,15 @@ namespace FWM
 			}
 			
 			RaycastHit hit;
+			
+			if(!tugging && tugHeld) // this makes the hook rise if you are still holding the tug button after the tug action is complete
+			{
+				raiseInput = true;
+			}
+			else
+			{
+				raiseInput = false;
+			}
 			
 			if(!raiseInput)
 			{
@@ -146,22 +156,18 @@ namespace FWM
 		{
 			if(context.performed && tugCountdown == 0)
 			{
+				
 				tugging = true;
 			}
-		}
-		
-		public void RaiseInput(InputAction.CallbackContext context)
-		{
+			
 			if(context.performed)
 			{
-				raiseInput = true;
+				tugHeld = true;
 			}
-			else
+			
+			if(context.canceled)
 			{
-				if(context.canceled)
-				{
-					raiseInput = false;
-				}
+				tugHeld = false;
 			}
 		}
 		

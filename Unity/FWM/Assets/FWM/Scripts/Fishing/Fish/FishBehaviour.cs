@@ -184,57 +184,34 @@ namespace FWM
 				
 					if(Vector3.Distance(hook.transform.position, transform.position) > curiosityRadius) // if far away, move to be closer to hook
 					{
-						targetPos = hook.transform.position + (Vector3.down * 0.5f);
+						targetPos = hook.transform.position + (Vector3.down);
 					}
 					else // if close enough, dont move
 					{
 						if(Vector3.Distance(hook.transform.position, transform.position) < tooCloseRadius)
 						{
-							targetPos = (transform.position + ( (transform.position - hook.transform.position).normalized * curiosityRadius) );
+							targetPos = (transform.position + ( (transform.position - hook.transform.position).normalized * curiosityRadius) ) + (Vector3.down);
 						}
 						else
 						{
 							targetPos = transform.position;
 						}
 					}
+					
+					if(transform.position.y > hook.transform.position.y)
+					{
+						targetPos.y = hook.transform.position.y;
+					}
+					
 					break;
 				case 2:
 					
 					
-					targetPos = hook.transform.position + (Vector3.down * (body.transform.localScale.y * 0.5f + 0.4f) );
+					targetPos = hook.transform.position + (Vector3.down * (body.transform.localScale.y * 0.5f + 0.2f) );
 					
 					
 					break;
 			}
-			
-			/* old if then based code, probably remove
-			if(!attentionGrabbed) // if wandering
-			{
-				targetPos = (startPos + ( Random.onUnitSphere * Random.Range(0f, wanderRadius) ) ); // choose random location relative to start position and maximum radius
-				
-				targetPos.y = ( ( (targetPos.y - startPos.y) * heightTruncationFactor) + startPos.y);
-				
-				targetSet = true;
-			}
-			else // if attention is grabbed
-			{
-				if(Vector3.Distance(hook.transform.position, transform.position) > curiosityRadius) // if far away, move to be closer to hook
-				{
-					targetPos = hook.transform.position;
-				}
-				else // if close enough, dont move
-				{
-					if(Vector3.Distance(hook.transform.position, transform.position) < tooCloseRadius)
-					{
-						targetPos = (transform.position + ( (transform.position - hook.transform.position).normalized * curiosityRadius) );
-					}
-					else
-					{
-						targetPos = transform.position;
-					}
-				}
-			}
-			*/
 		}
 		
 		private void MoveToTarget()
