@@ -66,7 +66,7 @@ Transform:
   m_Children:
   - {fileID: 3612536229398571530}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3612536229428263936
 Rigidbody:
@@ -107,7 +107,7 @@ MonoBehaviour:
   accelFactorLat: 0.5
   decelFactorLat: 2
   sinkFactor: 0.8
-  raiseFactor: 0.4
+  raiseFactor: 0.35
   sinkRotFactor: 2
   raiseRotFactor: 0.5
   minDepth: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   tugging: 0
   tugForce: 1
   tugTime: 60
+  fastFallFactor: 2.3
 --- !u!114 &3612536229428263951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,8 +176,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3612536229428263950}
-        m_TargetAssemblyTypeName: Fishing.HookControl, Assembly-CSharp
-        m_MethodName: RaiseInput
+        m_TargetAssemblyTypeName: FWM.HookControl, Assembly-CSharp
+        m_MethodName: FastFallInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

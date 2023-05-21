@@ -29,5 +29,5 @@ MonoBehaviour:
   attentionDecrement: 7
   maxAttention: 60
   scale: {x: 1.5, y: 1.5, z: 1.5}
-  sightDist: 5
-  sightRadius: 1.5
+  sightDist: 7
+  sightRadius: 3

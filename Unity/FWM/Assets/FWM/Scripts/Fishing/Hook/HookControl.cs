@@ -49,6 +49,8 @@ namespace FWM
 		
 		
 		private bool tugHeld = false;
+		private bool fastFall = false;
+		public float fastFallFactor = 2.0f;
 		
 		private void Awake()
 		{
@@ -171,6 +173,19 @@ namespace FWM
 			}
 		}
 		
+		public void FastFallInput(InputAction.CallbackContext context)
+		{
+			if(context.performed)
+			{
+				fastFall = true;
+			}
+			
+			if(context.canceled)
+			{
+				fastFall = false;
+			}
+		}
+		
 		public void LeaveInput(InputAction.CallbackContext context)
 		{
 			if(context.performed)
@@ -202,7 +217,14 @@ namespace FWM
 			{
 				if(!raiseInput)
 				{
-					v.y = Mathf.Lerp(v.y, targetVel.y, Time.deltaTime*sinkFactor);
+					if(!fastFall)
+					{
+						v.y = Mathf.Lerp(v.y, targetVel.y, Time.deltaTime*sinkFactor);
+					}
+					else
+					{
+						v.y = Mathf.Lerp(v.y, targetVel.y * fastFallFactor, Time.deltaTime * (sinkFactor * fastFallFactor));
+					}
 				}
 				else
 				{
@@ -224,7 +246,7 @@ namespace FWM
 			}
 			else
 			{
-				lookDir = Vector3.Lerp(lookDir, rb.transform.position + Vector3.down, Time.deltaTime * raiseRotFactor);
+				lookDir = Vector3.Lerp(lookDir, transform.position + Vector3.down, Time.deltaTime * raiseRotFactor);
 			}
 
 			

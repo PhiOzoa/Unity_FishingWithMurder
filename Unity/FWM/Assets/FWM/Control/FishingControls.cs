@@ -46,7 +46,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Raise"",
+                    ""name"": ""FastFall"",
                     ""type"": ""Button"",
                     ""id"": ""b15572fa-a6fe-458f-9eef-760e3bab68c7"",
                     ""expectedControlType"": ""Button"",
@@ -204,7 +204,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Raise"",
+                    ""action"": ""FastFall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -215,7 +215,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Raise"",
+                    ""action"": ""FastFall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -239,7 +239,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
         m_Hook = asset.FindActionMap("Hook", throwIfNotFound: true);
         m_Hook_Movement = m_Hook.FindAction("Movement", throwIfNotFound: true);
         m_Hook_Tug = m_Hook.FindAction("Tug", throwIfNotFound: true);
-        m_Hook_Raise = m_Hook.FindAction("Raise", throwIfNotFound: true);
+        m_Hook_FastFall = m_Hook.FindAction("FastFall", throwIfNotFound: true);
         m_Hook_LeaveFishing = m_Hook.FindAction("LeaveFishing", throwIfNotFound: true);
     }
 
@@ -302,7 +302,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
     private IHookActions m_HookActionsCallbackInterface;
     private readonly InputAction m_Hook_Movement;
     private readonly InputAction m_Hook_Tug;
-    private readonly InputAction m_Hook_Raise;
+    private readonly InputAction m_Hook_FastFall;
     private readonly InputAction m_Hook_LeaveFishing;
     public struct HookActions
     {
@@ -310,7 +310,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
         public HookActions(@FishingControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Hook_Movement;
         public InputAction @Tug => m_Wrapper.m_Hook_Tug;
-        public InputAction @Raise => m_Wrapper.m_Hook_Raise;
+        public InputAction @FastFall => m_Wrapper.m_Hook_FastFall;
         public InputAction @LeaveFishing => m_Wrapper.m_Hook_LeaveFishing;
         public InputActionMap Get() { return m_Wrapper.m_Hook; }
         public void Enable() { Get().Enable(); }
@@ -327,9 +327,9 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                 @Tug.started -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
                 @Tug.performed -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
                 @Tug.canceled -= m_Wrapper.m_HookActionsCallbackInterface.OnTug;
-                @Raise.started -= m_Wrapper.m_HookActionsCallbackInterface.OnRaise;
-                @Raise.performed -= m_Wrapper.m_HookActionsCallbackInterface.OnRaise;
-                @Raise.canceled -= m_Wrapper.m_HookActionsCallbackInterface.OnRaise;
+                @FastFall.started -= m_Wrapper.m_HookActionsCallbackInterface.OnFastFall;
+                @FastFall.performed -= m_Wrapper.m_HookActionsCallbackInterface.OnFastFall;
+                @FastFall.canceled -= m_Wrapper.m_HookActionsCallbackInterface.OnFastFall;
                 @LeaveFishing.started -= m_Wrapper.m_HookActionsCallbackInterface.OnLeaveFishing;
                 @LeaveFishing.performed -= m_Wrapper.m_HookActionsCallbackInterface.OnLeaveFishing;
                 @LeaveFishing.canceled -= m_Wrapper.m_HookActionsCallbackInterface.OnLeaveFishing;
@@ -343,9 +343,9 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
                 @Tug.started += instance.OnTug;
                 @Tug.performed += instance.OnTug;
                 @Tug.canceled += instance.OnTug;
-                @Raise.started += instance.OnRaise;
-                @Raise.performed += instance.OnRaise;
-                @Raise.canceled += instance.OnRaise;
+                @FastFall.started += instance.OnFastFall;
+                @FastFall.performed += instance.OnFastFall;
+                @FastFall.canceled += instance.OnFastFall;
                 @LeaveFishing.started += instance.OnLeaveFishing;
                 @LeaveFishing.performed += instance.OnLeaveFishing;
                 @LeaveFishing.canceled += instance.OnLeaveFishing;
@@ -357,7 +357,7 @@ public partial class @FishingControls : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnTug(InputAction.CallbackContext context);
-        void OnRaise(InputAction.CallbackContext context);
+        void OnFastFall(InputAction.CallbackContext context);
         void OnLeaveFishing(InputAction.CallbackContext context);
     }
 }
