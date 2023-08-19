@@ -132,7 +132,7 @@ namespace FWM
 				Vert();
 			}
 			
-			RotateToDirection();
+			//RotateToDirection();
 			
 			
 			
@@ -200,7 +200,7 @@ namespace FWM
 			{
 				if( (targetVel.x != 0f) || (targetVel.z != 0f) ) //if target is not zero use accel, if target is at zero use decel
 				{
-					v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * accelFactorLat);
+					v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * accelFactorLat);//fix this whole shit
 					v.z = Mathf.Lerp(v.z, targetVel.z, Time.deltaTime * accelFactorLat);
 				}
 				else
