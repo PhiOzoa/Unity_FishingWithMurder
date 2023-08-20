@@ -136,7 +136,7 @@ namespace FWM
 			
 			
 			
-			rb.velocity = v;
+			//rb.velocity = v;
 		}
 		
 		public void ReadMoveInput(InputAction.CallbackContext context)
@@ -196,19 +196,37 @@ namespace FWM
 		
 		private void MoveLaterally()
 		{
+			/*
 			if( (v.x != targetVel.x) || (v.z != targetVel.z) ) //if already at target, don't change velocity
 			{
 				if( (targetVel.x != 0f) || (targetVel.z != 0f) ) //if target is not zero use accel, if target is at zero use decel
 				{
-					v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * accelFactorLat);//fix this whole shit
-					v.z = Mathf.Lerp(v.z, targetVel.z, Time.deltaTime * accelFactorLat);
+					//v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * accelFactorLat);//fix this whole shit
+					//v.z = Mathf.Lerp(v.z, targetVel.z, Time.deltaTime * accelFactorLat);
+					
+					v.x 
 				}
 				else
 				{
 					v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * decelFactorLat);
 					v.z = Mathf.Lerp(v.z, targetVel.z, Time.deltaTime * decelFactorLat);
 				}
-			}
+			}*/
+			
+			//what i want to do: make velocity v = targetvel at a rate of accelfactor
+			
+			
+			Vector2 targetSpeed = inputDir * lateralMag;
+			
+			Vector2 speedDif = targetSpeed - new Vector2(rb.velocity.x, rb.velocity.z);
+			
+			float accelRate = (targetSpeed.magnitude > 0.01f) ? accelFactorLat : decelFactorLat;
+			
+			Vector2 movement = speedDif * accelRate;
+			
+			rb.AddForce(new Vector3(movement.x, 0f, movement.y) );
+			Debug.Log(rb.velocity.magnitude);
+			
 		}
 		
 		private void Vert()
