@@ -41,14 +41,14 @@ namespace FWM
 					leaveInputReceived = true;
 					loadOverworldScene();
 				}
-				
+				/*
 				if(fm.hookScript.activeFish != null && fm.hookScript.fishScript != null)
 				{
 					if(fm.hookScript.fishScript.fishCaught)
 					{
 						loadOverworldScene();
 					}
-				}
+				}*/
 			}
 			
 			if(curScene.name == "Overworld")

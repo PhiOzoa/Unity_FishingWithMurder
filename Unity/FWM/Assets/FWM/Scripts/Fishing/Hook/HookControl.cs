@@ -10,7 +10,7 @@ namespace FWM
 		public Rigidbody rb;
 		public GameObject hookDir;
 		public GameObject activeFish = null;
-		public FishBehaviour fishScript = null;
+
 		public bool leaveInput = false;
 		
 		private Vector2 inputDir = Vector2.zero;
@@ -52,47 +52,12 @@ namespace FWM
 		private bool fastFall = false;
 		public float fastFallBoost = 2.0f;
 		
-		private void Awake()
-		{
-
-		}
 		
 		private void FixedUpdate()
 		{
+			raiseInput = TestTugging();
 			
-			if(activeFish != null)
-			{
-				if(fishScript == null)
-				{
-					fishScript = activeFish.GetComponent<FishBehaviour>() as FishBehaviour;
-				}
-			}
-			else
-			{
-				fishScript = null;
-			}
-			
-			
-			
-			if(!tugging && tugHeld) // make the hook rise if you are still holding the tug button after the tug action is complete
-			{
-				raiseInput = true;
-			}
-			else
-			{
-				raiseInput = false;
-			}
-			
-			
-			
-			if(!raiseInput) // change target velocity depending on if raising or not
-			{
-				targetVel = new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag);
-			}
-			else
-			{
-				targetVel = new Vector3(inputDir.x * lateralMag, raiseMag, inputDir.y * lateralMag);
-			}
+			SetTarget();
 			
 			Lat();
 			
@@ -155,6 +120,30 @@ namespace FWM
 			}
 		}
 		
+		private bool TestTugging()
+		{
+			if(!tugging && tugHeld)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
+		private void SetTarget()
+		{
+			if(!raiseInput) // change target velocity depending on if raising or not
+			{
+				targetVel = new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag);
+			}
+			else
+			{
+				targetVel = new Vector3(inputDir.x * lateralMag, raiseMag, inputDir.y * lateralMag);
+			}
+		}
+		
 		private void Lat()
 		{
 			Vector2 targetLat = new Vector2(targetVel.x, targetVel.z);
@@ -201,26 +190,10 @@ namespace FWM
 		
 		private void RotateToDirection()
 		{
-			/*
-			if(!raiseInput)
-			{
-				lookDir = Vector3.Lerp(lookDir, new Vector3(v.x, v.y, v.z), Time.deltaTime * sinkRotFactor);
-			}
-			else
-			{
-				lookDir = Vector3.Lerp(lookDir, transform.position + Vector3.down, Time.deltaTime * raiseRotFactor);
-			}
-		
-			
-			Quaternion rotation = Quaternion.LookRotation(lookDir, Vector3.up);
-			hookDir.transform.rotation = rotation;
-			*/
-			
 			lookDir = rb.velocity.normalized;
 			
 			Quaternion rotation = Quaternion.LookRotation(lookDir, Vector3.up);
 			hookDir.transform.rotation = rotation;
-			
 		}
     }
 }
