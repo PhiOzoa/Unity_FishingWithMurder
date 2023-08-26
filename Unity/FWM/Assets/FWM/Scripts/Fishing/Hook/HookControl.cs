@@ -50,7 +50,7 @@ namespace FWM
 		
 		private bool tugHeld = false;
 		private bool fastFall = false;
-		public float fastFallFactor = 2.0f;
+		public float fastFallBoost = 2.0f;
 		
 		private void Awake()
 		{
@@ -75,7 +75,7 @@ namespace FWM
 			
 			RaycastHit hit;
 			
-			if(!tugging && tugHeld) // this makes the hook rise if you are still holding the tug button after the tug action is complete
+			if(!tugging && tugHeld) // make the hook rise if you are still holding the tug button after the tug action is complete
 			{
 				raiseInput = true;
 			}
@@ -84,55 +84,21 @@ namespace FWM
 				raiseInput = false;
 			}
 			
-			if(!raiseInput)
+			
+			if(!raiseInput) // change target velocity depending on if raising or not
 			{
-				if(Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
-				{
-					if(hit.transform.tag == "Env")
-					{
-						targetVel = ( new Vector3(inputDir.x * lateralMag, 0f, inputDir.y*lateralMag) );
-					}
-					else
-					{
-						targetVel = ( new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag) );
-					}
-				}
-				else
-				{
-					targetVel = ( new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag) );
-				}
-				
+				targetVel = new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag);
 			}
 			else
 			{
-				targetVel = ( new Vector3(0f, raiseMag, 0f) );
+				targetVel = new Vector3(inputDir.x * lateralMag, raiseMag, inputDir.y * lateralMag);
 			}
 			
+			Lat();
 			
-			MoveLaterally();
+			Vert();
 			
-			if( (tugging) && (tugCountdown == 0) && (v.y < 0f) )
-			{
-				//tugging = false;
-				v.y = tugForce;
-				tugCountdown = tugTime;
-			}
-			else
-			{	
-				if(tugCountdown != 0)
-				{
-					tugCountdown--;
-					
-					if(tugCountdown == 0)
-					{
-						tugging = false;
-					}
-				}
-				
-				Vert();
-			}
-			
-			//RotateToDirection();
+			RotateToDirection();
 			
 			
 			
@@ -156,9 +122,8 @@ namespace FWM
 		
 		public void TugInput(InputAction.CallbackContext context)
 		{
-			if(context.performed && tugCountdown == 0)
+			if(context.performed && tugCountdown == 0) //tugging only activates on the keypress, not on hold
 			{
-				
 				tugging = true;
 			}
 			
@@ -194,70 +159,53 @@ namespace FWM
 			}
 		}
 		
-		private void MoveLaterally()
+		private void Lat()
 		{
-			/*
-			if( (v.x != targetVel.x) || (v.z != targetVel.z) ) //if already at target, don't change velocity
-			{
-				if( (targetVel.x != 0f) || (targetVel.z != 0f) ) //if target is not zero use accel, if target is at zero use decel
-				{
-					//v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * accelFactorLat);//fix this whole shit
-					//v.z = Mathf.Lerp(v.z, targetVel.z, Time.deltaTime * accelFactorLat);
-					
-					v.x 
-				}
-				else
-				{
-					v.x = Mathf.Lerp(v.x, targetVel.x, Time.deltaTime * decelFactorLat);
-					v.z = Mathf.Lerp(v.z, targetVel.z, Time.deltaTime * decelFactorLat);
-				}
-			}*/
+			Vector2 targetLat = new Vector2(targetVel.x, targetVel.z);
 			
-			//what i want to do: make velocity v = targetvel at a rate of accelfactor
+			Vector2 speedDif = targetLat - new Vector2(rb.velocity.x, rb.velocity.z);
 			
-			
-			Vector2 targetSpeed = inputDir * lateralMag;
-			
-			Vector2 speedDif = targetSpeed - new Vector2(rb.velocity.x, rb.velocity.z);
-			
-			float accelRate = (targetSpeed.magnitude > 0.01f) ? accelFactorLat : decelFactorLat;
+			float accelRate = (targetLat.magnitude > 0.01f) ? accelFactorLat : decelFactorLat;
 			
 			Vector2 movement = speedDif * accelRate;
 			
 			rb.AddForce(new Vector3(movement.x, 0f, movement.y) );
-			Debug.Log(rb.velocity.magnitude);
 			
 		}
 		
 		private void Vert()
-		{
-			if( v.y != targetVel.y )
+		{			
+			if( (tugging) && (tugCountdown == 0) && (rb.velocity.y <= 0f) ) // if tug is pressed, a previous tug is not still in progress, and the hook is not rising
 			{
-				if(!raiseInput)
+				rb.velocity = new Vector3(rb.velocity.x, tugForce, rb.velocity.z);
+				tugCountdown = tugTime;
+			}
+			else
+			{
+				if(tugCountdown != 0) // decrement tug countdown until it reaches zero, at which point the player is no longer tugging
 				{
-					if(!fastFall)
-					{
-						v.y = Mathf.Lerp(v.y, targetVel.y, Time.deltaTime*sinkFactor);
-					}
-					else
-					{
-						v.y = Mathf.Lerp(v.y, targetVel.y * fastFallFactor, Time.deltaTime * (sinkFactor * fastFallFactor));
-					}
+					tugCountdown--;
 				}
 				else
 				{
-					v.y = Mathf.Lerp(v.y, targetVel.y, Time.deltaTime*raiseFactor);
+					tugging = false;
 				}
 				
+				float targetVert = (fastFall && !raiseInput) ? targetVel.y - fastFallBoost : targetVel.y; // if fastfall pressed and not raising, add fastfall boost to target speed
+				
+				float speedDif = targetVert - rb.velocity.y;
+				
+				float accelRate = (raiseInput) ? raiseFactor : sinkFactor;
+				
+				float movement  = speedDif * accelRate;
+				
+				rb.AddForce(new Vector3(0f, movement, 0f) );
 			}
 		}
 		
 		private void RotateToDirection()
 		{
-			Debug.DrawLine(gameObject.transform.position, (gameObject.transform.position + rb.velocity));
-			
-			
-			
+			/*
 			if(!raiseInput)
 			{
 				lookDir = Vector3.Lerp(lookDir, new Vector3(v.x, v.y, v.z), Time.deltaTime * sinkRotFactor);
@@ -266,22 +214,17 @@ namespace FWM
 			{
 				lookDir = Vector3.Lerp(lookDir, transform.position + Vector3.down, Time.deltaTime * raiseRotFactor);
 			}
-
+		
+			
+			Quaternion rotation = Quaternion.LookRotation(lookDir, Vector3.up);
+			hookDir.transform.rotation = rotation;
+			*/
+			
+			lookDir = rb.velocity.normalized;
 			
 			Quaternion rotation = Quaternion.LookRotation(lookDir, Vector3.up);
 			hookDir.transform.rotation = rotation;
 			
 		}
-		
-		private void Tug()
-		{
-			Debug.Log("Tug!");
-		}
-		
-		private void Raise()
-		{
-			
-		}
-		
     }
 }
