@@ -59,7 +59,6 @@ namespace FWM
 		
 		private void FixedUpdate()
 		{
-			v = rb.velocity;
 			
 			if(activeFish != null)
 			{
@@ -73,7 +72,7 @@ namespace FWM
 				fishScript = null;
 			}
 			
-			RaycastHit hit;
+			
 			
 			if(!tugging && tugHeld) // make the hook rise if you are still holding the tug button after the tug action is complete
 			{
@@ -83,6 +82,7 @@ namespace FWM
 			{
 				raiseInput = false;
 			}
+			
 			
 			
 			if(!raiseInput) // change target velocity depending on if raising or not
@@ -99,10 +99,6 @@ namespace FWM
 			Vert();
 			
 			RotateToDirection();
-			
-			
-			
-			//rb.velocity = v;
 		}
 		
 		public void ReadMoveInput(InputAction.CallbackContext context)
