@@ -28,10 +28,11 @@ namespace FWM
 		private bool targetSet = false; // has the fish got a target it wants to WanderBehaviour to
 		
 		[Header("Hook Detection")]
-		public float curiosityRadius = 1.5f; // how far the fish will get to the hook when interested
-		public float tooCloseRadius = 0.5f; // how close the fish will get to the hook when interested
+		public float curiosityRadius = 1.5f; // max distance of fish to hook when interested
+		public float tooCloseRadius = 0.5f; // min distance of fish to hook when interested
+		
 		public float getBoredDistance = 5f; // the distance the hook must be from the attentionPos for the fish to get bored
-		private Vector3 attentionPos; // the location from which the fish measures the getbored distance
+		private Vector3 attentionPos; // the location from which the fish measures the getBoredDistance
 		private bool seesHook = false; // hook is withing sight trigger
 		private bool attentionGrabbed = false; // hook has successfully grabbed fish's attention
 		public int countDownAfterLoseInterest = 600; // time in frames it takes after you lose the fish's interest for it to be possible to regain interest
@@ -44,7 +45,7 @@ namespace FWM
 		public int maxAttention = 100; // how much attention you need to reach to get the fish to bite
 		public int attentionAmt = 0;
 		private bool attentionFilled = false; // has the fish reached max attention
-		public bool fishCaught = false; // has the fish been caught
+		public bool fishSnagged = false; // has the fish been caught
 		
 		public int countdownBetweenDecrement = 60; // time between each instance of fish losing attention
 		private int decCountdownVal = 0;
@@ -89,17 +90,7 @@ namespace FWM
 		{
 			DetectInitialTug();
 			
-			if(seesHook && initialTug && !attentionGrabbed && hookScript.activeFish == null && interestCountdownVal <= 0)
-			{
-				hookScript.activeFish = gameObject;
-				
-				float middleDistance = Vector3.Distance(transform.position, hook.transform.position) - Mathf.Lerp(tooCloseRadius, curiosityRadius, 0.5f); // distance from fish to hook minus the halfway point between the fish's distances of interest
-				Vector3 dirFromFishToHook = (hook.transform.position - transform.position).normalized;
-				
-				attentionPos = (dirFromFishToHook * middleDistance) + transform.position; // set the attention pos as a position in the direction of the hook, within the fish's distance of interest from the hook
-				
-				attentionGrabbed = true;
-			}
+			GetAttention();
 			
 			if(!attentionGrabbed)
 			{
@@ -148,6 +139,23 @@ namespace FWM
 			isTugging = hookScript.tugging;
 		}
 		
+		private void GetAttention()
+		{
+			if(seesHook && initialTug && !attentionGrabbed && hookScript.activeFish == null && interestCountdownVal <= 0)
+			{
+				hookScript.activeFish = gameObject;
+				
+				float distanceOfInterest = Mathf.Lerp(tooCloseRadius, curiosityRadius, 0.5f); // halfway between min and max distance
+				float middleDistance = Vector3.Distance(transform.position, hook.transform.position) - distanceOfInterest; // distance from fish to hook minus the distanceOfInterest
+				
+				Vector3 dirFromFishToHook = (hook.transform.position - transform.position).normalized;
+				
+				attentionPos = (dirFromFishToHook * middleDistance) + transform.position; // set the attention pos as a position in the direction of the hook, at distanceOfInterest
+				
+				attentionGrabbed = true;
+			}
+		}
+		
 		private void WanderBehaviour()
 		{
 			if(interestCountdownVal > 0)
@@ -180,30 +188,24 @@ namespace FWM
 					targetPos.y = ( ( (targetPos.y - startPos.y) * heightTruncationFactor) + startPos.y);
 					targetSet = true;
 					break;
-				case 1:
-				
-					if(Vector3.Distance(hook.transform.position, transform.position) > curiosityRadius) // if far away, move to be closer to hook
-					{
-						targetPos = hook.transform.position + (Vector3.down);
-					}
-					else // if close enough, dont move
-					{
-						if(Vector3.Distance(hook.transform.position, transform.position) < tooCloseRadius)
-						{
-							targetPos = (transform.position + ( (transform.position - hook.transform.position).normalized * curiosityRadius) ) + (Vector3.down);
-						}
-						else
-						{
-							targetPos = transform.position;
-						}
-					}
 					
-					if(transform.position.y > hook.transform.position.y)
+				case 1: // go to position at a distance from the hook related to the level of interest
+					
+					Vector3 dirFromHookToFish = (transform.position - hook.transform.position).normalized;
+					Vector3 furthestPosToHook = hook.transform.position + (dirFromHookToFish * curiosityRadius);
+					Vector3 closestPosToHook = hook.transform.position + (dirFromHookToFish * tooCloseRadius);
+					
+					float distanceInterpolant = Mathf.InverseLerp(0f, (float)maxAttention, (float)attentionAmt);
+					
+					targetPos = Vector3.Lerp(furthestPosToHook, closestPosToHook, distanceInterpolant) + Vector3.down;
+					
+					if(transform.position.y > hook.transform.position.y) // make so the fish can't go higher than the hook
 					{
 						targetPos.y = hook.transform.position.y;
 					}
 					
 					break;
+					
 				case 2:
 					
 					
@@ -216,8 +218,13 @@ namespace FWM
 		
 		private void MoveToTarget()
 		{
-			rb.velocity = Vector3.Lerp(rb.velocity, ( (targetPos - transform.position).normalized * swimSpeed), Time.deltaTime * accelFactor);
-			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir, Vector3.up), Time.deltaTime * rotFactor);
+			Vector3 targetVel = (targetPos - transform.position).normalized * swimSpeed;
+			Vector3 velDif = targetVel - rb.velocity;
+			Vector3 movement = velDif * accelFactor;
+			
+			rb.AddForce(movement);
+			
+			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir, Vector3.up), rotFactor);
 		}
 		
 		private void FollowHookBehaviour()
@@ -308,14 +315,14 @@ namespace FWM
 			
 			if(initialTug && biting)
 			{
-				Catch();
+				Snag();
 			}
 		}
 		
-		private void Catch()
+		private void Snag()
 		{
-			Debug.Log("caught");
-			fishCaught = true;
+			Debug.Log("snagged");
+			fishSnagged = true;
 		}
     }
 }

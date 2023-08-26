@@ -55,15 +55,15 @@ namespace FWM
 		
 		private void FixedUpdate()
 		{
-			raiseInput = TestTugging();
+			raiseInput = TestTugging(); // raise input == tug is still held after tug effect complete
 			
-			SetTarget();
+			SetTarget(); // determine target velocity based on whether hook is raising or sinking
 			
-			Lat();
+			Lat(); // accelerate to lateral target velocity
 			
-			Vert();
+			Vert(); // accelerate to vertical target velocity
 			
-			RotateToDirection();
+			Rotate(); // rotate the hook to the direction it's moving, (needs improvement)
 		}
 		
 		public void ReadMoveInput(InputAction.CallbackContext context)
@@ -147,12 +147,9 @@ namespace FWM
 		private void Lat()
 		{
 			Vector2 targetLat = new Vector2(targetVel.x, targetVel.z);
-			
-			Vector2 speedDif = targetLat - new Vector2(rb.velocity.x, rb.velocity.z);
-			
+			Vector2 velDif = targetLat - new Vector2(rb.velocity.x, rb.velocity.z);
 			float accelRate = (targetLat.magnitude > 0.01f) ? accelFactorLat : decelFactorLat;
-			
-			Vector2 movement = speedDif * accelRate;
+			Vector2 movement = velDif * accelRate;
 			
 			rb.AddForce(new Vector3(movement.x, 0f, movement.y) );
 			
@@ -178,19 +175,19 @@ namespace FWM
 				
 				float targetVert = (fastFall && !raiseInput) ? targetVel.y - fastFallBoost : targetVel.y; // if fastfall pressed and not raising, add fastfall boost to target speed
 				
-				float speedDif = targetVert - rb.velocity.y;
+				float velDif = targetVert - rb.velocity.y;
 				
 				float accelRate = (raiseInput) ? raiseFactor : sinkFactor;
 				
-				float movement  = speedDif * accelRate;
+				float movement  = velDif * accelRate;
 				
 				rb.AddForce(new Vector3(0f, movement, 0f) );
 			}
 		}
 		
-		private void RotateToDirection()
+		private void Rotate()
 		{
-			lookDir = rb.velocity.normalized;
+			lookDir = (rb.velocity.magnitude > 0f) ? rb.velocity.normalized : Vector3.down;
 			
 			Quaternion rotation = Quaternion.LookRotation(lookDir, Vector3.up);
 			hookDir.transform.rotation = rotation;
