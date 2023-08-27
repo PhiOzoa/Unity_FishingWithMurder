@@ -33,8 +33,8 @@ namespace FWM
 			fb.accelFactor = fishStats.accelFactor;
 			fb.rotFactor = fishStats.rotFactor;
 			
-			fb.curiosityRadius = fishStats.curiosityRadius;
-			fb.tooCloseRadius = fishStats.tooCloseRadius;
+			fb.furthestRadius = fishStats.furthestRadius;
+			fb.closestRadius = fishStats.closestRadius;
 			fb.getBoredDistance = fishStats.getBoredDistance;
 			
 			fb.initAttention = fishStats.initAttention;

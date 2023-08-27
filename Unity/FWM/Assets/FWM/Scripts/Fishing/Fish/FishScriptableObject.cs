@@ -24,8 +24,8 @@ public class FishScriptableObject : ScriptableObject
 	public float accelFactor = 0.5f;
 	public float rotFactor = 1.3f;
 	
-	public float curiosityRadius = 2.5f;
-	public float tooCloseRadius = 0.5f;
+	public float furthestRadius = 2.5f;
+	public float closestRadius = 0.5f;
 	public float getBoredDistance = 5f;
 	
 	public int initAttention = 25;

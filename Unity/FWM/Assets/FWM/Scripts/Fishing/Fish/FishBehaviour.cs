@@ -28,11 +28,12 @@ namespace FWM
 		private bool targetSet = false; // has the fish got a target it wants to WanderBehaviour to
 		
 		[Header("Hook Detection")]
-		public float curiosityRadius = 1.5f; // max distance of fish to hook when interested
-		public float tooCloseRadius = 0.5f; // min distance of fish to hook when interested
+		public float furthestRadius = 1.5f; // max distance of fish to hook when interested
+		public float closestRadius = 0.5f; // min distance of fish to hook when interested
+		public float belowHookFactor = 0.5f; // vertical distance of fish from hook when interested
 		
-		public float getBoredDistance = 5f; // the distance the hook must be from the attentionPos for the fish to get bored
-		private Vector3 attentionPos; // the location from which the fish measures the getBoredDistance
+		public float getBoredDistance = 5f; // the distance of the hook from attentionPos at which the fish gets bored
+		private Vector3 attentionPos; // the location from which the getBoredDistance is measured
 		private bool seesHook = false; // hook is withing sight trigger
 		private bool attentionGrabbed = false; // hook has successfully grabbed fish's attention
 		public int countDownAfterLoseInterest = 600; // time in frames it takes after you lose the fish's interest for it to be possible to regain interest
@@ -76,6 +77,19 @@ namespace FWM
 			}
 		}
 		
+		private Vector3 FlattenedDir() // flatten the direction from the hook to the fish, in the vertical plane
+		{
+			Vector3 dirFromHookToFish = (transform.position - hook.transform.position).normalized;
+			Vector3 flattenedDir = new Vector3(dirFromHookToFish.x, 0f, dirFromHookToFish.z).normalized; // TODO: determine whether I want to make this a single declaration or leave it as is
+			
+			if(flattenedDir == Vector3.zero) // somehow (direction should never be nothing)
+			{
+				flattenedDir = Vector3.forward; // why not
+			}
+			
+			return flattenedDir;
+		}
+		
 		
 		private void Awake()
 		{
@@ -91,6 +105,8 @@ namespace FWM
 			DetectInitialTug();
 			
 			GetAttention();
+			
+			Debug.DrawLine(hook.transform.position, attentionPos);
 			
 			if(!attentionGrabbed)
 			{
@@ -145,12 +161,9 @@ namespace FWM
 			{
 				hookScript.activeFish = gameObject;
 				
-				float distanceOfInterest = Mathf.Lerp(tooCloseRadius, curiosityRadius, 0.5f); // halfway between min and max distance
-				float middleDistance = Vector3.Distance(transform.position, hook.transform.position) - distanceOfInterest; // distance from fish to hook minus the distanceOfInterest
+				float distanceOfInterest = Mathf.Lerp(closestRadius, furthestRadius, 0.5f); // midpoint between max distance and min distance from hook
 				
-				Vector3 dirFromFishToHook = (hook.transform.position - transform.position).normalized;
-				
-				attentionPos = (dirFromFishToHook * middleDistance) + transform.position; // set the attention pos as a position in the direction of the hook, at distanceOfInterest
+				attentionPos = (FlattenedDir() * distanceOfInterest) + hook.transform.position;
 				
 				attentionGrabbed = true;
 			}
@@ -191,23 +204,16 @@ namespace FWM
 					
 				case 1: // go to position at a distance from the hook related to the level of interest
 					
-					Vector3 dirFromHookToFish = (transform.position - hook.transform.position).normalized;
-					Vector3 furthestPosToHook = hook.transform.position + (dirFromHookToFish * curiosityRadius);
-					Vector3 closestPosToHook = hook.transform.position + (dirFromHookToFish * tooCloseRadius);
+					Vector3 furthestPosToHook = hook.transform.position + (FlattenedDir() * furthestRadius);
+					Vector3 closestPosToHook = hook.transform.position + (FlattenedDir() * closestRadius);
 					
 					float distanceInterpolant = Mathf.InverseLerp(0f, (float)maxAttention, (float)attentionAmt);
 					
-					targetPos = Vector3.Lerp(furthestPosToHook, closestPosToHook, distanceInterpolant) + Vector3.down;
-					
-					if(transform.position.y > hook.transform.position.y) // make so the fish can't go higher than the hook
-					{
-						targetPos.y = hook.transform.position.y;
-					}
+					targetPos = Vector3.Lerp(furthestPosToHook, closestPosToHook, distanceInterpolant) + (Vector3.down * belowHookFactor);
 					
 					break;
 					
 				case 2:
-					
 					
 					targetPos = hook.transform.position + (Vector3.down * (body.transform.localScale.y * 0.5f + 0.2f) );
 					
@@ -254,7 +260,7 @@ namespace FWM
 				CalcAttention();
 			}
 			
-			if( (Vector3.Distance(hook.transform.position, attentionPos) > getBoredDistance && Vector3.Distance(transform.position, hook.transform.position) < curiosityRadius ) || (attentionAmt <= 0) ) //if (hook goes too far from attentionPos && fish is within curiosity radius) OR attention amt hits zero it gets bored
+			if( (Vector3.Distance(hook.transform.position, attentionPos) > getBoredDistance && Vector3.Distance(transform.position, hook.transform.position) < furthestRadius ) || (attentionAmt <= 0) ) //if (hook goes too far from attentionPos && fish is within curiosity radius) OR attention amt hits zero it gets bored
 			{
 				LoseInterest();
 			}
@@ -262,7 +268,7 @@ namespace FWM
 		
 		private void CalcAttention()
 		{
-			if(Vector3.Distance(hook.transform.position, transform.position) < curiosityRadius)
+			if(Vector3.Distance(hook.transform.position, transform.position) < furthestRadius)
 			{
 				if(initialTug && seesHook)
 				{
@@ -295,7 +301,7 @@ namespace FWM
 			attentionAmt = 0; // reset attention of fish
 		}
 		
-		private void BiteBehaviour()
+		private void BiteBehaviour() // TODO: fix this lol
 		{
 			SetTarget(2);
 			bool biting = false;
@@ -324,5 +330,5 @@ namespace FWM
 			Debug.Log("snagged");
 			fishSnagged = true;
 		}
-    }
+	}
 }

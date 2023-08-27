@@ -20,9 +20,9 @@ MonoBehaviour:
   heightTruncationFactor: 0.7
   swimSpeed: 0.5
   accelFactor: 0.5
-  rotFactor: 0.3
-  curiosityRadius: 3
-  tooCloseRadius: 1
+  rotFactor: 0.05
+  furthestRadius: 2.5
+  closestRadius: 0.5
   getBoredDistance: 6
   initAttention: 25
   attentionIncrement: 14

@@ -55,7 +55,7 @@ namespace FWM
 		
 		private void FixedUpdate()
 		{
-			raiseInput = TestTugging(); // raise input == tug is still held after tug effect complete
+			raiseInput = TestRaising(); // raise input == tug is still held after tug effect complete
 			
 			SetTarget(); // determine target velocity based on whether hook is raising or sinking
 			
@@ -120,7 +120,7 @@ namespace FWM
 			}
 		}
 		
-		private bool TestTugging()
+		private bool TestRaising()
 		{
 			if(!tugging && tugHeld)
 			{
@@ -157,7 +157,9 @@ namespace FWM
 		
 		private void Vert()
 		{			
-			if( (tugging) && (tugCountdown == 0) && (rb.velocity.y <= 0f) ) // if tug is pressed, a previous tug is not still in progress, and the hook is not rising
+			bool canTug = (tugging) && (tugCountdown == 0) && (rb.velocity.y <= 0f);
+			
+			if(canTug) // if tug is pressed, a previous tug is not still in progress, and the hook is not rising
 			{
 				rb.velocity = new Vector3(rb.velocity.x, tugForce, rb.velocity.z);
 				tugCountdown = tugTime;
@@ -167,10 +169,11 @@ namespace FWM
 				if(tugCountdown != 0) // decrement tug countdown until it reaches zero, at which point the player is no longer tugging
 				{
 					tugCountdown--;
-				}
-				else
-				{
-					tugging = false;
+					
+					if(tugCountdown == 0)
+					{
+						tugging = false;
+					}
 				}
 				
 				float targetVert = (fastFall && !raiseInput) ? targetVel.y - fastFallBoost : targetVel.y; // if fastfall pressed and not raising, add fastfall boost to target speed
