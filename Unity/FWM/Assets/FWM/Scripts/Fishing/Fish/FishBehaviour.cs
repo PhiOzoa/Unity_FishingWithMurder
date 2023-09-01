@@ -87,6 +87,8 @@ namespace FWM
 			}
 		}
 		
+		
+		
 		private Vector3 FlattenedDir() // flatten the direction from the hook to the fish, in the vertical plane
 		{
 			Vector3 dirFromHookToFish = (transform.position - hook.transform.position).normalized;
@@ -137,6 +139,13 @@ namespace FWM
 					}
 				}
 			}
+			else
+			{
+				SnagStatus();
+			}
+			
+			Debug.DrawLine(transform.position, targetPos);
+			Debug.Log(rb.velocity.magnitude);
 		}
 		
 		private void OnTriggerEnter(Collider other)
@@ -159,6 +168,11 @@ namespace FWM
 		private void OnCollisionEnter(Collision col)
 		{
 			targetSet = false; // choose a new place to swim if you bump into something
+			
+			if( (col.relativeVelocity.magnitude > 1f) && fishSnagged)
+			{
+				DropSnag();
+			}
 		}
 		
 		private void DetectInitialTug()
@@ -168,17 +182,6 @@ namespace FWM
 		
 		private void GetAttention()
 		{
-			/*if(seesHook && initialTug && !attentionGrabbed && hookScript.activeFish == null && interestCountdownVal <= 0)
-			{
-				hookScript.activeFish = gameObject;
-				
-				float distanceOfInterest = Mathf.Lerp(closestRadius, furthestRadius, 0.5f); // midpoint between max distance and min distance from hook
-				
-				attentionPos = (FlattenedDir() * distanceOfInterest) + hook.transform.position;
-				
-				attentionGrabbed = true;
-			}*/
-			
 			if(CanGetAttention())
 			{
 				hookScript.activeFish = gameObject;
@@ -348,7 +351,7 @@ namespace FWM
 				
 				for(int i = 0; i < hookScript.pointsList.Count; i++)
 				{
-					if( (Vector3.Distance(hookScript.pointsList[i].pointTrans.position, transform.position) < Vector3.Distance(hookPoint.pointTrans.position, transform.position) ) && !(hookScript.pointsList[i].occupied) )
+					if( (Vector3.Distance(hookScript.pointsList[i].pointTrans.position, transform.position) < Vector3.Distance(hookPoint.pointTrans.position, transform.position) ) && !(hookScript.pointsList[i].occupied) ) // if distance is less than current position, and the position is free
 					{
 						hookPoint = hookScript.pointsList[i];
 					}
@@ -370,6 +373,7 @@ namespace FWM
 				{
 					snagLoc = transform.position;
 					snagRot = transform.rotation;
+					curSnagFrame = 0;
 					
 					snagLocSet = true;
 				}
@@ -398,11 +402,64 @@ namespace FWM
 		private void Snag()
 		{
 			Debug.Log("snagged");
-			
+			/*
 			joint = gameObject.AddComponent<FixedJoint>();
 			joint.connectedBody = hook.GetComponent<Rigidbody>();
+			joint.breakForce = 50f;
+			*/
+			transform.parent = hook.transform;
+			//rb.constraints = RigidbodyConstraints.FreezeAll;
+			
+			ResetOnSnag();
 			
 			fishSnagged = true;
+		}
+		
+		private void ResetOnSnag()
+		{
+			hookScript.activeFish = null; // hook can now catch another fish
+			
+			rb.velocity = Vector3.zero;
+			
+			snagLocSet = false;
+			
+			attentionPos = startPos; 
+			attentionGrabbed = false; 
+			attentionInitialized = false;
+			attentionFilled = false;
+			attentionAmt = 0;
+		}
+		
+		private void SnagStatus()
+		{
+			transform.position = hookPoint.pointTrans.position;
+			transform.rotation = Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up);
+			
+			/*
+			if(joint == null)
+			{
+				Debug.Log("dropped");
+				
+				interestCountdownVal = countDownAfterLoseInterest;
+				fishSnagged = false;
+				hookPoint.occupied = false;
+				hookPoint = null;
+				
+			}*/
+		}
+		
+		private void DropSnag()
+		{
+			Debug.Log("dropped");
+			
+			transform.parent = null;
+			
+			rb.velocity = Vector3.zero;
+			
+			interestCountdownVal = countDownAfterLoseInterest;
+			fishSnagged = false;
+			hookPoint.occupied = false;
+			hookPoint = null;
 		}
 	}
 }

@@ -18,7 +18,7 @@ MonoBehaviour:
   wanderRadius: 5
   arrivedErrorRadius: 0.3
   heightTruncationFactor: 0.7
-  swimSpeed: 0.5
+  swimSpeed: 0.7
   accelFactor: 0.5
   rotFactor: 0.05
   furthestRadius: 2.5
