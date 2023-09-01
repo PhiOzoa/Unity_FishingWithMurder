@@ -52,6 +52,16 @@ namespace FWM
 		private int decCountdownVal = 0;
 		private bool attentionInitialized = false;
 		
+		// Snag Parameters
+		private PointInfo hookPoint = null;
+		private int snagFrames = 30;
+		private int curSnagFrame = 0;
+		private Vector3 snagLoc = Vector3.zero;
+		private Quaternion snagRot;
+		private bool snagLocSet = false;
+		private float snagDistance = 0.7f;
+		private FixedJoint joint = null;
+		
 		private Vector3 lookDir = Vector3.forward;
 		
 		private bool initialTug = false;
@@ -102,28 +112,29 @@ namespace FWM
 		
 		private void FixedUpdate()
 		{
-			DetectInitialTug();
-			
-			GetAttention();
-			
-			Debug.DrawLine(hook.transform.position, attentionPos);
-			
-			if(!attentionGrabbed)
+			if(!fishSnagged)
 			{
-				WanderBehaviour();
-			}
-			else
-			{
-				if(!attentionFilled)
+				DetectInitialTug();
+				
+				GetAttention();
+				
+				if(!attentionGrabbed)
 				{
-					targetSet = false;
-					
-					FollowHookBehaviour();
-					BiteCalculation();
+					WanderBehaviour();
 				}
 				else
 				{
-					BiteBehaviour();
+					if(!attentionFilled)
+					{
+						targetSet = false;
+						
+						FollowHookBehaviour();
+						BiteCalculation();
+					}
+					else
+					{
+						BiteBehaviour();
+					}
 				}
 			}
 		}
@@ -157,7 +168,18 @@ namespace FWM
 		
 		private void GetAttention()
 		{
-			if(seesHook && initialTug && !attentionGrabbed && hookScript.activeFish == null && interestCountdownVal <= 0)
+			/*if(seesHook && initialTug && !attentionGrabbed && hookScript.activeFish == null && interestCountdownVal <= 0)
+			{
+				hookScript.activeFish = gameObject;
+				
+				float distanceOfInterest = Mathf.Lerp(closestRadius, furthestRadius, 0.5f); // midpoint between max distance and min distance from hook
+				
+				attentionPos = (FlattenedDir() * distanceOfInterest) + hook.transform.position;
+				
+				attentionGrabbed = true;
+			}*/
+			
+			if(CanGetAttention())
 			{
 				hookScript.activeFish = gameObject;
 				
@@ -167,6 +189,22 @@ namespace FWM
 				
 				attentionGrabbed = true;
 			}
+		}
+		
+		private bool CanGetAttention()
+		{
+			if(seesHook && initialTug && !attentionGrabbed && hookScript.activeFish == null && interestCountdownVal <= 0)
+			{
+				for(int i = 0; i < hookScript.pointsList.Count; i++)
+				{
+					if(!hookScript.pointsList[i].occupied) // if any point on the hook is free
+					{
+						return true;
+					}
+				}
+			}
+			
+			return false;
 		}
 		
 		private void WanderBehaviour()
@@ -183,7 +221,7 @@ namespace FWM
 			
 			lookDir = rb.velocity.normalized;
 			
-			MoveToTarget();
+			MoveToTarget(swimSpeed);
 			
 			if( (Vector3.Distance(transform.position, targetPos) ) <= arrivedErrorRadius )
 			{
@@ -215,16 +253,16 @@ namespace FWM
 					
 				case 2:
 					
-					targetPos = hook.transform.position + (Vector3.down * (body.transform.localScale.y * 0.5f + 0.2f) );
+					targetPos = hookPoint.pointTrans.position + (Vector3.down * belowHookFactor);
 					
 					
 					break;
 			}
 		}
 		
-		private void MoveToTarget()
+		private void MoveToTarget(float s)
 		{
-			Vector3 targetVel = (targetPos - transform.position).normalized * swimSpeed;
+			Vector3 targetVel = (targetPos - transform.position).normalized * s;
 			Vector3 velDif = targetVel - rb.velocity;
 			Vector3 movement = velDif * accelFactor;
 			
@@ -239,7 +277,7 @@ namespace FWM
 			
 			lookDir = (hook.transform.position - transform.position).normalized;
 			
-			MoveToTarget();
+			MoveToTarget(swimSpeed);
 		}
 		
 		private void BiteCalculation()
@@ -303,31 +341,67 @@ namespace FWM
 		
 		private void BiteBehaviour() // TODO: fix this lol
 		{
-			SetTarget(2);
-			bool biting = false;
-			if(Vector3.Distance(hook.transform.position, transform.position) < (0.1f + (body.transform.localScale.y / 2f) ) )
+			
+			if(hookPoint == null)
 			{
-				biting = true;
+				hookPoint = hookScript.pointsList[0];
+				
+				for(int i = 0; i < hookScript.pointsList.Count; i++)
+				{
+					if( (Vector3.Distance(hookScript.pointsList[i].pointTrans.position, transform.position) < Vector3.Distance(hookPoint.pointTrans.position, transform.position) ) && !(hookScript.pointsList[i].occupied) )
+					{
+						hookPoint = hookScript.pointsList[i];
+					}
+				}
+				
+				hookPoint.occupied = true;
 			}
 			
-			lookDir = (hook.transform.position - transform.position).normalized;
-			
-			MoveToTarget();
-			
-			if(Vector3.Distance(hook.transform.position, attentionPos) > getBoredDistance)
+			if(Vector3.Distance(transform.position, hookPoint.pointTrans.position) > snagDistance)
 			{
-				LoseInterest();
+				SetTarget(2);
+				lookDir = (hook.transform.position - transform.position).normalized;
+				
+				MoveToTarget(3 * swimSpeed);
 			}
-			
-			if(initialTug && biting)
+			else
 			{
-				Snag();
+				if(!snagLocSet)
+				{
+					snagLoc = transform.position;
+					snagRot = transform.rotation;
+					
+					snagLocSet = true;
+				}
+				
+				float interpolant = Mathf.InverseLerp(0f, (float)snagFrames, (float)curSnagFrame);
+				
+				transform.position = Vector3.Lerp(snagLoc, hookPoint.pointTrans.position, interpolant);
+				transform.rotation = Quaternion.Lerp(snagRot, Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up), interpolant);
+				
+				if(curSnagFrame != snagFrames)
+				{
+					curSnagFrame++;
+				}
+				else
+				{
+					Snag();
+				}
 			}
+			//SetTarget(2);
+			//bool biting = false;
+			
+			
+			
 		}
 		
 		private void Snag()
 		{
 			Debug.Log("snagged");
+			
+			joint = gameObject.AddComponent<FixedJoint>();
+			joint.connectedBody = hook.GetComponent<Rigidbody>();
+			
 			fishSnagged = true;
 		}
 	}

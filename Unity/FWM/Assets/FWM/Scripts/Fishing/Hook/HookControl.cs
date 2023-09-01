@@ -52,9 +52,33 @@ namespace FWM
 		private bool fastFall = false;
 		public float fastFallBoost = 2.0f;
 		
+		public List<PointInfo> pointsList;
+		
+		private void Awake()
+		{
+
+			pointsList = new List<PointInfo>();
+			
+			for(int i = 0; i < transform.childCount; i++)
+			{
+				Transform curTrans = transform.GetChild(i);
+				
+				if(curTrans.name == "Point")
+				{
+					PointInfo info = new PointInfo();
+					info.pointTrans = curTrans;
+					info.occupied = false;
+					
+					pointsList.Add(info);
+				}
+			}
+			
+			Debug.Log(pointsList.Count);
+		}
 		
 		private void FixedUpdate()
 		{
+			
 			raiseInput = TestRaising(); // raise input == tug is still held after tug effect complete
 			
 			SetTarget(); // determine target velocity based on whether hook is raising or sinking
@@ -190,10 +214,18 @@ namespace FWM
 		
 		private void Rotate()
 		{
-			lookDir = (rb.velocity.magnitude > 0f) ? rb.velocity.normalized : Vector3.down;
+			lookDir = (inputDir.magnitude > 0f && rb.velocity.y < 0f) ? new Vector3(inputDir.x, 0f, inputDir.y) : Vector3.down;
 			
-			Quaternion rotation = Quaternion.LookRotation(lookDir, Vector3.up);
-			hookDir.transform.rotation = rotation;
+			Quaternion rotation = (Quaternion.LookRotation(lookDir, Vector3.up));
+			//hookDir.transform.rotation = Quaternion.Lerp(hookDir.transform.rotation, rotation, 0.05f);
+			
+			transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.05f);
 		}
     }
+	
+	public class PointInfo
+	{
+		public Transform pointTrans;
+		public bool occupied;
+	}
 }
