@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &27627726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27627727}
+  m_Layer: 0
+  m_Name: Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &27627727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27627726}
+  m_LocalRotation: {x: -0.7303869, y: -0, z: -0, w: 0.68303365}
+  m_LocalPosition: {x: 0, y: 0, z: 0.17299995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3612536229428263937}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -93.838, y: 0, z: 0}
+--- !u!1 &97758626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 97758627}
+  m_Layer: 0
+  m_Name: Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &97758627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97758626}
+  m_LocalRotation: {x: -0.9677359, y: -0, z: -0, w: 0.25196683}
+  m_LocalPosition: {x: 0, y: 0.09899999, z: 0.106}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3612536229428263937}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -150.812, y: 0, z: 0}
+--- !u!1 &940412175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 940412176}
+  m_Layer: 0
+  m_Name: Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &940412176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940412175}
+  m_LocalRotation: {x: -0.43887758, y: -0, z: -0, w: 0.89854693}
+  m_LocalPosition: {x: 0, y: -0.122, z: 0.12499999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3612536229428263937}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -52.065, y: 0, z: 0}
 --- !u!1 &3612536229398571533
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,8 +158,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3612536229398571530}
+  - {fileID: 97758627}
+  - {fileID: 940412176}
+  - {fileID: 27627727}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3612536229428263936
 Rigidbody:
@@ -99,9 +195,8 @@ MonoBehaviour:
   rb: {fileID: 3612536229428263936}
   hookDir: {fileID: 3612536229398571533}
   activeFish: {fileID: 0}
-  fishScript: {fileID: 0}
   leaveInput: 0
-  lateralMag: 2
+  lateralMag: 3
   sinkMag: 0.5
   raiseMag: 1.24
   accelFactorLat: 0.5
@@ -115,7 +210,7 @@ MonoBehaviour:
   tugging: 0
   tugForce: 1
   tugTime: 60
-  fastFallFactor: 2.3
+  fastFallBoost: 2
 --- !u!114 &3612536229428263951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +361,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 3612536229498546550}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

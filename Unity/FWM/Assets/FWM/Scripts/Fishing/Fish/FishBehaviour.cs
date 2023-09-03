@@ -60,9 +60,12 @@ namespace FWM
 		private Quaternion snagRot;
 		private bool snagLocSet = false;
 		private float snagDistance = 0.7f;
-		private FixedJoint joint = null;
 		
 		private Vector3 lookDir = Vector3.forward;
+		
+		public ParticleSystem magnetSnap;
+		public ParticleSystem attentionShine;
+		
 		
 		private bool initialTug = false;
 		
@@ -143,9 +146,6 @@ namespace FWM
 			{
 				SnagStatus();
 			}
-			
-			Debug.DrawLine(transform.position, targetPos);
-			Debug.Log(rb.velocity.magnitude);
 		}
 		
 		private void OnTriggerEnter(Collider other)
@@ -314,6 +314,7 @@ namespace FWM
 				if(initialTug && seesHook)
 				{
 					attentionAmt+= attentionIncrement;
+					attentionShine.Play();
 				}
 				
 				if(decCountdownVal > 0)
@@ -418,6 +419,8 @@ namespace FWM
 		private void ResetOnSnag()
 		{
 			hookScript.activeFish = null; // hook can now catch another fish
+			
+			magnetSnap.Play();
 			
 			rb.velocity = Vector3.zero;
 			
