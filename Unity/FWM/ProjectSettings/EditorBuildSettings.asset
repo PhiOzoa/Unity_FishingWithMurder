@@ -5,16 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/FWM/Scenes/Overworld.unity
     guid: 369f33fbb05b4ef4a9365113def2b98c
-  - enabled: 1
+  - enabled: 0
     path: Assets/FWM/Scenes/Fishing/Lake.unity
     guid: 92690e5970b349e45a6005a688032794
-  - enabled: 1
+  - enabled: 0
     path: Assets/FWM/Scenes/Fishing/Beach.unity
     guid: aec2e8dc8bb79e24da66eee17ce19b71
-  - enabled: 1
+  - enabled: 0
     path: Assets/FWM/Scenes/Fishing/River.unity
     guid: eb12fe63229381e4d9b1fdb66c72c913
+  - enabled: 1
+    path: Assets/FWM/Scenes/NewLevelBlockout.unity
+    guid: 2b99d0edd39448541a6f9314aa5d68f5
   m_configObjects: {}
