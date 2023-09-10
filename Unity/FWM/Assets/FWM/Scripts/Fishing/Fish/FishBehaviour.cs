@@ -190,6 +190,11 @@ namespace FWM
 				
 				attentionPos = (FlattenedDir() * distanceOfInterest) + hook.transform.position;
 				
+				if(Vector3.Distance(hook.transform.position, transform.position) >= furthestRadius)
+				{
+					attentionShine.Play();
+				}
+				
 				attentionGrabbed = true;
 			}
 		}

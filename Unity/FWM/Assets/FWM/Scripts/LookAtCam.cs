@@ -8,6 +8,11 @@ namespace FWM
     {
 		public Camera cam;
 		
+		void Awake()
+		{
+			cam = Camera.main;
+		}
+		
 		void Update()
 		{
 			transform.rotation = Quaternion.LookRotation( (cam.transform.position - transform.position).normalized, Vector3.up);
