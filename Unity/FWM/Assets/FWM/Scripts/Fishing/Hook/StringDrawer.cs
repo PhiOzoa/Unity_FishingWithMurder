@@ -7,21 +7,16 @@ namespace FWM
     public class StringDrawer : MonoBehaviour
     {
 		public LineRenderer fishingLine;
-		public GameObject cam;
 		
-		private Vector3 hookDir;
-		
-		private Vector3 lineTopPos = Vector3.forward;
+		private Vector3 lineTopPos = Vector3.up;
 		
 		private void Awake()
 		{
-			
 			SetPositions();
-			lineTopPos = hookDir;
 			DrawLine();
 		}
 		
-		private void FixedUpdate()
+		private void Update()
 		{
 			SetPositions();
 			DrawLine();
@@ -29,8 +24,7 @@ namespace FWM
 		
 		private void SetPositions()
 		{
-			hookDir = new Vector3(transform.position.x, 0f, transform.position.z).normalized;
-			lineTopPos = Vector3.Slerp(lineTopPos - cam.transform.position , hookDir, Time.deltaTime) + cam.transform.position;
+			lineTopPos = Vector3.Lerp(lineTopPos, transform.position + Vector3.up * 5, 0.02f);
 		}
 		
 		private void DrawLine()

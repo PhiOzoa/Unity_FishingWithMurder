@@ -10,6 +10,7 @@ namespace FWM
 		public Rigidbody rb;
 		public GameObject hookDir;
 		public GameObject activeFish = null;
+		private Transform camTrans;
 
 		public bool leaveInput = false;
 		
@@ -56,7 +57,8 @@ namespace FWM
 		
 		private void Awake()
 		{
-
+			camTrans = Camera.main.transform;
+			
 			pointsList = new List<PointInfo>();
 			
 			for(int i = 0; i < transform.childCount; i++)
@@ -92,9 +94,13 @@ namespace FWM
 		
 		public void ReadMoveInput(InputAction.CallbackContext context)
 		{
+			
 			if(context.performed)
 			{
-				inputDir = context.ReadValue<Vector2>();
+				Vector2 camFor = new Vector2(camTrans.forward.x, camTrans.forward.z).normalized;
+				Vector2 camRight = new Vector2(camTrans.right.x, camTrans.right.z).normalized;
+
+				inputDir = (context.ReadValue<Vector2>().x * camRight) + (context.ReadValue<Vector2>().y * camFor);
 			}
 			else
 			{
@@ -102,6 +108,7 @@ namespace FWM
 				{
 					inputDir = Vector2.zero;
 				}
+				
 			}
 		}
 		

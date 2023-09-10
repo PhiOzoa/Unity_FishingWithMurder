@@ -93,38 +93,6 @@ Transform:
   m_Father: {fileID: 3612536229428263937}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -52.065, y: 0, z: 0}
---- !u!1 &3612536229398571533
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3612536229398571530}
-  m_Layer: 0
-  m_Name: HookDir
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3612536229398571530
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3612536229398571533}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3612536229498546546}
-  m_Father: {fileID: 3612536229428263937}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3612536229428263938
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,12 +125,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3612536229398571530}
+  - {fileID: 3612536229498546546}
   - {fileID: 97758627}
   - {fileID: 940412176}
   - {fileID: 27627727}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3612536229428263936
 Rigidbody:
@@ -177,7 +145,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &3612536229428263950
@@ -193,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3612536229428263936}
-  hookDir: {fileID: 3612536229398571533}
+  hookDir: {fileID: 0}
   activeFish: {fileID: 0}
   leaveInput: 0
   lateralMag: 3
@@ -349,7 +317,7 @@ Transform:
   m_Children:
   - {fileID: 4296546111474838182}
   - {fileID: 3191466194871143372}
-  m_Father: {fileID: 3612536229398571530}
+  m_Father: {fileID: 3612536229428263937}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!136 &3612536229498546551
@@ -495,7 +463,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishingLine: {fileID: 8141601283768895997}
-  cam: {fileID: 0}
 --- !u!120 &8141601283768895997
 LineRenderer:
   serializedVersion: 2
