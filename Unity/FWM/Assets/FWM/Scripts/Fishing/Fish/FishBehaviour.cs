@@ -386,6 +386,8 @@ namespace FWM
 				
 				float interpolant = Mathf.InverseLerp(0f, (float)snagFrames, (float)curSnagFrame);
 				
+				interpolant = -(Mathf.Pow( (1f - interpolant), (1f/2f) ) ) + 1f; //nice curve
+				
 				transform.position = Vector3.Lerp(snagLoc, hookPoint.pointTrans.position, interpolant);
 				transform.rotation = Quaternion.Lerp(snagRot, Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up), interpolant);
 				
