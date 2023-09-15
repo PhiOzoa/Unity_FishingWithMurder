@@ -12,7 +12,7 @@ namespace FWM
 		public GameObject body;
 		public CapsuleCollider col;
 		
-		private Transform snagTrans;
+		
 		
 		private Vector3 startPos; // fish's position at spawn, centre of spheroid area it will WanderBehaviour within
 		private Vector3 targetPos; // fish's destination
@@ -58,8 +58,12 @@ namespace FWM
 		private PointInfo hookPoint = null;
 		private int snagFrames = 30;
 		private int curSnagFrame = 0;
-		private Vector3 snagLoc = Vector3.zero;
-		private Quaternion snagRot;
+		private Vector3 initSnagLoc = Vector3.zero;
+		private Quaternion initSnagRot;
+		
+		private Vector3 targetSnagLoc;
+		private Quaternion targetSnagRot;
+		
 		private bool snagLocSet = false;
 		private float snagDistance = 0.7f;
 		
@@ -171,7 +175,7 @@ namespace FWM
 		{
 			targetSet = false; // choose a new place to swim if you bump into something
 			
-			if( (col.relativeVelocity.magnitude > 3f) && fishSnagged)
+			if( (col.relativeVelocity.magnitude > 3f) && fishSnagged && (col.gameObject.tag != "Fish") )
 			{
 				DropSnag();
 			}
@@ -379,8 +383,8 @@ namespace FWM
 			{
 				if(!snagLocSet)
 				{
-					snagLoc = transform.position;
-					snagRot = transform.rotation;
+					initSnagLoc = transform.position;
+					initSnagRot = transform.rotation;
 					curSnagFrame = 0;
 					
 					snagLocSet = true;
@@ -390,8 +394,8 @@ namespace FWM
 				
 				interpolant = -(Mathf.Pow( (1f - interpolant), (1f/2f) ) ) + 1f; //nice curve
 				
-				transform.position = Vector3.Lerp(snagLoc, hookPoint.pointTrans.position, interpolant);
-				transform.rotation = Quaternion.Lerp(snagRot, Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up), interpolant);
+				transform.position = Vector3.Lerp(initSnagLoc, hookPoint.pointTrans.position, interpolant);
+				transform.rotation = Quaternion.Lerp(initSnagRot, Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up), interpolant);
 				
 				if(curSnagFrame != snagFrames)
 				{
@@ -415,8 +419,11 @@ namespace FWM
 
 			transform.parent = hook.transform;
 			//rb.constraints = RigidbodyConstraints.FreezeAll;
-			snagTrans = transform;
-
+			transform.position = hookPoint.pointTrans.position;
+			transform.rotation = Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up);
+			
+			targetSnagLoc = transform.position;
+			targetSnagRot = transform.rotation;
 			
 			ResetOnSnag();
 			
@@ -445,9 +452,9 @@ namespace FWM
 			//transform.position = hookPoint.pointTrans.position;
 			//transform.rotation = Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up);
 			
-			transform.position = snagTrans.position;
-			transform.rotation = snagTrans.rotation;
-			
+			transform.position = hookPoint.pointTrans.position;
+			transform.rotation = Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up);
+			//Debug.Log(snagTrans.position);
 			/*
 			if(joint == null)
 			{

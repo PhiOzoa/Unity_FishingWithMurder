@@ -9803,7 +9803,7 @@ GameObject:
   - component: {fileID: 1897456279}
   m_Layer: 0
   m_Name: FishBody
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9905,7 +9905,7 @@ GameObject:
   - component: {fileID: 238982263}
   m_Layer: 0
   m_Name: Fish
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
