@@ -12,6 +12,8 @@ namespace FWM
 		public GameObject body;
 		public CapsuleCollider col;
 		
+		private Transform snagTrans;
+		
 		private Vector3 startPos; // fish's position at spawn, centre of spheroid area it will WanderBehaviour within
 		private Vector3 targetPos; // fish's destination
 		
@@ -169,7 +171,7 @@ namespace FWM
 		{
 			targetSet = false; // choose a new place to swim if you bump into something
 			
-			if( (col.relativeVelocity.magnitude > 1f) && fishSnagged)
+			if( (col.relativeVelocity.magnitude > 3f) && fishSnagged)
 			{
 				DropSnag();
 			}
@@ -410,13 +412,11 @@ namespace FWM
 		private void Snag()
 		{
 			Debug.Log("snagged");
-			/*
-			joint = gameObject.AddComponent<FixedJoint>();
-			joint.connectedBody = hook.GetComponent<Rigidbody>();
-			joint.breakForce = 50f;
-			*/
+
 			transform.parent = hook.transform;
 			//rb.constraints = RigidbodyConstraints.FreezeAll;
+			snagTrans = transform;
+
 			
 			ResetOnSnag();
 			
@@ -442,8 +442,11 @@ namespace FWM
 		
 		private void SnagStatus()
 		{
-			transform.position = hookPoint.pointTrans.position;
-			transform.rotation = Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up);
+			//transform.position = hookPoint.pointTrans.position;
+			//transform.rotation = Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up);
+			
+			transform.position = snagTrans.position;
+			transform.rotation = snagTrans.rotation;
 			
 			/*
 			if(joint == null)
@@ -463,6 +466,8 @@ namespace FWM
 			Debug.Log("dropped");
 			
 			transform.parent = null;
+			
+			//rb.constraints = RigidbodyConstraints.None;
 			
 			rb.velocity = Vector3.zero;
 			
