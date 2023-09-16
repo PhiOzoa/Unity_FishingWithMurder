@@ -23,7 +23,7 @@ namespace FWM
 		public float lateralMag = 3.0f;
 		[Range(0.5f, 3.0f)]
 		public float sinkMag = 3.0f;
-		[Range(0.5f, 3.0f)]
+		[Range(0.5f, 10.0f)]
 		public float raiseMag = 3.0f;
 		[Range(0.1f, 1.0f)]
 		public float accelFactorLat = 1.0f;
@@ -226,7 +226,7 @@ namespace FWM
 			Quaternion rotation = (Quaternion.LookRotation(lookDir, Vector3.up));
 			//hookDir.transform.rotation = Quaternion.Lerp(hookDir.transform.rotation, rotation, 0.05f);
 			
-			transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.05f);
+			hookDir.transform.rotation = Quaternion.Lerp(hookDir.transform.rotation, rotation, 0.05f);
 		}
     }
 	
