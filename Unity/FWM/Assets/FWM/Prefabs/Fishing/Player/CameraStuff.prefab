@@ -311,6 +311,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 5455358842039430411}
     m_Modifications:
+    - target: {fileID: 1982184977, guid: 4868d4e96c5b38043994a491fe11fde6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6869301260725725845, guid: 4868d4e96c5b38043994a491fe11fde6, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -359,7 +363,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishingCam
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6869301260725725843, guid: 4868d4e96c5b38043994a491fe11fde6, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4868d4e96c5b38043994a491fe11fde6, type: 3}
 --- !u!4 &5455358843940229349 stripped
