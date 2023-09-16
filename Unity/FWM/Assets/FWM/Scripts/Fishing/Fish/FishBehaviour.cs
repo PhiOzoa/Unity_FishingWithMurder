@@ -156,7 +156,7 @@ namespace FWM
 		
 		private void OnTriggerEnter(Collider other)
 		{
-			if(other.gameObject == hook)
+			if(other.gameObject.tag == "Hook")
 			{
 				seesHook = true;
 			}
@@ -165,7 +165,7 @@ namespace FWM
 		
 		private void OnTriggerExit(Collider other)
 		{
-			if(other.gameObject == hook)
+			if(other.gameObject.tag == "Hook")
 			{
 				seesHook = false;
 			}

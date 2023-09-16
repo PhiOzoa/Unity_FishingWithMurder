@@ -6,6 +6,9 @@ namespace FWM
 {
     public class CatchCalc : MonoBehaviour
     {
+		public GameObject hook;
+		public List<FishInfo> snaggedFishList;
+		public float scaleFactor = 10f;
 		
 		private void OnTriggerEnter(Collider col)
 		{
@@ -20,18 +23,33 @@ namespace FWM
 		{
 			
 			
-			ControlHook();
+			AnimateHook();
 			
 			GetFish();
 		}
 		
-		private void ControlHook()
+		private void AnimateHook()
 		{
 			
 		}
 		
 		private void GetFish()
 		{
+			snaggedFishList = new List<FishInfo>();
+			
+			for(int i = 0; i < hook.transform.childCount; i++)
+			{
+				Transform curTrans = hook.transform.GetChild(i);
+				
+				if(curTrans.gameObject.tag == "Fish")
+				{
+					FishInfo info = new FishInfo();
+					info.fishName = curTrans.name;
+					info.fishLength = curTrans.GetChild(0).localScale.y * scaleFactor;
+					
+					snaggedFishList.Add(info);
+				}
+			}
 			
 		}
 		

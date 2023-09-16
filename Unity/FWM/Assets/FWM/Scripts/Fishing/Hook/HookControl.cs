@@ -74,8 +74,6 @@ namespace FWM
 					pointsList.Add(info);
 				}
 			}
-			
-			Debug.Log(pointsList.Count);
 		}
 		
 		private void FixedUpdate()
@@ -226,13 +224,13 @@ namespace FWM
 			Quaternion rotation = (Quaternion.LookRotation(lookDir, Vector3.up));
 			//hookDir.transform.rotation = Quaternion.Lerp(hookDir.transform.rotation, rotation, 0.05f);
 			
-			hookDir.transform.rotation = Quaternion.Lerp(hookDir.transform.rotation, rotation, 0.05f);
+			transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.05f);
 		}
     }
-	
+	/*
 	public class PointInfo
 	{
 		public Transform pointTrans;
 		public bool occupied;
-	}
+	}*/
 }
