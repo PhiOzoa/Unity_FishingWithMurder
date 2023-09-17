@@ -415,8 +415,6 @@ namespace FWM
 		
 		private void Snag()
 		{
-			Debug.Log("snagged");
-
 			transform.parent = hook.transform;
 			//rb.constraints = RigidbodyConstraints.FreezeAll;
 			transform.position = hookPoint.pointTrans.position;
@@ -449,32 +447,15 @@ namespace FWM
 		
 		private void SnagStatus()
 		{
-			//transform.position = hookPoint.pointTrans.position;
-			//transform.rotation = Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up);
-			
+
 			transform.position = hookPoint.pointTrans.position;
 			transform.rotation = Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up);
-			//Debug.Log(snagTrans.position);
-			/*
-			if(joint == null)
-			{
-				Debug.Log("dropped");
-				
-				interestCountdownVal = countDownAfterLoseInterest;
-				fishSnagged = false;
-				hookPoint.occupied = false;
-				hookPoint = null;
-				
-			}*/
+
 		}
 		
 		private void DropSnag()
 		{
-			Debug.Log("dropped");
-			
 			transform.parent = null;
-			
-			//rb.constraints = RigidbodyConstraints.None;
 			
 			rb.velocity = Vector3.zero;
 			

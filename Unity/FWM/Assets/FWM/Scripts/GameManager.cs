@@ -7,12 +7,15 @@ namespace FWM
 {
     public class GameManager : MonoBehaviour
     {
+
 		public FishingManager fm = null;
 		public OverworldManager om = null;
 		
+		public InventoryManager im = null;
+		
 		private Scene curScene;
 		
-		public List<FishInfo> inventoryFish = new List<FishInfo>();
+
 		
         void Awake()
 		{
@@ -32,18 +35,17 @@ namespace FWM
 		void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 		{
 			curScene = scene;
-
-			if(scene.name == "Overworld" && om.enabled == false)
+			
+			if(curScene.name == "Beach")
 			{
-				om.enabled = true;
-				fm.enabled = false;
+				GameObject.Find("CatchManager").GetComponent<CatchCalc>().im = im;
 			}
 			
-			if(scene.name == "Lake" || scene.name == "River" || scene.name == "Beach" && fm.enabled == false)
+			if(curScene.name == "TackleBoxMenu")
 			{
-				fm.enabled = true;
-				om.enabled = false;
+				im.PopulateInventoryUI(GameObject.Find("Content"));
 			}
+		
 		}
 		
 		void OnDisable()
@@ -51,9 +53,5 @@ namespace FWM
 			SceneManager.sceneLoaded -= OnSceneLoaded;
 		}
 		
-		void AddToInventory()
-		{
-			
-		}
     }
 }

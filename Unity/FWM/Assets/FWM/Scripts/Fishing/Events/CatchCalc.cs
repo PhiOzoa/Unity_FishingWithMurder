@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FWM
 {
@@ -9,6 +10,8 @@ namespace FWM
 		public GameObject hook;
 		public List<FishInfo> snaggedFishList;
 		public float scaleFactor = 10f;
+		
+		public InventoryManager im = null;
 		
 		private void OnTriggerEnter(Collider col)
 		{
@@ -26,6 +29,12 @@ namespace FWM
 			AnimateHook();
 			
 			GetFish();
+			
+			AddNewFishToManager();
+			
+			ActivateButtons();
+			
+			ReturnToMenu();
 		}
 		
 		private void AnimateHook()
@@ -50,8 +59,21 @@ namespace FWM
 					snaggedFishList.Add(info);
 				}
 			}
+		}
+		
+		private void AddNewFishToManager()
+		{
+			im.AddToInventory(snaggedFishList);
+		}
+		
+		private void ActivateButtons()
+		{
 			
 		}
 		
+		private void ReturnToMenu()
+		{
+			SceneManager.LoadScene("TackleBoxMenu");
+		}
     }
 }

@@ -6,6 +6,7 @@ namespace FWM
 {
     public class FishingFog : MonoBehaviour
     {
+		/*
 		public Camera cam;
 		public Light light;
 		
@@ -45,6 +46,6 @@ namespace FWM
 				RenderSettings.fogColor = curColour;
 			}
 		}
-		
+		*/
     }
 }

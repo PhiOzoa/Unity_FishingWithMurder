@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.4009434, g: 0.7913055, b: 1, a: 1}
   m_FogMode: 2
-  m_FogDensity: 0.014
+  m_FogDensity: 0.005
   m_LinearFogStart: 30
   m_LinearFogEnd: 150
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.45
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.41960785, g: 0.627451, b: 0.5508343, a: 1}
+  m_SubtractiveShadowColor: {r: 0.033686116, g: 0, b: 0.3773585, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.579
   m_FlareStrength: 1
@@ -504,7 +504,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134967863}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 80.6, y: -6.6320467, z: 99.4}
+  m_LocalPosition: {x: 80.6, y: -45.6, z: 99.4}
   m_LocalScale: {x: 1, y: 103.81109, z: 263.2347}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7475,7 +7475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948773718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -96.6, y: -6.6320467, z: 99.4}
+  m_LocalPosition: {x: -96.6, y: -45.6, z: 99.4}
   m_LocalScale: {x: 1, y: 103.81109, z: 263.2347}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8851,7 +8851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333616556}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 12.9, y: -6.6320467, z: 223}
+  m_LocalPosition: {x: 12.9, y: -45.6, z: 223}
   m_LocalScale: {x: 1, y: 103.81109, z: 263.2347}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10474,7 +10474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792797183}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 12.9, y: -6.6320467, z: -23.7}
+  m_LocalPosition: {x: 12.9, y: -45.6, z: -23.7}
   m_LocalScale: {x: 1, y: 103.81109, z: 263.2347}
   m_ConstrainProportionsScale: 0
   m_Children: []
