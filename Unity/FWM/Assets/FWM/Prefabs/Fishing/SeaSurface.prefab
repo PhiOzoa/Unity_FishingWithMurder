@@ -175,4 +175,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hook: {fileID: 0}
-  scaleFactor: 10
+  scaleFactor: 5
+  im: {fileID: 0}
