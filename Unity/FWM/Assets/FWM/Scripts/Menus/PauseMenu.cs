@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace FWM
 {
-    public class TackleBoxMenu : MonoBehaviour
+    public class PauseMenu : MonoBehaviour
     {
 		public Button initButton;
 		
@@ -15,14 +14,10 @@ namespace FWM
 			initButton.Select();
 		}
 		
-		public void GoFishing()
+		public void ReturnToSurface()
 		{
-			SceneManager.LoadScene("Beach");
+			
 		}
 		
-		public void MainMenu()
-		{
-			SceneManager.LoadScene("MainMenu");
-		}
     }
 }

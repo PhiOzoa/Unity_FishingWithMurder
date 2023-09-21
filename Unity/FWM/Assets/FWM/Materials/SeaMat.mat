@@ -140,6 +140,7 @@ Material:
     - _Surface: 1
     - _WorkflowMode: 1
     - _ZWrite: 0
+    - _alpha: 0.7
     m_Colors:
     - _BaseColor: {r: 0.10065861, g: 0.41659373, b: 0.735849, a: 1}
     - _Color: {r: 0.10065857, g: 0.4165937, b: 0.735849, a: 1}
