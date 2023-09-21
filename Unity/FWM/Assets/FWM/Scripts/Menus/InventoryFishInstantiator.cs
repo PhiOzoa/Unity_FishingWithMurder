@@ -16,7 +16,7 @@ namespace FWM
 		private void OnEnable()
 		{
 			nameLabel.SetText(fishName);
-			lengthLabel.SetText(fishLength.ToString("#.0"));
+			lengthLabel.SetText(fishLength.ToString("#.0 cm"));
 		}
 		
 		
