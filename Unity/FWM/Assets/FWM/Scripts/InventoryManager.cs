@@ -9,6 +9,7 @@ namespace FWM
 		private List<FishInfo> inventoryFish = new List<FishInfo>();
 		public GameObject inventoryItemPrefab;
 		private GameObject currentItem;
+		private InventoryFishInstantiator currentScript;
 		
 		public void AddToInventory(List<FishInfo> newFish)
 		{
@@ -23,7 +24,11 @@ namespace FWM
 			for(int i = 0; i < inventoryFish.Count; i++)
 			{
 				currentItem = Instantiate(inventoryItemPrefab, itemParent.transform);
+				currentScript = currentItem.GetComponent<InventoryFishInstantiator>();
 				
+				currentScript.fishName = inventoryFish[i].fishName;
+				currentScript.fishLength = inventoryFish[i].fishLength;
+				currentItem.SetActive(true);
 			}
 		}
 	}

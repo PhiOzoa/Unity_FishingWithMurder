@@ -289,7 +289,7 @@ namespace FWM
 		{
 			SetTarget(1);
 			
-			lookDir = (hook.transform.position - transform.position).normalized;
+			lookDir = ( (hook.transform.position + (Vector3.down * belowHookFactor) ) - transform.position).normalized;
 			
 			MoveToTarget(swimSpeed);
 		}
@@ -375,7 +375,7 @@ namespace FWM
 			if(Vector3.Distance(transform.position, hookPoint.pointTrans.position) > snagDistance)
 			{
 				SetTarget(2);
-				lookDir = (hook.transform.position - transform.position).normalized;
+				lookDir = ( (hook.transform.position + (Vector3.down * belowHookFactor) ) - transform.position).normalized;
 				
 				MoveToTarget(3 * swimSpeed);
 			}

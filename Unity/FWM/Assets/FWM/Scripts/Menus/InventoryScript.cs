@@ -8,6 +8,7 @@ namespace FWM
 {
     public class InventoryScript : MonoBehaviour
     {
+		/*
 		public GameObject contents;
 		public Button backButton;
 		private Button initButton;
@@ -27,6 +28,6 @@ namespace FWM
 			}
 			
 			initButton.Select();
-		}
+		}*/
     }
 }

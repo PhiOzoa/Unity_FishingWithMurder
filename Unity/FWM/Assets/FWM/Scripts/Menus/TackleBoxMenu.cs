@@ -19,5 +19,10 @@ namespace FWM
 		{
 			SceneManager.LoadScene("Beach");
 		}
+		
+		public void MainMenu()
+		{
+			SceneManager.LoadScene("MainMenu");
+		}
     }
 }
