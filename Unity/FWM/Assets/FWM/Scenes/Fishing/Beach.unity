@@ -12393,6 +12393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraStuff
       objectReference: {fileID: 0}
+    - target: {fileID: 5455358842093748040, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5455358842093748041, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.1099999
@@ -12405,6 +12409,14 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 504089132}
+    - target: {fileID: 5455358843570737084, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_VerticalAxis.m_InputAxisValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455358843570737084, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_HorizontalAxis.m_InputAxisValue
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5455358843940229349, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.44
