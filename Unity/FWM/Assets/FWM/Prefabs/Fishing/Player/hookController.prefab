@@ -5386,6 +5386,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hook
       objectReference: {fileID: 0}
+    - target: {fileID: 5901893356585517859, guid: 3c269ea66d5528543b0f2b5d281f2bff, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ab22b41e9561ee4da36fba4a07446e7, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c269ea66d5528543b0f2b5d281f2bff, type: 3}
