@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pinky
   m_EditorClassIdentifier: 
   fishName: Slimefin
-  wanderRadius: 3
+  wanderRadius: 4
   arrivedErrorRadius: 0.3
   heightTruncationFactor: 0.5
   swimSpeed: 1.2
