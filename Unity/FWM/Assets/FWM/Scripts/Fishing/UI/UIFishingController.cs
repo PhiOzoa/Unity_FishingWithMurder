@@ -16,6 +16,7 @@ namespace FWM
 		public float maxMeasuredDepth = 150f;
 		
 		public GameObject pauseMenu;
+		public Animator snagUI;
 		
 		public GameObject hook;
 
@@ -66,6 +67,11 @@ namespace FWM
 			pauseMenu.SetActive(false);
 			Time.timeScale = 1f;
 			isPaused = false;
+		}
+		
+		public void SnagAnim()
+		{
+			snagUI.SetTrigger("Play");
 		}
 		
     }

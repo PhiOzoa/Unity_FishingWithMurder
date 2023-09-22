@@ -11,6 +11,7 @@ namespace FWM
 		public Rigidbody rb;
 		public GameObject body;
 		public CapsuleCollider col;
+		private GameObject UIObject;
 		
 		
 		
@@ -114,6 +115,10 @@ namespace FWM
 		
 		private void Awake()
 		{
+			body = transform.GetChild(0).gameObject;
+			col = body.GetComponent<CapsuleCollider>();
+			UIObject = GameObject.Find("UIController");
+			
 			startPos = transform.position;
 			attentionPos = startPos;
 			
@@ -415,6 +420,8 @@ namespace FWM
 		
 		private void Snag()
 		{
+			UIObject.SendMessage("SnagAnim");
+			
 			transform.parent = hook.transform;
 			//rb.constraints = RigidbodyConstraints.FreezeAll;
 			transform.position = hookPoint.pointTrans.position;
