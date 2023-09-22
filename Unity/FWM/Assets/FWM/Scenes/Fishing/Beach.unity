@@ -13428,6 +13428,10 @@ PrefabInstance:
       propertyPath: waterHeight
       value: 
       objectReference: {fileID: 2071719514}
+    - target: {fileID: 1504759656898184289, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5455358842039430411, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_RootOrder
       value: 0
