@@ -37,8 +37,8 @@ namespace FWM
 		
 		public float getBoredDistance = 5f; // the distance of the hook from attentionPos at which the fish gets bored
 		private Vector3 attentionPos; // the location from which the getBoredDistance is measured
-		private bool seesHook = false; // hook is withing sight trigger
-		private bool attentionGrabbed = false; // hook has successfully grabbed fish's attention
+		public bool seesHook = false; // hook is withing sight trigger
+		public bool attentionGrabbed = false; // hook has successfully grabbed fish's attention
 		public int countDownAfterLoseInterest = 600; // time in frames it takes after you lose the fish's interest for it to be possible to regain interest
 		private int interestCountdownVal = 0;
 		
@@ -57,6 +57,7 @@ namespace FWM
 		
 		// Snag Parameters
 		private PointInfo hookPoint = null;
+		private int hookPointIndex = 0;
 		private int snagFrames = 30;
 		private int curSnagFrame = 0;
 		private Vector3 initSnagLoc = Vector3.zero;
@@ -68,7 +69,7 @@ namespace FWM
 		private bool snagLocSet = false;
 		private float snagDistance = 0.7f;
 		
-		private Vector3 lookDir = Vector3.forward;
+		public Vector3 lookDir = Vector3.forward;
 		
 		public ParticleSystem magnetSnap;
 		public ParticleSystem attentionShine;
@@ -319,6 +320,8 @@ namespace FWM
 			
 			if( (Vector3.Distance(hook.transform.position, attentionPos) > getBoredDistance && Vector3.Distance(transform.position, hook.transform.position) < furthestRadius ) || (attentionAmt <= 0) ) //if (hook goes too far from attentionPos && fish is within curiosity radius) OR attention amt hits zero it gets bored
 			{
+				//Debug.Log((Vector3.Distance(hook.transform.position, attentionPos));
+				
 				LoseInterest();
 			}
 		}
@@ -364,19 +367,44 @@ namespace FWM
 			
 			if(hookPoint == null)
 			{
-				hookPoint = hookScript.pointsList[0];
+				//Debug.Log("hookpoint null");
+				//hookPoint = hookScript.pointsList[0];
+				//hookPointIndex = 0;
+				//hookPoint.occupied = true;
+				
+				
 				
 				for(int i = 0; i < hookScript.pointsList.Count; i++)
 				{
+					/*
 					if( (Vector3.Distance(hookScript.pointsList[i].pointTrans.position, transform.position) < Vector3.Distance(hookPoint.pointTrans.position, transform.position) ) && !(hookScript.pointsList[i].occupied) ) // if distance is less than current position, and the position is free
 					{
 						hookPoint = hookScript.pointsList[i];
+						hookPointIndex = i;
+						
+						Debug.Log("run");
+					}*/
+					
+					if(!hookScript.pointsList[i].occupied)
+					{
+						hookPoint = hookScript.pointsList[i];
+						hookPoint.occupied = true;
+						if(hookPointIndex != i)
+						{
+							hookScript.pointsList[hookPointIndex].occupied = false;
+						}
+						if(false)
+						{
+							
+						}
+						hookPointIndex = i;
 					}
 				}
 				
-				hookPoint.occupied = true;
+				//hookScript.pointsList[hookPointIndex].occupied = true;
+				//hookPoint.occupied = true;
 			}
-			
+			/*
 			if(Vector3.Distance(transform.position, hookPoint.pointTrans.position) > snagDistance)
 			{
 				SetTarget(2);
@@ -410,7 +438,32 @@ namespace FWM
 				{
 					Snag();
 				}
-			}
+			}*/
+			
+			if(!snagLocSet)
+				{
+					initSnagLoc = transform.position;
+					initSnagRot = transform.rotation;
+					curSnagFrame = 0;
+					
+					snagLocSet = true;
+				}
+				
+				float interpolant = Mathf.InverseLerp(0f, (float)snagFrames, (float)curSnagFrame);
+				
+				interpolant = -(Mathf.Pow( (1f - interpolant), (1f/2f) ) ) + 1f; //nice curve
+				
+				transform.position = Vector3.Lerp(initSnagLoc, hookPoint.pointTrans.position, interpolant);
+				transform.rotation = Quaternion.Lerp(initSnagRot, Quaternion.LookRotation(hookPoint.pointTrans.up, Vector3.up), interpolant);
+				
+				if(curSnagFrame != snagFrames)
+				{
+					curSnagFrame++;
+				}
+				else
+				{
+					Snag();
+				}
 			//SetTarget(2);
 			//bool biting = false;
 			
@@ -469,6 +522,7 @@ namespace FWM
 			interestCountdownVal = countDownAfterLoseInterest;
 			fishSnagged = false;
 			hookPoint.occupied = false;
+			hookScript.pointsList[hookPointIndex].occupied = false;
 			hookPoint = null;
 		}
 	}

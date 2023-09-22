@@ -9,6 +9,7 @@ namespace FWM
 		public FishBehaviour fb;
 		public GameObject body;
 		public CapsuleCollider sightCol;
+		private float randScale;
 		
 		public FishScriptableObject fishStats;
 		
@@ -52,7 +53,10 @@ namespace FWM
 		
 		public void SetupModelFromConfig()
 		{
-			body.transform.localScale = fishStats.scale;
+			randScale = Random.Range(fishStats.scaleRange.x, fishStats.scaleRange.y);
+			
+			body.transform.localScale = new Vector3(randScale, randScale, randScale);
+			body.transform.localPosition = new Vector3(body.transform.localPosition.x, body.transform.localPosition.y, body.transform.localPosition.z + ( (1f - randScale)/2f) );
 		}
 		
     }

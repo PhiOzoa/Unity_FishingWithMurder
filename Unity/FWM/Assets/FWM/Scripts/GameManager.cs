@@ -35,11 +35,11 @@ namespace FWM
 		void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 		{
 			curScene = scene;
-			
+			/*
 			if(curScene.name == "Beach")
 			{
 				GameObject.Find("CatchManager").GetComponent<CatchCalc>().im = im;
-			}
+			}*/
 			
 			if(curScene.name == "TackleBoxMenu")
 			{

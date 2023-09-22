@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace FWM
 {
-    public class PauseMenu : MonoBehaviour
+    public class ButtonInit : MonoBehaviour
     {
 		public Button initButton;
 		
@@ -13,11 +13,5 @@ namespace FWM
 		{
 			initButton.Select();
 		}
-		
-		public void ReturnToSurface()
-		{
-			
-		}
-		
     }
 }

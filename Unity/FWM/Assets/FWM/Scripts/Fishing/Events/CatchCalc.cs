@@ -8,16 +8,22 @@ namespace FWM
     public class CatchCalc : MonoBehaviour
     {
 		public GameObject hook;
+		private GameObject UIObject;
 		public List<FishInfo> snaggedFishList;
 		public float scaleFactor = 10f;
 		
-		public InventoryManager im = null;
+		public GameObject gm = null;
+		
+		private void Awake()
+		{
+			UIObject = GameObject.Find("UIController");
+			gm = GameObject.Find("GameManager");
+		}
 		
 		private void OnTriggerEnter(Collider col)
 		{
 			if(col.gameObject.tag == "Hook")
 			{
-				Debug.Log("hello");
 				Catch();
 			}
 		}
@@ -30,16 +36,17 @@ namespace FWM
 			
 			GetFish();
 			
-			AddNewFishToManager();
+			if(gm != null)
+			{
+				AddNewFishToManager();
+			}
 			
 			ActivateButtons();
-			
-			ReturnToMenu();
 		}
 		
 		private void AnimateHook()
 		{
-			
+			hook.SendMessage("CatchActions");
 		}
 		
 		private void GetFish()
@@ -63,17 +70,19 @@ namespace FWM
 		
 		private void AddNewFishToManager()
 		{
-			im.AddToInventory(snaggedFishList);
+			gm.SendMessage("AddToInventory", snaggedFishList);
 		}
 		
 		private void ActivateButtons()
 		{
-			
-		}
-		
-		private void ReturnToMenu()
-		{
-			SceneManager.LoadScene("TackleBoxMenu");
+			if(snaggedFishList.Count > 0)
+			{
+				UIObject.SendMessage("ActivateCatchMenu", true);
+			}
+			else
+			{
+				UIObject.SendMessage("ActivateCatchMenu", false);
+			}
 		}
     }
 }

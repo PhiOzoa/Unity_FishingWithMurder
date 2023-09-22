@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace FWM
 {
@@ -17,6 +18,7 @@ namespace FWM
 		
 		public GameObject pauseMenu;
 		public Animator snagUI;
+		public Animator catchUI;
 		
 		public GameObject hook;
 
@@ -74,5 +76,25 @@ namespace FWM
 			snagUI.SetTrigger("Play");
 		}
 		
+		public void ActivateCatchMenu(bool caught)
+		{
+			catchUI.gameObject.SetActive(true);
+			
+			if(caught)
+			{
+				CatchAnim();
+			}
+		}
+		
+		private void CatchAnim()
+		{
+			catchUI.SetTrigger("Play");
+		}
+		
+		public void ReturnToMenu()
+		{
+			Unpause();
+			SceneManager.LoadScene("TackleBoxMenu");
+		}
     }
 }

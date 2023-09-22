@@ -11,6 +11,8 @@ namespace FWM
 		public GameObject hookDir;
 		public GameObject activeFish = null;
 		private Transform camTrans;
+		
+		private bool isControlled = true;
 
 		public bool leaveInput = false;
 		
@@ -78,16 +80,22 @@ namespace FWM
 		
 		private void FixedUpdate()
 		{
-			
-			raiseInput = TestRaising(); // raise input == tug is still held after tug effect complete
-			
-			SetTarget(); // determine target velocity based on whether hook is raising or sinking
-			
-			Lat(); // accelerate to lateral target velocity
-			
-			Vert(); // accelerate to vertical target velocity
-			
-			Rotate(); // rotate the hook to the direction it's moving, (needs improvement)
+			if(isControlled)
+			{
+				raiseInput = TestRaising(); // raise input == tug is still held after tug effect complete
+				
+				SetTarget(); // determine target velocity based on whether hook is raising or sinking
+				
+				Lat(); // accelerate to lateral target velocity
+				
+				Vert(); // accelerate to vertical target velocity
+				
+				Rotate(); // rotate the hook to the direction it's moving, (needs improvement)
+			}
+			else
+			{
+				rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 0.02f);
+			}
 		}
 		
 		public void ReadMoveInput(InputAction.CallbackContext context)
@@ -226,11 +234,12 @@ namespace FWM
 			
 			transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.05f);
 		}
-    }
-	/*
-	public class PointInfo
-	{
-		public Transform pointTrans;
-		public bool occupied;
-	}*/
+    
+		public void CatchActions()
+		{
+			isControlled = false;
+			rb.velocity = Vector3.up * raiseMag;
+		}
+	}
+
 }
