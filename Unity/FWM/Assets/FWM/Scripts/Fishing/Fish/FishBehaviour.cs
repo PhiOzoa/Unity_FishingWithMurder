@@ -55,6 +55,9 @@ namespace FWM
 		private int decCountdownVal = 0;
 		private bool attentionInitialized = false;
 		
+		// Bump
+		private bool isBumped = false;
+		
 		// Snag Parameters
 		private PointInfo hookPoint = null;
 		private int hookPointIndex = 0;
@@ -73,6 +76,8 @@ namespace FWM
 		
 		public ParticleSystem magnetSnap;
 		public ParticleSystem attentionShine;
+		public ParticleSystem bumpSwirls;
+		public ParticleSystem bumpBurst;
 		
 		
 		private bool initialTug = false;
@@ -125,38 +130,48 @@ namespace FWM
 			
 			hook = GameObject.Find("HookController");
 			hookScript = hook.GetComponent<HookControl>();
+			
+			//rb.velocity = Vector3.up;
+			//Bump();
 		}
 		
 		private void FixedUpdate()
 		{
-			if(!fishSnagged)
+			if(isBumped)
 			{
-				DetectInitialTug();
-				
-				GetAttention();
-				
-				if(!attentionGrabbed)
-				{
-					WanderBehaviour();
-				}
-				else
-				{
-					if(!attentionFilled)
-					{
-						targetSet = false;
-						
-						FollowHookBehaviour();
-						BiteCalculation();
-					}
-					else
-					{
-						BiteBehaviour();
-					}
-				}
+				BumpBehaviour();
 			}
 			else
 			{
-				SnagStatus();
+				if(!fishSnagged)
+				{
+					DetectInitialTug();
+					
+					GetAttention();
+					
+					if(!attentionGrabbed)
+					{
+						WanderBehaviour();
+					}
+					else
+					{
+						if(!attentionFilled)
+						{
+							targetSet = false;
+							
+							FollowHookBehaviour();
+							BiteCalculation();
+						}
+						else
+						{
+							BiteBehaviour();
+						}
+					}
+				}
+				else
+				{
+					SnagStatus();
+				}
 			}
 		}
 		
@@ -181,9 +196,15 @@ namespace FWM
 		{
 			targetSet = false; // choose a new place to swim if you bump into something
 			
-			if( (col.relativeVelocity.magnitude > 3f) && fishSnagged && (col.gameObject.tag != "Fish") )
+			if( (col.relativeVelocity.magnitude > 1.5f) && fishSnagged && (col.gameObject.tag != "Fish") )
 			{
+				Bump();
 				DropSnag();
+			}
+			
+			if(col.relativeVelocity.magnitude > 0.5f && col.gameObject.tag == "Hook" && rb.velocity.magnitude > 0.1f && !isBumped)
+			{
+				Bump();
 			}
 		}
 		
@@ -524,6 +545,50 @@ namespace FWM
 			hookPoint.occupied = false;
 			hookScript.pointsList[hookPointIndex].occupied = false;
 			hookPoint = null;
+		}
+		
+		private void Bump()
+		{
+			isBumped = true;
+			
+			rb.drag = 0.5f;
+			rb.angularDrag = 0.5f;
+			
+			
+			if(bumpBurst != null)
+			{
+				bumpBurst.Play();
+			}
+			if(bumpSwirls != null)
+			{
+				bumpSwirls.Play();
+			}
+		}
+		
+		private void BumpBehaviour()
+		{
+			// if the fish is in bumped mode, accelerate them towards zero velocity
+			// also activate particles
+			// the longer they spend in bumped mode, increase acceleration and speed to induce a return to zero faster
+			// once they are close enough to zero velocity, turn off bumped mode
+			
+			if(isBumped)
+			{
+				if(rb.velocity.magnitude < 0.1)
+				{
+					rb.velocity = Vector3.zero;
+					
+					rb.drag = 0f;
+					rb.angularDrag = 0f;
+					
+					isBumped = false;
+					
+					if(bumpSwirls != null)
+					{
+						bumpSwirls.Stop();
+					}
+				}
+			}
 		}
 	}
 }
