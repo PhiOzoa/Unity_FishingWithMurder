@@ -196,7 +196,7 @@ namespace FWM
 		{
 			targetSet = false; // choose a new place to swim if you bump into something
 			
-			if( (col.relativeVelocity.magnitude > 1.5f) && fishSnagged && (col.gameObject.tag != "Fish") )
+			if( (col.relativeVelocity.magnitude > 0.3f) && fishSnagged && (col.gameObject.tag == "Env") )
 			{
 				Bump();
 				DropSnag();

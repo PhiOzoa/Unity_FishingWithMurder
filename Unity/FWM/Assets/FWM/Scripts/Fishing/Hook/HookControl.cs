@@ -55,6 +55,9 @@ namespace FWM
 		private bool fastFall = false;
 		public float fastFallBoost = 2.0f;
 		
+		public ParticleSystem bubbleBurst;
+		public ParticleSystem ambientBubble;
+		
 		public List<PointInfo> pointsList;
 		
 		private void Awake()
@@ -91,6 +94,8 @@ namespace FWM
 				Vert(); // accelerate to vertical target velocity
 				
 				Rotate(); // rotate the hook to the direction it's moving, (needs improvement)
+				
+				ControlBubbles();
 			}
 			else
 			{
@@ -159,7 +164,7 @@ namespace FWM
 		
 		private bool TestRaising()
 		{
-			if(!tugging && tugHeld)
+			if(/*!tugging &&*/ tugHeld)
 			{
 				return true;
 			}
@@ -198,6 +203,7 @@ namespace FWM
 			
 			if(canTug) // if tug is pressed, a previous tug is not still in progress, and the hook is not rising
 			{
+				bubbleBurst.Play();
 				rb.velocity = new Vector3(rb.velocity.x, tugForce, rb.velocity.z);
 				tugCountdown = tugTime;
 			}
@@ -225,7 +231,7 @@ namespace FWM
 			}
 		}
 		
-		private void Rotate()
+		private void Rotate() // bad
 		{
 			lookDir = (inputDir.magnitude > 0f && rb.velocity.y < 0f) ? new Vector3(inputDir.x, 0f, inputDir.y) : Vector3.down;
 			
@@ -239,6 +245,16 @@ namespace FWM
 		{
 			isControlled = false;
 			rb.velocity = Vector3.up * raiseMag;
+		}
+	
+		private void ControlBubbles()
+		{
+			float interpolant = Mathf.InverseLerp(0f, 5f, rb.velocity.magnitude);
+			
+			var emissionController = ambientBubble.emission;
+			var main = ambientBubble.main;
+			emissionController.rateOverTime = Mathf.Lerp(0f, 20f, interpolant);
+			main.startSpeed = Mathf.Lerp(0.2f, 1f, interpolant);
 		}
 	}
 
