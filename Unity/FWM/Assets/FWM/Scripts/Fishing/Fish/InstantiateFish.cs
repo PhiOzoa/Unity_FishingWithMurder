@@ -38,9 +38,9 @@ namespace FWM
 			fb.closestRadius = fishStats.closestRadius;
 			fb.getBoredDistance = fishStats.getBoredDistance;
 			
-			fb.initAttention = fishStats.initAttention;
+			//fb.initAttention = fishStats.initAttention;
 			fb.attentionIncrement = fishStats.attentionIncrement;
-			fb.attentionDecrement = fishStats.attentionDecrement;
+			//fb.attentionDecrement = fishStats.attentionDecrement;
 			fb.maxAttention = fishStats.maxAttention;
 		}
 		

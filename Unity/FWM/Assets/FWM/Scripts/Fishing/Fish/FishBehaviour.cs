@@ -43,17 +43,18 @@ namespace FWM
 		private int interestCountdownVal = 0;
 		
 		[Header("Catch Mechanics")]
-		public int initAttention = 25; // how much attention the fish starts with
+		//public int initAttention = 25; // how much attention the fish starts with
 		public int attentionIncrement = 10; // how much attention the fish gains with a tug
-		public int attentionDecrement = 5; // how much attention the fish loses every attention decrement countdown
+		//public int attentionDecrement = 5; // how much attention the fish loses every attention decrement countdown
 		public int maxAttention = 100; // how much attention you need to reach to get the fish to bite
 		public int attentionAmt = 0;
 		private bool attentionFilled = false; // has the fish reached max attention
 		public bool fishSnagged = false; // has the fish been caught
 		
-		public int countdownBetweenDecrement = 60; // time between each instance of fish losing attention
-		private int decCountdownVal = 0;
+		//public int countdownBetweenDecrement = 60; // time between each instance of fish losing attention
+		//private int decCountdownVal = 0;
 		private bool attentionInitialized = false;
+		private bool distanceInitialized = false;
 		
 		// Bump
 		private bool isBumped = false;
@@ -318,16 +319,22 @@ namespace FWM
 			
 			lookDir = ( (hook.transform.position + (Vector3.down * belowHookFactor) ) - transform.position).normalized;
 			
-			MoveToTarget(swimSpeed);
+			MoveToTarget(swimSpeed * 2);
 		}
 		
 		private void BiteCalculation()
 		{
 			if(!attentionInitialized)
 			{
-				attentionAmt = initAttention;
-				decCountdownVal = countdownBetweenDecrement;
+				//attentionAmt = initAttention;
+				attentionAmt = 0;
+				//decCountdownVal = countdownBetweenDecrement;
 				attentionInitialized = true;
+			}
+			
+			if(Vector3.Distance(hook.transform.position, transform.position) <= furthestRadius)
+			{
+				distanceInitialized = true;
 			}
 			
 			if(attentionAmt >= maxAttention)
@@ -339,33 +346,29 @@ namespace FWM
 				CalcAttention();
 			}
 			
-			if( (Vector3.Distance(hook.transform.position, attentionPos) > getBoredDistance && Vector3.Distance(transform.position, hook.transform.position) < furthestRadius ) || (attentionAmt <= 0) ) //if (hook goes too far from attentionPos && fish is within curiosity radius) OR attention amt hits zero it gets bored
-			{
+			
+			//if( (Vector3.Distance(hook.transform.position, attentionPos) > getBoredDistance && Vector3.Distance(transform.position, hook.transform.position) <= furthestRadius ) /*|| (attentionAmt <= 0)*/ ) //if (hook goes too far from attentionPos && fish is within curiosity radius) OR attention amt hits zero it gets bored
+			//{
 				//Debug.Log((Vector3.Distance(hook.transform.position, attentionPos));
 				
+			//	LoseInterest();
+			//}
+			
+			if( (Vector3.Distance(hook.transform.position, transform.position) > getBoredDistance && distanceInitialized) || (Vector3.Distance(hook.transform.position, attentionPos) > 15f) )
+			{
 				LoseInterest();
 			}
+			
 		}
 		
 		private void CalcAttention()
 		{
-			if(Vector3.Distance(hook.transform.position, transform.position) < furthestRadius)
+			if(Vector3.Distance(hook.transform.position, transform.position) < (furthestRadius + 0.5f) )
 			{
 				if(initialTug && seesHook)
 				{
 					attentionAmt+= attentionIncrement;
 					attentionShine.Play();
-				}
-				
-				if(decCountdownVal > 0)
-				{
-					decCountdownVal--;
-				}
-				else
-				{
-					attentionAmt-= attentionDecrement;
-					
-					decCountdownVal = countdownBetweenDecrement;
 				}
 			}
 		}
@@ -379,6 +382,7 @@ namespace FWM
 			attentionPos = startPos; 
 			attentionGrabbed = false; // negate all bools
 			attentionInitialized = false;
+			distanceInitialized = false;
 			attentionFilled = false;
 			attentionAmt = 0; // reset attention of fish
 		}
@@ -522,6 +526,7 @@ namespace FWM
 			attentionPos = startPos; 
 			attentionGrabbed = false; 
 			attentionInitialized = false;
+			distanceInitialized = false;
 			attentionFilled = false;
 			attentionAmt = 0;
 		}
@@ -562,6 +567,11 @@ namespace FWM
 			if(bumpSwirls != null)
 			{
 				bumpSwirls.Play();
+			}
+			
+			if (hookScript.activeFish == gameObject)
+			{
+				LoseInterest();
 			}
 		}
 		
