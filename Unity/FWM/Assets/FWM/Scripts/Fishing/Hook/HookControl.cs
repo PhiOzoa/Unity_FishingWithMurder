@@ -179,6 +179,20 @@ namespace FWM
 			if(!raiseInput) // change target velocity depending on if raising or not
 			{
 				targetVel = new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag);
+				
+				Debug.DrawRay(transform.position, Vector3.down, Color.white);
+				Debug.DrawLine(transform.position, transform.position + (Vector3.down * 5f), Color.red);
+				RaycastHit hit;
+				
+				int layerMask = 1 << 6;
+				
+				if(Physics.Raycast(transform.position, Vector3.down, out hit, 3f, layerMask) )
+				{
+					if(hit.transform.CompareTag("Env") )
+					{
+						targetVel.y = 0f;
+					}
+				}
 			}
 			else
 			{
@@ -233,7 +247,7 @@ namespace FWM
 		
 		private void Rotate() // bad
 		{
-			lookDir = (inputDir.magnitude > 0f && rb.velocity.y < 0f) ? new Vector3(inputDir.x, 0f, inputDir.y) : Vector3.down;
+			lookDir = (inputDir.magnitude > 0f && rb.velocity.y <= 0f) ? new Vector3(inputDir.x, 0f, inputDir.y) : Vector3.down;
 			
 			Quaternion rotation = (Quaternion.LookRotation(lookDir, Vector3.up));
 			//hookDir.transform.rotation = Quaternion.Lerp(hookDir.transform.rotation, rotation, 0.05f);
