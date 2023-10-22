@@ -71,6 +71,7 @@ namespace FWM
 			isPaused = false;
 		}
 		
+		
 		public void SnagAnim()
 		{
 			snagUI.SetTrigger("Play");
@@ -89,6 +90,13 @@ namespace FWM
 		private void CatchAnim()
 		{
 			catchUI.SetTrigger("Play");
+			catchUI.SetTrigger("BucketPlay");
+			
+		}
+		
+		public void ReturnToFishing()
+		{
+			Debug.Log("return");
 		}
 		
 		public void ReturnToMenu()
