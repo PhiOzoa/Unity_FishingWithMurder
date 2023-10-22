@@ -140,9 +140,9 @@ GameObject:
   - component: {fileID: 42784314}
   - component: {fileID: 42784313}
   - component: {fileID: 42784312}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (9)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 47419080}
   - component: {fileID: 47419079}
   - component: {fileID: 47419078}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MidReef (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,9 +331,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 66588169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rocks
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 83198630}
   - component: {fileID: 83198629}
   - component: {fileID: 83198628}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkReef (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,9 +583,9 @@ GameObject:
   - component: {fileID: 103788937}
   - component: {fileID: 103788936}
   - component: {fileID: 103788935}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (8)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -874,9 +874,9 @@ GameObject:
   - component: {fileID: 134967866}
   - component: {fileID: 134967865}
   - component: {fileID: 134967864}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1543,7 +1543,7 @@ GameObject:
   - component: {fileID: 330313098}
   - component: {fileID: 330313097}
   - component: {fileID: 330313096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1707,7 +1707,7 @@ GameObject:
   - component: {fileID: 343372626}
   - component: {fileID: 343372625}
   - component: {fileID: 343372624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1901,9 +1901,9 @@ GameObject:
   - component: {fileID: 348229055}
   - component: {fileID: 348229054}
   - component: {fileID: 348229053}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (15)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2095,7 +2095,7 @@ GameObject:
   - component: {fileID: 370129897}
   - component: {fileID: 370129896}
   - component: {fileID: 370129895}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2374,7 +2374,7 @@ GameObject:
   - component: {fileID: 479483310}
   - component: {fileID: 479483309}
   - component: {fileID: 479483308}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MidReef
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2536,9 +2536,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 495363236}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shore
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8426,9 +8426,9 @@ GameObject:
   - component: {fileID: 752515144}
   - component: {fileID: 752515143}
   - component: {fileID: 752515142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (5)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8523,7 +8523,7 @@ GameObject:
   - component: {fileID: 764507455}
   - component: {fileID: 764507454}
   - component: {fileID: 764507453}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MidReef (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8722,9 +8722,9 @@ GameObject:
   - component: {fileID: 797838414}
   - component: {fileID: 797838413}
   - component: {fileID: 797838412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (12)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9331,9 +9331,9 @@ GameObject:
   - component: {fileID: 926609497}
   - component: {fileID: 926609496}
   - component: {fileID: 926609495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (11)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9625,9 +9625,9 @@ GameObject:
   - component: {fileID: 948773721}
   - component: {fileID: 948773720}
   - component: {fileID: 948773719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9819,7 +9819,7 @@ GameObject:
   - component: {fileID: 956205123}
   - component: {fileID: 956205122}
   - component: {fileID: 956205121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MidReef (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10018,7 +10018,7 @@ GameObject:
   - component: {fileID: 973448549}
   - component: {fileID: 973448548}
   - component: {fileID: 973448547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkReef (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10406,9 +10406,9 @@ GameObject:
   - component: {fileID: 1007287575}
   - component: {fileID: 1007287574}
   - component: {fileID: 1007287573}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (14)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10600,9 +10600,9 @@ GameObject:
   - component: {fileID: 1027367969}
   - component: {fileID: 1027367968}
   - component: {fileID: 1027367967}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (3)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10823,9 +10823,9 @@ GameObject:
   - component: {fileID: 1111443791}
   - component: {fileID: 1111443790}
   - component: {fileID: 1111443789}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (4)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11017,9 +11017,9 @@ GameObject:
   - component: {fileID: 1128545374}
   - component: {fileID: 1128545373}
   - component: {fileID: 1128545372}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11568,7 +11568,7 @@ GameObject:
   - component: {fileID: 1194036646}
   - component: {fileID: 1194036645}
   - component: {fileID: 1194036644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11729,9 +11729,9 @@ GameObject:
   - component: {fileID: 1208171032}
   - component: {fileID: 1208171031}
   - component: {fileID: 1208171030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (6)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12243,9 +12243,9 @@ GameObject:
   - component: {fileID: 1333616559}
   - component: {fileID: 1333616558}
   - component: {fileID: 1333616557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12340,7 +12340,7 @@ GameObject:
   - component: {fileID: 1348966779}
   - component: {fileID: 1348966778}
   - component: {fileID: 1348966777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkReef (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12789,7 +12789,7 @@ GameObject:
   - component: {fileID: 1432704224}
   - component: {fileID: 1432704223}
   - component: {fileID: 1432704222}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12988,7 +12988,7 @@ GameObject:
   - component: {fileID: 1455760115}
   - component: {fileID: 1455760114}
   - component: {fileID: 1455760113}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkReef (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18541,7 +18541,7 @@ GameObject:
   - component: {fileID: 1643429940}
   - component: {fileID: 1643429939}
   - component: {fileID: 1643429938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18638,7 +18638,7 @@ GameObject:
   - component: {fileID: 1665058959}
   - component: {fileID: 1665058958}
   - component: {fileID: 1665058957}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18895,7 +18895,7 @@ GameObject:
   - component: {fileID: 1673252877}
   - component: {fileID: 1673252876}
   - component: {fileID: 1673252875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19600,9 +19600,9 @@ GameObject:
   - component: {fileID: 1731432762}
   - component: {fileID: 1731432761}
   - component: {fileID: 1731432760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (7)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19702,7 +19702,7 @@ GameObject:
   - component: {fileID: 1749156684}
   - component: {fileID: 1749156683}
   - component: {fileID: 1749156682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkReef (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19799,7 +19799,7 @@ GameObject:
   - component: {fileID: 1751383525}
   - component: {fileID: 1751383524}
   - component: {fileID: 1751383523}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19896,9 +19896,9 @@ GameObject:
   - component: {fileID: 1767430400}
   - component: {fileID: 1767430399}
   - component: {fileID: 1767430398}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (10)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19993,7 +19993,7 @@ GameObject:
   - component: {fileID: 1773388223}
   - component: {fileID: 1773388222}
   - component: {fileID: 1773388221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20095,9 +20095,9 @@ GameObject:
   - component: {fileID: 1792797186}
   - component: {fileID: 1792797185}
   - component: {fileID: 1792797184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20386,9 +20386,9 @@ GameObject:
   - component: {fileID: 1824905112}
   - component: {fileID: 1824905111}
   - component: {fileID: 1824905110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (13)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20886,7 +20886,7 @@ GameObject:
   - component: {fileID: 1884117835}
   - component: {fileID: 1884117834}
   - component: {fileID: 1884117833}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21177,7 +21177,7 @@ GameObject:
   - component: {fileID: 1919812813}
   - component: {fileID: 1919812812}
   - component: {fileID: 1919812811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightReef (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21764,7 +21764,7 @@ GameObject:
   - component: {fileID: 1987643121}
   - component: {fileID: 1987643120}
   - component: {fileID: 1987643119}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkReef (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21958,9 +21958,9 @@ GameObject:
   - component: {fileID: 1990981150}
   - component: {fileID: 1990981149}
   - component: {fileID: 1990981148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (2)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22167,9 +22167,9 @@ GameObject:
   - component: {fileID: 2072594293}
   - component: {fileID: 2072594292}
   - component: {fileID: 2072594291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sand (1)
-  m_TagString: Untagged
+  m_TagString: Env
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22361,7 +22361,7 @@ GameObject:
   - component: {fileID: 2085980475}
   - component: {fileID: 2085980474}
   - component: {fileID: 2085980473}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkReef
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22782,7 +22782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2125361215}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlockEnv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22897,7 +22897,7 @@ GameObject:
   - component: {fileID: 2144088762}
   - component: {fileID: 2144088761}
   - component: {fileID: 2144088760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MidReef (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23164,10 +23164,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HookController
       objectReference: {fileID: 0}
-    - target: {fileID: 3612536229428263938, guid: 63b1adb0ac081e042a7185aaac407763, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 63b1adb0ac081e042a7185aaac407763, type: 3}
@@ -23302,6 +23298,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5455358842093748039, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_CollideAgainst.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455358842093748041, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.44
+      objectReference: {fileID: 0}
     - target: {fileID: 5455358842093748041, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.5899999
@@ -23329,6 +23333,14 @@ PrefabInstance:
     - target: {fileID: 5455358843940229349, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455358843940229350, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: field of view
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455358843940229350, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 95
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
