@@ -36,6 +36,8 @@ namespace FWM
 			
 			GetFish();
 			
+			DeleteFish();
+			
 			if(gm != null)
 			{
 				AddNewFishToManager();
@@ -64,6 +66,17 @@ namespace FWM
 					info.fishLength = curTrans.GetChild(0).localScale.y * scaleFactor;
 					
 					snaggedFishList.Add(info);
+				}
+			}
+		}
+		
+		private void DeleteFish()
+		{
+			foreach (Transform child in hook.transform)
+			{
+				if(child.tag == "Fish")
+				{
+					GameObject.Destroy(child.gameObject);
 				}
 			}
 		}

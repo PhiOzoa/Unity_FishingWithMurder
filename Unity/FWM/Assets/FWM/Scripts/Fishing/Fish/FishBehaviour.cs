@@ -203,7 +203,7 @@ namespace FWM
 				DropSnag();
 			}
 			
-			if(col.relativeVelocity.magnitude > 0.5f && col.gameObject.tag == "Hook" && rb.velocity.magnitude > 0.1f && !isBumped)
+			if(col.relativeVelocity.magnitude > 0.5f && col.gameObject.tag == "Hook" && rb.velocity.magnitude > 0.1f && !isBumped && !snagLocSet)
 			{
 				Bump();
 			}
