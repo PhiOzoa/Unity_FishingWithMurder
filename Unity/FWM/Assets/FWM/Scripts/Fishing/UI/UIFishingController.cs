@@ -57,6 +57,7 @@ namespace FWM
 			depthDialTransform.rotation = Quaternion.Euler(0f,0f, depthInGauge);
 		}
 		
+		//PAUSING
 		private void Pause()
 		{
 			pauseMenu.SetActive(true);
@@ -71,12 +72,13 @@ namespace FWM
 			isPaused = false;
 		}
 		
-		
+		//SNAGGING
 		public void SnagAnim()
 		{
 			snagUI.SetTrigger("Play");
 		}
 		
+		//CATCHING
 		public void ActivateCatchMenu(bool caught)
 		{
 			catchUI.gameObject.SetActive(true);
@@ -94,11 +96,15 @@ namespace FWM
 			
 		}
 		
+		//BACKTOFISHING
 		public void ReturnToFishing()
 		{
+			catchUI.gameObject.SetActive(false);
+			hook.SendMessage("ReturnActions");
 			Debug.Log("return");
 		}
 		
+		//BACKTOMENU
 		public void ReturnToMenu()
 		{
 			Unpause();

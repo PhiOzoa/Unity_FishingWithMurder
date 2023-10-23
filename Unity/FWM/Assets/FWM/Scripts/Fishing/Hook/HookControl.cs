@@ -13,6 +13,7 @@ namespace FWM
 		private Transform camTrans;
 		
 		private bool isControlled = true;
+		private bool returning = false;
 
 		public bool leaveInput = false;
 		
@@ -99,7 +100,22 @@ namespace FWM
 			}
 			else
 			{
-				rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 0.02f);
+				ambientBubble.Stop();
+				
+				if(!returning)
+				{
+					rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 0.02f);
+				}
+				else
+				{
+					rb.velocity = new Vector3(0f, -sinkMag * fastFallBoost, 0f);
+					if(transform.position.y <= -0.5f)
+					{
+						ambientBubble.Play();
+						isControlled = true;
+						returning = false;
+					}
+				}
 			}
 		}
 		
@@ -125,7 +141,7 @@ namespace FWM
 		
 		public void TugInput(InputAction.CallbackContext context)
 		{
-			if(context.performed && tugCountdown == 0) //tugging only activates on the keypress, not on hold
+			if(context.performed && tugCountdown == 0 && isControlled) //tugging only activates on the keypress, not on hold
 			{
 				tugging = true;
 			}
@@ -188,7 +204,7 @@ namespace FWM
 				
 				if(Physics.Raycast(transform.position, Vector3.down, out hit, 3f, layerMask) )
 				{
-					if(hit.transform.CompareTag("Env") )
+					if(hit.transform.CompareTag("Env") && rb.velocity.y <= 0f)
 					{
 						targetVel.y = 0f;
 					}
@@ -259,6 +275,11 @@ namespace FWM
 		{
 			isControlled = false;
 			rb.velocity = Vector3.up * raiseMag;
+		}
+		
+		public void ReturnActions()
+		{
+			returning = true;
 		}
 	
 		private void ControlBubbles()

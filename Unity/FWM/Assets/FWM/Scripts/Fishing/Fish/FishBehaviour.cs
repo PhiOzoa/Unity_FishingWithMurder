@@ -261,6 +261,15 @@ namespace FWM
 				SetTarget(0);
 			}
 			
+			
+			Debug.DrawRay(transform.position, transform.forward, Color.red);
+			RaycastHit hit;
+			int layerMask = 1 << 6;
+			if(Physics.Raycast(transform.position, transform.forward, out hit, 1.5f, layerMask) )
+			{
+				targetSet = false;
+			}
+			
 			lookDir = rb.velocity.normalized;
 			
 			MoveToTarget(swimSpeed);
