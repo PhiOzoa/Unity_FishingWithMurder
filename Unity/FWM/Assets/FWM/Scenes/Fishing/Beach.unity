@@ -13690,6 +13690,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5298399720185664141, guid: e19c61797b216c442b989227e2140a96, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298399720185664141, guid: e19c61797b216c442b989227e2140a96, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6351773595578672598, guid: e19c61797b216c442b989227e2140a96, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -13788,6 +13796,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7427329141364143905, guid: e19c61797b216c442b989227e2140a96, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925644288713757116, guid: e19c61797b216c442b989227e2140a96, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1777004015, guid: 603bb6f33104efd43b09faf25bd3310c, type: 3}
+    - target: {fileID: 8925644288713757116, guid: e19c61797b216c442b989227e2140a96, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925644288713757116, guid: e19c61797b216c442b989227e2140a96, type: 3}
+      propertyPath: m_UseSpriteMesh
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
