@@ -40,11 +40,11 @@ namespace FWM
 			{
 				GameObject.Find("CatchManager").GetComponent<CatchCalc>().im = im;
 			}*/
-			
+			/*
 			if(curScene.name == "TackleBoxMenu")
 			{
 				im.PopulateInventoryUI(GameObject.Find("Content"));
-			}
+			}*/
 		
 		}
 		

@@ -196,10 +196,7 @@ namespace FWM
 			{
 				targetVel = new Vector3(inputDir.x * lateralMag, -sinkMag, inputDir.y * lateralMag);
 				
-				Debug.DrawRay(transform.position, Vector3.down, Color.white);
-				Debug.DrawLine(transform.position, transform.position + (Vector3.down * 5f), Color.red);
 				RaycastHit hit;
-				
 				int layerMask = 1 << 6;
 				
 				if(Physics.Raycast(transform.position, Vector3.down, out hit, 3f, layerMask) )

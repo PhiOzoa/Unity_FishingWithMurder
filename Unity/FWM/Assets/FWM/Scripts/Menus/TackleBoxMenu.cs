@@ -20,6 +20,11 @@ namespace FWM
 			SceneManager.LoadScene("Beach");
 		}
 		
+		public void Inventory()
+		{
+			
+		}
+		
 		public void MainMenu()
 		{
 			SceneManager.LoadScene("MainMenu");

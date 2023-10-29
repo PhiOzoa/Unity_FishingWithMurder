@@ -29,5 +29,37 @@ namespace FWM
 			
 			initButton.Select();
 		}*/
+		
+		private bool instantiated = false;
+		
+		private List<FishInfo> inv = InventoryManager.inventoryFish;
+		
+		public GameObject content;
+		public GameObject inventoryItem;
+		private GameObject currentItem;
+		private InventoryFishInstantiator currentScript;
+		
+		private void OnEnable()
+		{
+			if(!instantiated)
+			{
+				AddContent();
+			}
+			
+			instantiated = true;
+		}
+		
+		public void AddContent()
+		{
+			for(int i = 0; i < inv.Count; i++)
+			{
+				currentItem = Instantiate(inventoryItem, content.transform);
+				currentScript = currentItem.GetComponent<InventoryFishInstantiator>();
+				
+				currentScript.fishName = inv[i].fishName;
+				currentScript.fishLength = inv[i].fishLength;
+				currentItem.SetActive(true);
+			}
+		}
     }
 }

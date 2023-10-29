@@ -6,10 +6,10 @@ namespace FWM
 {
     public class InventoryManager : MonoBehaviour
 	{
-		private List<FishInfo> inventoryFish = new List<FishInfo>();
-		public GameObject inventoryItemPrefab;
-		private GameObject currentItem;
-		private InventoryFishInstantiator currentScript;
+		public static List<FishInfo> inventoryFish = new List<FishInfo>();
+		//public GameObject inventoryItemPrefab;
+		//private GameObject currentItem;
+		//private InventoryFishInstantiator currentScript;
 		
 		public void AddToInventory(List<FishInfo> newFish)
 		{
@@ -18,7 +18,7 @@ namespace FWM
 				inventoryFish.Add(newFish[i]);
 			}
 		}
-		
+		/*
 		public void PopulateInventoryUI(GameObject itemParent)
 		{
 			for(int i = 0; i < inventoryFish.Count; i++)
@@ -30,6 +30,7 @@ namespace FWM
 				currentScript.fishLength = inventoryFish[i].fishLength;
 				currentItem.SetActive(true);
 			}
-		}
+		}*/
+
 	}
 }
