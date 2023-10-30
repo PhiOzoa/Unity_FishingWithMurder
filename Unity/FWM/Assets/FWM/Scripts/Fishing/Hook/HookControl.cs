@@ -276,6 +276,11 @@ namespace FWM
 		
 		public void ReturnActions()
 		{
+			for(int i = 0; i < pointsList.Count; i++)
+			{
+				pointsList[i].occupied = false;
+			}
+
 			returning = true;
 		}
 	
