@@ -8,6 +8,7 @@ namespace FWM
 	{
 		public string fishName;
 		public float fishLength;
+		public bool isNew = false;
 	}
 	
 	public class PointInfo

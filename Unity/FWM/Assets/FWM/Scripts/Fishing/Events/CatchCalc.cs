@@ -10,6 +10,7 @@ namespace FWM
 		public GameObject hook;
 		private GameObject UIObject;
 		public List<FishInfo> snaggedFishList;
+		public List<GameObject> snaggedFishObjects;
 		public float scaleFactor = 10f;
 		
 		public GameObject gm = null;
@@ -36,7 +37,7 @@ namespace FWM
 			
 			GetFish();
 			
-			DeleteFish();
+			//DeleteFish();
 			
 			if(gm != null)
 			{
@@ -61,9 +62,12 @@ namespace FWM
 				
 				if(curTrans.gameObject.tag == "Fish")
 				{
+					snaggedFishObjects.Add(curTrans.gameObject);
+					
 					FishInfo info = new FishInfo();
 					info.fishName = curTrans.name;
 					info.fishLength = curTrans.GetChild(0).localScale.y * scaleFactor;
+					info.isNew = true;
 					
 					snaggedFishList.Add(info);
 				}
@@ -91,6 +95,7 @@ namespace FWM
 			if(snaggedFishList.Count > 0)
 			{
 				UIObject.SendMessage("ActivateCatchMenu", true);
+				UIObject.SendMessage("SendFishObjects", snaggedFishObjects);
 			}
 			else
 			{

@@ -26,6 +26,12 @@ namespace FWM
 		
 		private bool isPaused = false;
 		
+		private List<GameObject> caughtFish;
+		
+		public GameObject fishIconPrefab;
+		private List<GameObject> instantiatedIcons;
+		private List<Animator> instantiatedAnimator;
+		
 		private void Start()
 		{
 			pauseMenu.SetActive(false);
@@ -89,6 +95,11 @@ namespace FWM
 			}
 		}
 		
+		public void SendFishObjects(List<GameObject> fishesList)
+		{
+			
+		}
+		
 		private void CatchAnim()
 		{
 			catchUI.SetTrigger("Play");
@@ -109,6 +120,11 @@ namespace FWM
 		{
 			Unpause();
 			SceneManager.LoadScene("TackleBoxMenu");
+		}
+		
+		public void AnimateFishIcons()
+		{
+			
 		}
     }
 }
