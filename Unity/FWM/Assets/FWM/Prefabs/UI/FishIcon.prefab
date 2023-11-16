@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7881464778647144230}
   - component: {fileID: 7881464778647144233}
   - component: {fileID: 7881464778647144232}
+  - component: {fileID: 1735054573236734552}
   m_Layer: 5
   m_Name: FishIcon
   m_TagString: Untagged
@@ -97,3 +98,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1735054573236734552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881464778647144234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17524410f8d08b140b38c5dc8655ed70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

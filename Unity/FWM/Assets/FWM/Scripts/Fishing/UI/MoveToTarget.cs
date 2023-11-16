@@ -6,6 +6,8 @@ namespace FWM
 {
     public class MoveToTarget : MonoBehaviour
     {
+		private RectTransform m_RectTransform;
+		
 		private Vector3 startPos;
 		private Vector3 endPos;
 		private string fishType;
@@ -15,19 +17,20 @@ namespace FWM
 		
 		private void Awake()
 		{
+			m_RectTransform = GetComponent<RectTransform>();
 			anim = GetComponent<Animator>();
 		}
 		
-		public void SetParams(Vector3 start, Vector3 end, string givenName)
+		public void SetParams(Vector2 start, Vector2 end, string givenName)
 		{
 			startPos = start;
 			endPos = end;
 			fishType = givenName;
-			transform.position = startPos;
+			m_RectTransform.anchoredPosition = startPos;
 			ready = true;
 		}
 		
-		private void Update()
+		private void FixedUpdate()
 		{
 			if(ready)
 			{
@@ -36,11 +39,18 @@ namespace FWM
 					SetFish();
 				}
 				
-				transform.position = Vector3.Lerp(transform.position, endPos, 0.2f);
-				
-				if(Vector3.Distance(transform.position, endPos) < 0.2f)
+				if(anim.GetCurrentAnimatorStateInfo(1).IsName("Idle"))
 				{
-					anim.SetTrigger("Away");
+					m_RectTransform.anchoredPosition = Vector3.MoveTowards(m_RectTransform.anchoredPosition, endPos, 10f);
+					
+					
+					if(Vector3.Distance(m_RectTransform.anchoredPosition, endPos) < 1f)
+					{
+						anim.SetTrigger("Away");
+
+						Destroy(gameObject, 0.4f);
+						
+					}
 				}
 			}
 		}
