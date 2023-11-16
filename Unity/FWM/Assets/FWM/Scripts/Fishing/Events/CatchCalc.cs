@@ -9,6 +9,7 @@ namespace FWM
     {
 		public GameObject hook;
 		private GameObject UIObject;
+		private UIFishingController UIScript;
 		public List<FishInfo> snaggedFishList;
 		public List<GameObject> snaggedFishObjects;
 		public float scaleFactor = 10f;
@@ -17,7 +18,9 @@ namespace FWM
 		
 		private void Awake()
 		{
+			snaggedFishObjects = new List<GameObject>();
 			UIObject = GameObject.Find("UIController");
+			UIScript = UIObject.GetComponent<UIFishingController>();
 			gm = GameObject.Find("GameManager");
 		}
 		
@@ -94,8 +97,10 @@ namespace FWM
 		{
 			if(snaggedFishList.Count > 0)
 			{
+				//UIObject.SendMessage("GetFishObjects", snaggedFishObjects);
+				
+				UIScript.caughtFish = snaggedFishObjects;
 				UIObject.SendMessage("ActivateCatchMenu", true);
-				UIObject.SendMessage("SendFishObjects", snaggedFishObjects);
 			}
 			else
 			{

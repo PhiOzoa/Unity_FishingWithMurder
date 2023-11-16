@@ -26,11 +26,9 @@ namespace FWM
 		
 		private bool isPaused = false;
 		
-		private List<GameObject> caughtFish;
+		public List<GameObject> caughtFish;
 		
 		public GameObject fishIconPrefab;
-		private List<GameObject> instantiatedIcons;
-		private List<Animator> instantiatedAnimator;
 		
 		private void Start()
 		{
@@ -91,14 +89,16 @@ namespace FWM
 			
 			if(caught)
 			{
+				Debug.Log(caughtFish[0].name);
 				CatchAnim();
 			}
 		}
-		
-		public void SendFishObjects(List<GameObject> fishesList)
+		/*
+		public void GetFishObjects(List<GameObject> fishesList)
 		{
-			
-		}
+			caughtFish = fishesList;
+			Debug.Log(caughtFish[0].name);
+		}*/
 		
 		private void CatchAnim()
 		{
@@ -126,5 +126,7 @@ namespace FWM
 		{
 			
 		}
+		
+		
     }
 }

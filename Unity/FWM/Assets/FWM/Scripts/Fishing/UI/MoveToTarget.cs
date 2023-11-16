@@ -49,13 +49,13 @@ namespace FWM
 		{
 			switch(fishType)
 			{
-				case "Orange":
+				case "Slippery Minnow":
 				
 					anim.Play("Base Layer.OrangeIcon");
 					
 					break;
 				
-				case "Stripey":
+				case "Cutterback":
 				
 					anim.Play("Base Layer.StripeyIcon");
 					
@@ -67,31 +67,31 @@ namespace FWM
 					
 					break;
 				
-				case "Clown":
+				case "Funny Fluffer":
 				
 					anim.Play("Base Layer.ClownIcon");
 					
 					break;
 				
-				case "Blueboy":
+				case "Blue Crease":
 				
 					anim.Play("Base Layer.BlueboyIcon");
 					
 					break;
 				
-				case "Pinky":
+				case "Slimefin":
 				
 					anim.Play("Base Layer.PinkyIcon");
 					
 					break;
 				
-				case "Dry":
+				case "Splinterfish":
 				
 					anim.Play("Base Layer.DryIcon");
 					
 					break;
 				
-				case "Triangle":
+				case "Dorieteaus":
 				
 					anim.Play("Base Layer.OrangeIcon");
 					
