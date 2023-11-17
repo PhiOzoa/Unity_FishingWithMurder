@@ -14,6 +14,7 @@ namespace FWM
 		private bool ready = false;
 		private bool fishSet = false;
 		private Animator anim;
+		private Animator bucketAnim;
 		
 		private void Awake()
 		{
@@ -21,12 +22,13 @@ namespace FWM
 			anim = GetComponent<Animator>();
 		}
 		
-		public void SetParams(Vector2 start, Vector2 end, string givenName)
+		public void SetParams(Vector2 start, Vector2 end, string givenName, Animator bucketAnimator)
 		{
 			startPos = start;
 			endPos = end;
 			fishType = givenName;
 			m_RectTransform.anchoredPosition = startPos;
+			bucketAnim = bucketAnimator;
 			ready = true;
 		}
 		
@@ -41,13 +43,14 @@ namespace FWM
 				
 				if(anim.GetCurrentAnimatorStateInfo(1).IsName("Idle"))
 				{
-					m_RectTransform.anchoredPosition = Vector3.MoveTowards(m_RectTransform.anchoredPosition, endPos, 10f);
+					m_RectTransform.anchoredPosition = Vector3.MoveTowards(m_RectTransform.anchoredPosition, endPos, 20f);
 					
 					
 					if(Vector3.Distance(m_RectTransform.anchoredPosition, endPos) < 1f)
 					{
 						anim.SetTrigger("Away");
-
+						bucketAnim.SetTrigger("BucketAddition");
+						
 						Destroy(gameObject, 0.4f);
 						
 					}

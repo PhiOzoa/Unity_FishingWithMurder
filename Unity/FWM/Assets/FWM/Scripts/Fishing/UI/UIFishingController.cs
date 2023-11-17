@@ -129,15 +129,20 @@ namespace FWM
 		
 		public void InstantiateFishIcons()
 		{
-			Vector2 fishViewport = Camera.main.WorldToViewportPoint(caughtFish[0].transform.position);
+			// turn gameobject position to a canvas space position
+			Vector2 fishViewport = Camera.main.WorldToViewportPoint(caughtFish[0].transform.GetChild(0).transform.position);
 			Vector2 fishScreen = new Vector2(
 			( (fishViewport.x * canvasTransform.sizeDelta.x) - (canvasTransform.sizeDelta.x * 0.5f) ),
 			( (fishViewport.y * canvasTransform.sizeDelta.y) - (canvasTransform.sizeDelta.y * 0.5f) ) );
 			
+			// create icon prefab and pass it values for beginning, end, name string, and the animator for the bucket
 			GameObject currentFishIcon;
 			currentFishIcon = Instantiate(fishIconPrefab, canvasTransform);
-			currentFishIcon.GetComponent<MoveToTarget>().SetParams(fishScreen, new Vector2(-645f,0f) , caughtFish[0].name);
-
+			currentFishIcon.GetComponent<MoveToTarget>().SetParams(fishScreen, new Vector2(-645f,0f) , caughtFish[0].name, catchUI);
+			
+			// destroy the fish object once the icon is created
+			Destroy(caughtFish[0], 1f);
+			
 			//Vector2 anchoredPos;
 			//RectTransformUtility.ScreenPointToLocalPointInRectangle(gameObject.transform.GetChild(0),)
 		}
