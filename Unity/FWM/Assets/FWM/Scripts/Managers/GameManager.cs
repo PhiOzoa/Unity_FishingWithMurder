@@ -8,8 +8,8 @@ namespace FWM
     public class GameManager : MonoBehaviour
     {
 
-		public FishingManager fm = null;
-		public OverworldManager om = null;
+		//public FishingManager fm = null;
+		//public OverworldManager om = null;
 		
 		public InventoryManager im = null;
 		

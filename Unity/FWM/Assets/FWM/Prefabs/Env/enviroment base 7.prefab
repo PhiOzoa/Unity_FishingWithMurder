@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 254398314449005236}
   - component: {fileID: 2622003878305996414}
   - component: {fileID: 1571905404449905791}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: enviroment base 7
   m_TagString: Env
   m_Icon: {fileID: 0}
@@ -100,4 +100,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5076798556035486163, guid: df20cd5be53457c43ba1f7a776c9a431, type: 3}
+  m_Mesh: {fileID: -5076798556035486163, guid: 9f674892fb3a85745bbedfaf1e3e97a6, type: 3}
