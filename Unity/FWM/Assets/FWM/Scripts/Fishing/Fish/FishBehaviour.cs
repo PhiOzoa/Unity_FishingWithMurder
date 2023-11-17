@@ -51,8 +51,6 @@ namespace FWM
 		private bool attentionFilled = false; // has the fish reached max attention
 		public bool fishSnagged = false; // has the fish been caught
 		
-		//public int countdownBetweenDecrement = 60; // time between each instance of fish losing attention
-		//private int decCountdownVal = 0;
 		private bool attentionInitialized = false;
 		private bool distanceInitialized = false;
 		
@@ -60,9 +58,9 @@ namespace FWM
 		private bool isBumped = false;
 		
 		// Snag Parameters
-		private PointInfo hookPoint = null;
+		private PointInfo hookPoint = null; // the point on the hook to snag to
 		private int hookPointIndex = 0;
-		private int snagFrames = 30;
+		private int snagFrames = 30; // how many frames it takes to stick to the hook
 		private int curSnagFrame = 0;
 		private Vector3 initSnagLoc = Vector3.zero;
 		private Quaternion initSnagRot;
@@ -71,7 +69,6 @@ namespace FWM
 		private Quaternion targetSnagRot;
 		
 		private bool snagLocSet = false;
-		private float snagDistance = 0.7f;
 		
 		public Vector3 lookDir = Vector3.forward;
 		

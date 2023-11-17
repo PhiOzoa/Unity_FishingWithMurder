@@ -32690,7 +32690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3612536229428263937, guid: 63b1adb0ac081e042a7185aaac407763, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.87
+      value: 17.06
       objectReference: {fileID: 0}
     - target: {fileID: 3612536229428263937, guid: 63b1adb0ac081e042a7185aaac407763, type: 3}
       propertyPath: m_LocalRotation.w
@@ -32939,6 +32939,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraStuff
       objectReference: {fileID: 0}
+    - target: {fileID: 5455358842093748041, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.19
+      objectReference: {fileID: 0}
     - target: {fileID: 5455358842093748042, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_Follow
       value: 
@@ -32947,6 +32951,10 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 504089132}
+    - target: {fileID: 5455358843940229349, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}

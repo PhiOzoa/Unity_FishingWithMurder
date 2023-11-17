@@ -117,7 +117,6 @@ namespace FWM
 		{
 			catchUI.gameObject.SetActive(false);
 			hook.SendMessage("ReturnActions");
-			Debug.Log("return");
 		}
 		
 		//BACKTOMENU

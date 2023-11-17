@@ -7,9 +7,6 @@ namespace FWM
 {
     public class GameManager : MonoBehaviour
     {
-
-		//public FishingManager fm = null;
-		//public OverworldManager om = null;
 		
 		public InventoryManager im = null;
 		
@@ -35,17 +32,6 @@ namespace FWM
 		void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 		{
 			curScene = scene;
-			/*
-			if(curScene.name == "Beach")
-			{
-				GameObject.Find("CatchManager").GetComponent<CatchCalc>().im = im;
-			}*/
-			/*
-			if(curScene.name == "TackleBoxMenu")
-			{
-				im.PopulateInventoryUI(GameObject.Find("Content"));
-			}*/
-		
 		}
 		
 		void OnDisable()
