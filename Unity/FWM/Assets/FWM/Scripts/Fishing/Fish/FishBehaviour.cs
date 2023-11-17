@@ -360,7 +360,7 @@ namespace FWM
 			//	LoseInterest();
 			//}
 			
-			if( (Vector3.Distance(hook.transform.position, transform.position) > getBoredDistance && distanceInitialized) || (Vector3.Distance(hook.transform.position, attentionPos) > 15f) )
+			if( (Vector3.Distance(hook.transform.position, transform.position) > getBoredDistance && distanceInitialized) || (Vector3.Distance(hook.transform.position, attentionPos) > 15f) || (hook.transform.position.y > -1f) )
 			{
 				LoseInterest();
 			}
