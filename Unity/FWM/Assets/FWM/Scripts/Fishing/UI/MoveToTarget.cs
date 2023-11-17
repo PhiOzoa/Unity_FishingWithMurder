@@ -106,7 +106,7 @@ namespace FWM
 				
 				case "Dorieteaus":
 				
-					anim.Play("Base Layer.OrangeIcon");
+					anim.Play("Base Layer.TriangleIcon");
 					
 					break;
 				
