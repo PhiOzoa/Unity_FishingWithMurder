@@ -19238,17 +19238,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368560551}
   m_Mesh: {fileID: 8998605553026369596, guid: 989ee621377f5384da70bfd43fffd131, type: 3}
---- !u!114 &1382552127 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6824004924606157188, guid: e19c61797b216c442b989227e2140a96, type: 3}
-  m_PrefabInstance: {fileID: 7339665664947722764}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1383037639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32995,15 +32984,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 438367818434922500, guid: e57fc3705c4b44744894eda6c0c278c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.5
+      value: -23.26
       objectReference: {fileID: 0}
     - target: {fileID: 438367818434922500, guid: e57fc3705c4b44744894eda6c0c278c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1
+      value: -15.92
       objectReference: {fileID: 0}
     - target: {fileID: 438367818434922500, guid: e57fc3705c4b44744894eda6c0c278c9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -52.4
+      value: 57.06
       objectReference: {fileID: 0}
     - target: {fileID: 438367818434922500, guid: e57fc3705c4b44744894eda6c0c278c9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33107,10 +33096,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6824004924606157188, guid: e19c61797b216c442b989227e2140a96, type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7339665663560352977, guid: e19c61797b216c442b989227e2140a96, type: 3}
       propertyPath: m_Name
       value: UIController
@@ -33119,10 +33104,6 @@ PrefabInstance:
       propertyPath: hook
       value: 
       objectReference: {fileID: 504089124}
-    - target: {fileID: 7339665663560352979, guid: e19c61797b216c442b989227e2140a96, type: 3}
-      propertyPath: keepFishingButton
-      value: 
-      objectReference: {fileID: 1382552127}
     - target: {fileID: 7339665663560353004, guid: e19c61797b216c442b989227e2140a96, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

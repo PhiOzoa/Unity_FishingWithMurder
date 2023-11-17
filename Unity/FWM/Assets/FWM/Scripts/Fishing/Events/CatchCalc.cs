@@ -98,9 +98,8 @@ namespace FWM
 			if(snaggedFishList.Count > 0)
 			{
 				//UIObject.SendMessage("GetFishObjects", snaggedFishObjects);
-				Debug.Log(snaggedFishObjects.Count);
+				
 				UIScript.caughtFish = snaggedFishObjects;
-				//snaggedFishObjects.Clear();
 				UIObject.SendMessage("ActivateCatchMenu", true);
 			}
 			else

@@ -23,8 +23,6 @@ namespace FWM
 		public Animator snagUI;
 		public Animator catchUI;
 		
-		public Button keepFishingButton;
-		
 		public GameObject hook;
 
 		public float depthFactor = 5f;
@@ -34,13 +32,7 @@ namespace FWM
 		public List<GameObject> caughtFish;
 		
 		public GameObject fishIconPrefab;
-		
-		private bool spawningFishIcons = false;
 		//private GameObject currentFishIcon;
-		private float nextSpawnTime = 0.0f;
-		private float period = 1f;
-		private int fishCountToSpawn = 0;
-		private bool fishCountSet = false;
 		
 		private void Start()
 		{
@@ -50,32 +42,6 @@ namespace FWM
 		private void Update()
 		{
 			AlterDepthGauge();
-			
-			if(spawningFishIcons)
-			{
-				if(!fishCountSet)
-				{
-					fishCountToSpawn = caughtFish.Count - 1;
-					fishCountSet = true;
-				}
-				
-				if( Time.time > nextSpawnTime )
-				{
-					nextSpawnTime = Time.time + period;
-					
-					if(fishCountToSpawn >= 0)
-					{
-						InstantiateFishIcons(fishCountToSpawn);
-						fishCountToSpawn--;
-					}
-					else
-					{
-						spawningFishIcons = false;
-						fishCountSet = false;
-						keepFishingButton.interactable = true;
-					}
-				}
-			}
 		}
 		
 		public void PauseInput()
@@ -127,11 +93,8 @@ namespace FWM
 			
 			if(caught)
 			{
+				Debug.Log(caughtFish[0].name);
 				CatchAnim();
-			}
-			else
-			{
-				keepFishingButton.interactable = true;
 			}
 		}
 		/*
@@ -145,19 +108,14 @@ namespace FWM
 		{
 			catchUI.SetTrigger("Play");
 			catchUI.SetTrigger("BucketPlay");
-
-			spawningFishIcons = true;
+			InstantiateFishIcons();
+			
 		}
 		
 		//BACKTOFISHING
 		public void ReturnToFishing()
 		{
-			caughtFish.Clear();
-			
-			keepFishingButton.interactable = false;
-			catchUI.Play("Bucket.BucketGone");
 			catchUI.gameObject.SetActive(false);
-			
 			hook.SendMessage("ReturnActions");
 		}
 		
@@ -168,10 +126,10 @@ namespace FWM
 			SceneManager.LoadScene("TackleBoxMenu");
 		}
 		
-		public void InstantiateFishIcons(int i)
+		public void InstantiateFishIcons()
 		{
 			// turn gameobject position to a canvas space position
-			Vector2 fishViewport = Camera.main.WorldToViewportPoint(caughtFish[i].transform.GetChild(0).transform.position);
+			Vector2 fishViewport = Camera.main.WorldToViewportPoint(caughtFish[0].transform.GetChild(0).transform.position);
 			Vector2 fishScreen = new Vector2(
 			( (fishViewport.x * canvasTransform.sizeDelta.x) - (canvasTransform.sizeDelta.x * 0.5f) ),
 			( (fishViewport.y * canvasTransform.sizeDelta.y) - (canvasTransform.sizeDelta.y * 0.5f) ) );
@@ -179,13 +137,15 @@ namespace FWM
 			// create icon prefab and pass it values for beginning, end, name string, and the animator for the bucket
 			GameObject currentFishIcon;
 			currentFishIcon = Instantiate(fishIconPrefab, canvasTransform);
-			currentFishIcon.GetComponent<MoveToTarget>().SetParams(fishScreen, new Vector2(-645f,0f) , caughtFish[i].name, catchUI);
+			currentFishIcon.GetComponent<MoveToTarget>().SetParams(fishScreen, new Vector2(-645f,0f) , caughtFish[0].name, catchUI);
 			
 			// destroy the fish object once the icon is created
-			Destroy(caughtFish[i], 1f);
+			Destroy(caughtFish[0], 1f);
 			
 			//Vector2 anchoredPos;
 			//RectTransformUtility.ScreenPointToLocalPointInRectangle(gameObject.transform.GetChild(0),)
 		}
+		
+		
     }
 }
