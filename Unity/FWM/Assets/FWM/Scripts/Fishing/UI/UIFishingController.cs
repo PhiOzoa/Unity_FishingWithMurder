@@ -155,7 +155,7 @@ namespace FWM
 			caughtFish.Clear();
 			
 			keepFishingButton.interactable = false;
-			catchUI.Play("Bucket.BucketGone");
+			//catchUI.Play("Bucket.BucketGone");
 			catchUI.gameObject.SetActive(false);
 			
 			hook.SendMessage("ReturnActions");
