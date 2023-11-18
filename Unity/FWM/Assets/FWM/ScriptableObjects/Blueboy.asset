@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Blueboy
   m_EditorClassIdentifier: 
   fishName: Blue Crease
-  wanderRadius: 10
+  wanderRadius: 12
   arrivedErrorRadius: 0.3
   heightTruncationFactor: 0.7
-  swimSpeed: 0.9
+  swimSpeed: 2.2
   accelFactor: 0.8
   rotFactor: 0.07
   furthestRadius: 3
@@ -26,6 +26,6 @@ MonoBehaviour:
   attentionIncrement: 14
   attentionDecrement: 7
   maxAttention: 85
-  scaleRange: {x: 0.5, y: 1.5}
+  scaleRange: {x: 1.5, y: 2.1}
   sightDist: 7
   sightRadius: 2

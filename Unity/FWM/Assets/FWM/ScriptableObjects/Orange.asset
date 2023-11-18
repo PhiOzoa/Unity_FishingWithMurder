@@ -16,7 +16,7 @@ MonoBehaviour:
   wanderRadius: 7
   arrivedErrorRadius: 0.3
   heightTruncationFactor: 0.7
-  swimSpeed: 0.4
+  swimSpeed: 1
   accelFactor: 0.8
   rotFactor: 0.07
   furthestRadius: 3
@@ -26,6 +26,6 @@ MonoBehaviour:
   attentionIncrement: 14
   attentionDecrement: 7
   maxAttention: 85
-  scaleRange: {x: 0.8, y: 1.4}
+  scaleRange: {x: 1, y: 1.7}
   sightDist: 7
   sightRadius: 3
