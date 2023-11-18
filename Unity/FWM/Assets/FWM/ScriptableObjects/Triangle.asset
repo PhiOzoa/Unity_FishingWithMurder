@@ -25,7 +25,7 @@ MonoBehaviour:
   initAttention: 25
   attentionIncrement: 14
   attentionDecrement: 7
-  maxAttention: 85
+  maxAttention: 75
   scaleRange: {x: 0.8, y: 1.4}
   sightDist: 7
   sightRadius: 3

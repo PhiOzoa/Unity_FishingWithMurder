@@ -325,7 +325,7 @@ namespace FWM
 			
 			lookDir = ( (hook.transform.position + (Vector3.down * belowHookFactor) ) - transform.position).normalized;
 			
-			MoveToTarget(swimSpeed * 2);
+			MoveToTarget(swimSpeed * 1.4f);
 		}
 		
 		private void BiteCalculation()
@@ -360,7 +360,7 @@ namespace FWM
 			//	LoseInterest();
 			//}
 			
-			if( (Vector3.Distance(hook.transform.position, transform.position) > getBoredDistance && distanceInitialized) || (Vector3.Distance(hook.transform.position, attentionPos) > 15f) || (hook.transform.position.y > -1f) )
+			if( (Vector3.Distance(hook.transform.position, transform.position) > getBoredDistance && distanceInitialized) || (Vector3.Distance(hook.transform.position, attentionPos) > 10f) || (hook.transform.position.y > -1f) )
 			{
 				LoseInterest();
 			}

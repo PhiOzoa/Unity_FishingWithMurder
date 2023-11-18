@@ -55836,6 +55836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HookController
       objectReference: {fileID: 0}
+    - target: {fileID: 3612536229428263950, guid: 63b1adb0ac081e042a7185aaac407763, type: 3}
+      propertyPath: lateralMag
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 63b1adb0ac081e042a7185aaac407763, type: 3}

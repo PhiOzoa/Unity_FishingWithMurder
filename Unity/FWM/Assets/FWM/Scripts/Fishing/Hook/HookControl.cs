@@ -22,7 +22,7 @@ namespace FWM
 		
 		private Vector3 v = Vector3.down;
 		
-		[Range(0.5f, 5.0f)]
+		[Range(0.5f, 10.0f)]
 		public float lateralMag = 3.0f;
 		[Range(0.5f, 3.0f)]
 		public float sinkMag = 3.0f;

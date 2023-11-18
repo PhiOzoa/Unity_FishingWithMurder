@@ -21,7 +21,7 @@
                     "id": "1f78b01e-6dca-49b5-9583-2aa9872bc591",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.5,y=0.3)",
+                    "processors": "InvertVector2(invertX=false,invertY=false),ScaleVector2(x=0.5,y=0.3)",
                     "groups": "",
                     "action": "Rotate",
                     "isComposite": false,

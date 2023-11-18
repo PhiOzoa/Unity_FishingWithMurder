@@ -9939,7 +9939,7 @@ MonoBehaviour:
   hookDir: {fileID: 3612536229498546550}
   activeFish: {fileID: 0}
   leaveInput: 0
-  lateralMag: 5
+  lateralMag: 7
   sinkMag: 0.9
   raiseMag: 3
   accelFactorLat: 0.7
