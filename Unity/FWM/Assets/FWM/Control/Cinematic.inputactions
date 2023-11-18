@@ -1,0 +1,54 @@
+{
+    "name": "Cinematic",
+    "maps": [
+        {
+            "name": "cinematicbuttons",
+            "id": "ddd3be41-3302-4413-89e5-dc7b6f8c8981",
+            "actions": [
+                {
+                    "name": "change cam",
+                    "type": "Button",
+                    "id": "f3784094-c48f-4324-afb0-3cd45041b905",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "change focus",
+                    "type": "Button",
+                    "id": "0a7b24cb-708e-47dc-a2c0-5ec5ed7616fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ed0abde9-7b83-488c-84ab-816617a410cb",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "change cam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c41adf54-8023-4f25-b64f-a706759523c5",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "change focus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

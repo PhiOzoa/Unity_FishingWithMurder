@@ -17807,6 +17807,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 679873491}
+  - component: {fileID: 679873493}
+  - component: {fileID: 679873492}
   m_Layer: 0
   m_Name: Trailer Cams
   m_TagString: Untagged
@@ -17833,6 +17835,85 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &679873492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679873490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 6112fea3bf8e8834b80f42f777f86b84, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 679873493}
+        m_TargetAssemblyTypeName: FWM.TrailerCam, Assembly-CSharp
+        m_MethodName: SwitchCamAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f3784094-c48f-4324-afb0-3cd45041b905
+    m_ActionName: cinematicbuttons/change cam[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 679873493}
+        m_TargetAssemblyTypeName: FWM.TrailerCam, Assembly-CSharp
+        m_MethodName: SwitchFocusAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0a7b24cb-708e-47dc-a2c0-5ec5ed7616fa
+    m_ActionName: cinematicbuttons/change focus[/Keyboard/l]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: cinematicbuttons
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &679873493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679873490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f83ecd56eac922a47aad570e8fe41ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vcam0: {fileID: 1357982444}
+  vcam1: {fileID: 2147122311}
+  WellFocus: {fileID: 1090929549}
+  ArchFocus: {fileID: 282711081}
+  PanFocus: {fileID: 144283251}
 --- !u!1001 &680677636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34987,6 +35068,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2788049964029031619, guid: 2b64f6ef10582c54cab6f2a8055aa975, type: 3}
   m_PrefabInstance: {fileID: 1357905769}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1357982444 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5455358842093748042, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+  m_PrefabInstance: {fileID: 5455358841962262255}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1359210898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55797,7 +55889,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 11
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 144283252}
   m_Follow: {fileID: 144283252}
@@ -56349,6 +56441,10 @@ PrefabInstance:
       propertyPath: waterHeight
       value: 
       objectReference: {fileID: 2071719514}
+    - target: {fileID: 1504759656898184316, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_DefaultBlend.m_Style
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5455358842039430411, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -56409,17 +56505,21 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 504089132}
+    - target: {fileID: 5455358842093748042, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
+      propertyPath: m_Priority
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5455358843940229349, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.440001
+      value: 2.44
       objectReference: {fileID: 0}
     - target: {fileID: 5455358843940229349, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1700001
+      value: 1.5899999
       objectReference: {fileID: 0}
     - target: {fileID: 5455358843940229349, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.630001
+      value: 10.19
       objectReference: {fileID: 0}
     - target: {fileID: 5455358843940229349, guid: 188d44340d1c8f0408367520d4f358d7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -56578,6 +56678,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 50182342, guid: e19c61797b216c442b989227e2140a96, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 632812797, guid: e19c61797b216c442b989227e2140a96, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -56684,6 +56788,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7339665663560353004, guid: e19c61797b216c442b989227e2140a96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8139580709614318221, guid: e19c61797b216c442b989227e2140a96, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699413351478514379, guid: e19c61797b216c442b989227e2140a96, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
